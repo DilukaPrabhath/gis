@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">Create Applications</h4>
+                        <h4 class="mt-0 header-title">Create Application</h4>
 
 
                         <div class="row">
@@ -162,5 +162,5 @@
 
     </div>
     @stop
-    <script src="{{asset('frogetor/assets/plugins/dropify/js/dropify.min.js')}}"></script>
-    <script src="{{asset('frogetor/assets/pages/jquery.form-upload.init.js')}}"></script>
+    {{-- <script src="{{asset('frogetor/assets/plugins/dropify/js/dropify.min.js')}}"></script>
+    <script src="{{asset('frogetor/assets/pages/jquery.form-upload.init.js')}}"></script> --}}

@@ -8,32 +8,41 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">Create Bank</h4>
+                        <h4 class="mt-0 header-title">Update Bank</h4>
 
 
+                        <form action="{{url('/admin/banks/update')}}/{{$bnk->id}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
+                            @csrf
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group row">
-                                    <label for="example-text-input" class="col-sm-2 col-form-label text-right">Bank Name</label>
+                                    <label for="bank_name" class="col-sm-2 col-form-label text-right">Bank Name</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="text" value="" id="example-text-input">
+                                        <input class="form-control" type="text" value="{{$bnk->bank_name}}" name="bank_name" id="bank_name">
+                                        @error('bank_name')
+                                        <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label text-right">Bank Status</label>
+                                    <label class="col-sm-2 col-form-label text-right">Status</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control">
+                                        <select class="form-control" name="status" id="status">
                                             <option value="">Select</option>
-                                            <option value="1">Active</option>
-                                            <option value="2">Inactive</option>
+                                            <option value="1" {{$bnk->status=='1'?'selected':''}}>Active</option>
+                                            <option value="2" {{$bnk->status=='2'?'selected':''}}>Inactive</option>
                                         </select>
+                                        @error('status')
+                                        <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <a type="button" class="btn btn-success waves-effect waves-light" style="color: white;"><i class="mdi mdi-check-all mr-2"></i>Submit</a>
-                                        <a type="button" href="{{url('home')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
+                                        <button type="submit" id="x" class="btn btn-success waves-effect waves-light" style="color: white;"><i class="mdi mdi-check-all mr-2"></i>Submit</button>
+                                        <a type="button" href="{{url('/admin/banks')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
                                     </div>
                                 </div>
                             </div>
@@ -54,27 +63,22 @@
 
 
                             <tbody>
-                            <tr>
-                                <td>People Bank</td>
-                                <td><span class="badge badge-success">Active</span></td>
-                                <td>
-
-                                    <a href="{{url('admin/banks/edit')}}" type="button" class="btn btn-danger">
-                                        <i class="fab fas fa-pencil-alt" style="color: white; font-size:8px;"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>NTB</td>
-                                <td><span class="badge badge-success">Active</span></td>
-                                <td>
-
-
-                                    <a href="{{url('admin/banks/edit')}}" type="button" class="btn btn-danger">
-                                        <i class="fab fas fa-pencil-alt" style="color: white; font-size:8px;"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                                @foreach ($data as $value)
+                                <tr>
+                                    <td>{{$value->bank_name}}</td>
+                                    <td>@if ($value->status == 1)
+                                        <span class="badge badge-success">Active</span>
+                                       @elseif ($value->status == 2)
+                                        <span class="badge badge-danger">Inactive</span>
+                                       @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{url('admin/banks/edit')}}/{{$value->id}}" type="button" class="btn btn-danger">
+                                            <i class="fab fas fa-pencil-alt" style="color: white; font-size:8px;"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
 
 
                             </tbody>
@@ -85,6 +89,8 @@
 
 
                         </div>
+
+                        </form>
                     </div>
                 </div>
             </div> <!-- end col -->
@@ -92,5 +98,35 @@
 
     </div>
     @stop
-    <script src="{{asset('frogetor/assets/plugins/dropify/js/dropify.min.js')}}"></script>
-    <script src="{{asset('frogetor/assets/pages/jquery.form-upload.init.js')}}"></script>
+    @section('scripts')
+
+    <script>
+
+        $(document).ready(function() {
+
+            $("#regForm").validate({
+                rules: {
+                    bank_name: {
+                        required: true,
+                        maxlength: 150,
+                    },
+                    status: {
+                        required: true,
+                    }
+
+                },
+                messages: {
+                    bank_name: {
+                        required: "Bank Name is required",
+                        maxlength: "Bank Name cannot be more than 100 characters"
+                    },
+                    status: {
+                        required: "Status is required"
+                    }
+                }
+            });
+
+        });
+
+    </script>
+    @stop

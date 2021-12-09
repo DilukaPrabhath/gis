@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        {{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
         <meta charset="utf-8" />
         <title>GIS</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A premium admin dashboard template by mannatthemes" name="description" />
         <meta content="Mannatthemes" name="author" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
 
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{asset('frogetor/assets/images/favicon.ico')}}">
@@ -15,14 +17,13 @@
         <link href="{{asset('frogetor/assets/plugins/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('frogetor/assets/plugins/datatables/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
 
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
         <!-- App css -->
         <link href="{{asset('frogetor/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('frogetor/assets/css/icons.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('frogetor/assets/css/metismenu.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('frogetor/assets/css/style.css')}}" rel="stylesheet" type="text/css" />
-
-        <link href="{{asset('frogetor/assets/plugins/dropify/css/dropify.min.css')}}" rel="stylesheet">
-
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
     </head>
 
     <body>
@@ -39,7 +40,7 @@
         <div class="page-wrapper-img">
             <div class="page-wrapper-img-inner">
                 <div class="sidebar-user media">
-                    <img src="{{url('frogetor/assets/images/users/user1.jpg')}}" alt="user" class="rounded-circle img-thumbnail mb-1">
+                    <img src="{{asset('frogetor/assets/images/users/user1.jpg')}}" alt="user" class="rounded-circle img-thumbnail mb-1">
                     <span class="online-icon"><i class="mdi mdi-record text-success"></i></span>
                     <div class="media-body">
                         <h5 class="text-light">Dhanushka</h5>
@@ -53,6 +54,8 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="page-title-box">
+
+                            @yield('button')
 
                             <h4 class="page-title mb-2"><i class="mdi mdi-view-dashboard-outline mr-2"></i>Dashboard</h4>
                             <div class="">
@@ -97,6 +100,7 @@
 
         <!-- jQuery  -->
         <script src="{{asset('frogetor/assets/js/jquery.min.js')}}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <script src="{{asset('frogetor/assets/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{asset('frogetor/assets/js/metisMenu.min.js')}}"></script>
         <script src="{{asset('frogetor/assets/js/waves.min.js')}}"></script>
@@ -115,12 +119,37 @@
         <script src="{{asset('frogetor/assets/plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
         <script src="{{asset('frogetor/assets/pages/jquery.dashboard-2.init.js')}}"></script>
-
-        <script src="{{asset('frogetor/assets/plugins/dropify/js/dropify.min.js')}}"></script>
-        <script src="{{asset('frogetor/assets/pages/jquery.form-upload.init.js')}}"></script>
-
+        <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
         <!-- App js -->
         <script src="{{asset('frogetor/assets/js/app.js')}}"></script>
+        @yield('scripts')
 
+        <script>
+
+            toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+          }
+              @if(Session::has('message'))
+              var type = "{{ Session::get('alert-type', 'info') }}";
+              toastr["success"]("{{ Session::get('message') }}", type)
+              clean();
+            @endif
+
+          </script>
     </body>
 </html>

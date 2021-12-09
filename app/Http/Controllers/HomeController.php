@@ -25,9 +25,9 @@ class HomeController extends Controller
 
     public function index()
     {
-            if(Auth::user()->user_type_id =='1'){
+            if(Auth::user()->user_role =='1'){
                 return view('admin.index');
-            }elseif( Auth::user()->user_type_id =='2'){
+            }elseif( Auth::user()->user_role =='2'){
                 return view('user.index');
             }else{
                 return view('login');

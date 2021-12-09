@@ -10,91 +10,77 @@
                     <div class="card-body">
                         <h4 class="mt-0 header-title">Create Institute</h4>
 
-
-                        <div class="row">
+                        <form action="{{url('admin/institutes/store')}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group row">
-                                    <label for="example-text-input" class="col-sm-2 col-form-label text-right">Institute Name</label>
+                                    <label for="name" class="col-sm-2 col-form-label text-right">Institute Name</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="text" value="" id="example-text-input">
+                                        <input class="form-control" type="text" value="" id="name" name="name">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="example-email-input" class="col-sm-2 col-form-label text-right">Email</label>
-                                    <div class="col-sm-10">
-                                        <input class="form-control" type="email" value="" id="example-email-input">
+                                    <label class="col-sm-2 col-form-label text-right">Is Pre School ?</label>
+                                    <div class="col-md-9">
+                                        <div class="form-check-inline my-1">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="customRadio9" checked="" name="pre_or_sch" class="custom-control-input">
+                                                <label class="custom-control-label" for="customRadio9">Yes</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-check-inline my-1">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="customRadio10" name="pre_or_sch" class="custom-control-input">
+                                                <label class="custom-control-label" for="customRadio10">No</label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="example-tel-input" class="col-sm-2 col-form-label text-right">Telephone</label>
+                                    <label for="email" class="col-sm-2 col-form-label text-right">Email</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="tel" value="" id="example-tel-input">
+                                        <input class="form-control" type="email" value="" id="email" name="email">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="example-password-input" class="col-sm-2 col-form-label text-right">Town</label>
+                                    <label for="phone" class="col-sm-2 col-form-label text-right">Telephone</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="text" value="" id="example-password-input">
+                                        <input class="form-control" type="tel" value="" id="phone" name="phone">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="example-password-input" class="col-sm-2 col-form-label text-right">Address</label>
-                                    <div class="col-sm-10">
-                                        <input class="form-control" type="text" value="" id="example-password-input">
-                                    </div>
-                                </div>
+
 
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group row">
-                                        <label for="example-text-input" class="col-sm-2 col-form-label text-right">Grade</label>
+                                        <label for="address_line_1" class="col-sm-2 col-form-label text-right">Address Line 1</label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" type="text" value="" id="example-text-input">
+                                            <input class="form-control" type="text" value="" name="address_line_1" id="address_line_1">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="example-text-input" class="col-sm-2 col-form-label text-right">Class Fee Anualy</label>
+                                        <label for="address_line_2" class="col-sm-2 col-form-label text-right">Address Line 2</label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" type="text" value="" id="example-text-input">
+                                            <input class="form-control" type="text" value="" name="address_line_2" id="address_line_2">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="example-email-input" class="col-sm-2 col-form-label text-right">Class Fee Qutation</label>
+                                        <label for="city" class="col-sm-2 col-form-label text-right">City</label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" type="email" value="" id="example-email-input">
+                                            <input class="form-control" type="text" value="" id="city" name="city">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="example-tel-input" class="col-sm-2 col-form-label text-right">Class Fee Monthly</label>
+                                        <label class="col-sm-2 col-form-label text-right">Status</label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" type="tel" value="" id="example-tel-input">
+                                            <select class="form-control" id="status" name="status">
+                                                <option value="">Select</option>
+                                                <option value="1" selected>Active</option>
+                                                <option value="2">Inactive</option>
+                                            </select>
                                         </div>
                                     </div>
-                                    <table class="table table-bordered mb-0 table-centered">
-                                        <thead>
-                                        <tr>
-                                            <th>Grade</th>
-                                            <th>Class Fee Anualy</th>
-                                            <th>Class Fee Qutar</th>
-                                            <th>Class Fee Monthly</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>Grage 1</td>
-                                            <td>Rs.40000.00</td>
-                                            <td>Rs.10000.00</td>
-                                            <td>Rs.3000.00</td>
-                                            <td>
-                                                <a href="" type="button" class="btn btn-danger btn-round">
-                                                    <i class="mdi mdi-close" ></i></a>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                        </tbody>
-                                    </table><!--end /table-->
                                 </div>
                             </div>
 
@@ -105,10 +91,12 @@
 
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <a type="button" class="btn btn-success waves-effect waves-light" style="color: white;"><i class="mdi mdi-check-all mr-2"></i>Submit</a>
+                                    <button type="submit" id="x" class="btn btn-success waves-effect waves-light" style="color: white;"><i class="mdi mdi-check-all mr-2"></i>Submit</button>
                                     <a type="button" href="{{url('admin/institutes')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
                                 </div>
                             </div>
+
+                        </form>
                         </div>
                     </div>
                 </div>
@@ -117,5 +105,76 @@
 
     </div>
     @stop
-    <script src="{{asset('frogetor/assets/plugins/dropify/js/dropify.min.js')}}"></script>
-    <script src="{{asset('frogetor/assets/pages/jquery.form-upload.init.js')}}"></script>
+
+    @section('scripts')
+
+    <script>
+        $(document).ready(function() {
+            $("#regForm").validate({
+                rules: {
+                    name: {
+                        required: true,
+                        maxlength: 150,
+                        remote:'/validate-name',
+                    },
+                    email:{
+                        email: true,
+                        required: true,
+                        maxlength: 100,
+                        remote:'/validate-email',
+                    },
+                    phone: {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 10,
+                        number: true,
+                        remote:'/validate-phone',
+                    },
+                    address_line_1: {
+                        required: true,
+                    },
+                    status: {
+                        required: true,
+                    },
+                    city: {
+                        required: true,
+                    }
+
+                },
+                messages: {
+                    name: {
+                        required: "Institute Name is required",
+                        remote:"Institute Name already exist",
+                        maxlength: "Institute Name cannot be more than 150 characters"
+                    },
+                    email: {
+                        required: "Email name is required",
+                        email: "Email must be a valid email address",
+                        remote:"Email already exist",
+                        maxlength: "Email cannot be more than 100 characters"
+                    },
+                    phone: {
+                        required: "Contact number is required",
+                        minlength: "Contact number must be of 10 digits",
+                        maxlength: "Contact number must be of 10 digits",
+                        remote:"Contact already exist"
+                    },
+                    address_line_1: {
+                        required: "Address Line 1 is required"
+                    },
+                    status: {
+                        required: "Status is required"
+                    },
+                    city: {
+                        required: "City is required"
+                    }
+                }
+            });
+
+        });
+
+
+    </script>
+
+
+    @stop

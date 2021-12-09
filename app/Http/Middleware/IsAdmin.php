@@ -11,7 +11,7 @@ class IsAdmin
 
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user() && $request->user()->user_type_id == '1'){
+        if ($request->user() && $request->user()->user_role == '1'){
             return $next($request);
     }
     return redirect()->guest('login');

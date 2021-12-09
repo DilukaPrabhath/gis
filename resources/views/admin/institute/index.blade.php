@@ -1,4 +1,4 @@
-@extends('admin.layout.master_ins_tbl')
+@extends('admin.layout.master')
 @section('content')
 <div class="page-content">
     <div class="container-fluid">
@@ -24,37 +24,29 @@
 
 
                             <tbody>
-                            <tr>
-                                <td>Institute 01</td>
-                                <td>Gampaha</td>
-                                <td>0110668362</td>
-                                <td>institute1@g.com</td>
-                                <td><span class="badge badge-success">Active</span></td>
-                                <td>
-                                    <a href="{{url('/admin/institutes/view')}}" type="button" class="btn btn-dropbox">
-                                        <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
-                                    </a>
-                                    <a href="{{url('admin/institutes/edit')}}" type="button" class="btn btn-danger">
-                                        <i class="fab fas fa-pencil-alt" style="color: white; font-size:8px;"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Institute 02</td>
-                                <td>Negambo</td>
-                                <td>0110668363</td>
-                                <td>institute2@g.com</td>
-                                <td><span class="badge badge-success">Active</span></td>
-                                <td>
-                                    <a href="{{url('/admin/institutes/view')}}" type="button" class="btn btn-dropbox">
-                                        <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
-                                    </a>
-                                    <a href="{{url('admin/institutes/edit')}}" type="button" class="btn btn-danger">
-                                        <i class="fab fas fa-pencil-alt" style="color: white; font-size:8px;"></i>
-                                    </a>
-                                </td>
-                            </tr>
-
+                                @foreach ($data as $institute)
+                                <tr>
+                                    <td>{{$institute->institute_name}}</td>
+                                    <td>{{$institute->city}}</td>
+                                    <td>{{$institute->contact_number}}</td>
+                                    <td>{{$institute->email}}</td>
+                                    <td>
+                                    @if ($institute->status == 1)
+                                     <span class="badge badge-success">Active</span>
+                                    @elseif ($institute->status == 2)
+                                     <span class="badge badge-danger">Inactive</span>
+                                    @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{url('/admin/institutes/view')}}/{{$institute->id}}" type="button" class="btn btn-dropbox">
+                                            <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
+                                        </a>
+                                        <a href="{{url('admin/institutes/edit')}}/{{$institute->id}}" type="button" class="btn btn-danger">
+                                            <i class="fab fas fa-pencil-alt" style="color: white; font-size:8px;"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
 
                             </tbody>
                         </table>
@@ -65,4 +57,14 @@
         </div> <!-- end row -->
 
     </div>
+    @stop
+
+    @section('button')
+    <div class="float-right align-item-center mt-2">
+        <a href="{{url('admin/institutes/create')}}" class="btn btn-info px-4 align-self-center report-btn">Add</a>
+    </div>
+    @stop
+
+    @section('scripts')
+
     @stop

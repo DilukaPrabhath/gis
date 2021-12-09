@@ -16,56 +16,53 @@
                                 <table class="table table-hover mb-0">
                                     <tr>
                                         <th>Inatitute Name</th>
-                                        <td>Inatitute 01</td>
+                                        <td>{{$value->institute_name}}</td>
                                     </tr>
                                     <tr>
                                         <th>Email</th>
-                                        <td>email@g.com</td>
+                                        <td>{{$value->email}}</td>
                                     </tr>
                                     <tr>
                                         <th>Telephone</th>
-                                        <td>0110668362</td>
+                                        <td>{{$value->contact_number}}</td>
                                     </tr>
                                     <tr>
-                                        <th>Town</th>
-                                        <td>942722742V</td>
+                                        <th>Address Line 1</th>
+                                        <td>{{$value->address_line_1}}</td>
                                     </tr>
                                     <tr>
-                                        <th>Address</th>
-                                        <td>Pellawaththa,Colombo</td>
+                                        <th>Address Line 2</th>
+                                        <td>{{$value->address_line_2}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>City</th>
+                                        <td>{{$value->city}}</td>
                                     </tr>
                                     <tr>
                                         <th>Status</th>
-                                        <td><span class="badge badge-success">Active</span></td>
+                                        <td>@if ($value->status == 1)
+                                            <span class="badge badge-success">Active</span>
+                                           @elseif ($value->status == 2)
+                                            <span class="badge badge-danger">Inactive</span>
+                                           @endif</td>
                                     </tr>
-
                                 </table>
                             </div>
                             <div class="col-lg-6">
-                                <table class="table table-bordered mb-0 table-centered">
+                                {{-- <table class="table table-bordered mb-0 table-centered">
                                     <thead>
                                     <tr>
                                         <th>Grade</th>
-                                        <th>Class Fee Anualy</th>
-                                        <th>Class Fee Qutar</th>
-                                        <th>Class Fee Monthly</th>
+                                        <th>Syllabus</th>
+                                        <th>Class Fee</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>Grage 1</td>
-                                        <td>Rs.40000.00</td>
-                                        <td>Rs.10000.00</td>
-                                        <td>Rs.3000.00</td>
+
                                     </tr>
-                                    <tr>
-                                        <td>Grage 2</td>
-                                        <td>Rs.40000.00</td>
-                                        <td>Rs.10000.00</td>
-                                        <td>Rs.3000.00</td>
-                                    <tr>
                                     </tbody>
-                                </table><!--end /table-->
+                                </table><!--end /table--> --}}
                             </div>
 
 

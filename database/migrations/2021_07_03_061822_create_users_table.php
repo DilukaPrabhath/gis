@@ -15,27 +15,20 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('full_name');
-            $table->string('nwi');
-            $table->string('mobile')->unique();
-            $table->string('tele');
-            $table->string('nic')->unique();
-            $table->string('email')->unique();
+            $table->string('name',199);
+            $table->string('email',100)->unique();
+            $table->string('nic',12)->unique();
+            $table->string('mobile',10)->unique();
             $table->string('address',255);
-            $table->string('image');
-            $table->integer('user_type_id')->unsigned();
-            $table->string('user_number');
-            $table->tinyInteger('status');
-            $table->integer('ins_id')->unsigned();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('user_name')->unique();
             $table->string('password');
+            $table->string('image',100)->nullable();
+            $table->integer('user_role');
+            $table->integer('ins_id');
+            $table->string('user_number');
+            $table->smallInteger('status');
             $table->rememberToken();
             $table->timestamps();
-        });
-        Schema::table('users', function (Blueprint $table){
-            $table->foreign('user_type_id')->references('id')->on('user_types')->onDelete('Restrict')->onUpdate('Cascade');
-            $table->foreign('ins_id')->references('id')->on('institutes')->onDelete('Restrict')->onUpdate('Cascade');
         });
     }
 
