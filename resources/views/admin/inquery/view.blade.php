@@ -42,70 +42,37 @@
                                         <table class="table table-hover mb-0">
                                             <tr>
                                                 <th>Inquery Number</th>
-                                                <td>{{$data[0]->inq_number}}</td>
+                                                <td>{{$data->inq_number}}</td>
                                             </tr>
                                             <tr>
                                                 <th>Student Full Name</th>
-                                                <td>{{$data[0]->student_full_name}}</td>
+                                                <td>{{$data->student_full_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Name With Initials</th>
+                                                <td>{{$data->nwi}}</td>
                                             </tr>
                                             <tr>
                                                 <th>Date of Birth</th>
-                                                <td>{{$data[0]->dob}}</td>
+                                                <td>{{$data->dob}}</td>
                                             </tr>
                                             <tr>
                                                 <th>Gender</th>
-                                                <td>@if ($data[0]->gender == 1)
-                                                    <span>Male</span>
-                                                   @elseif ($data[0]->gender == 2)
-                                                    <span>Female</span>
+                                                <td>@if ($data->gender == 1)
+                                                    <span class="">Male</span>
+                                                   @elseif ($data->gender == 2)
+                                                    <span class="" >Female</span>
                                                    @endif</td>
                                             </tr>
                                             <tr>
-                                                <th>Request Institute</th>
-                                                <td>{{$data[0]->institute}}</td>
+                                                <th>Religion</th>
+                                                <td>{{$data->religion}}</td>
                                             </tr>
                                             <tr>
-                                                <th>Request Grade</th>
-                                                <td>{{$data[0]->grade}}</td>
+                                                <th>Nationality</th>
+                                                <td>{{$data->nationality}}</td>
                                             </tr>
-                                            <tr>
-                                                <th>Inquery Type</th>
-                                                <td>@if ($data[0]->inq_type == 1)
-                                                    <span>Online</span>
-                                                   @elseif ($data[0]->inq_type == 2)
-                                                    <span>Physical</span>
-                                                    @elseif ($data[0]->inq_type == 3)
-                                                    <span>Over the Phone</span>
-                                                   @endif</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Inquery Status</th>
-                                                <td>@if ($data[0]->inq_status == 1)
-                                                    <span class="badge badge-danger" style="background-color: purple;">Investigating</span>
-                                                   @elseif ($data[0]->inq_status == 2)
-                                                    <span class="badge badge-danger" style="background-color: orange;">Confirm</span>
-                                                    @elseif ($data[0]->inq_status == 3)
-                                                    <span class="badge badge-danger" style="background-color: red;">Not Comming</span>
-                                                    @elseif ($data[0]->inq_status ==4)
-                                                    <span class="badge badge-danger" style="background-color: green;">Student</span>
-                                                   @endif</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Student Status</th>
-                                                <td>@if ($data[0]->stu_status == 1)
-                                                    <span class="badge badge-danger" style="background-color: purple;">Investigating Step</span>
-                                                   @elseif ($data[0]->stu_status == 2)
-                                                    <span class="badge badge-danger" style="background-color: orange;">Application Step</span>
-                                                    @elseif ($data[0]->stu_status == 3)
-                                                    <span class="badge badge-danger" style="background-color: blue;">Interview Step</span>
-                                                    @elseif ($data[0]->stu_status == 4)
-                                                    <span class="badge badge-danger" style="background-color: green;">Registration Step</span>
-                                                    @elseif ($data[0]->stu_status == 5)
-                                                    <span class="badge badge-danger" style="background-color: green;">Student</span>
-                                                    @elseif ($data[0]->stu_status == 6)
-                                                    <span class="badge badge-danger" style="background-color: red;">Leved</span>
-                                                   @endif</td>
-                                            </tr>
+
 
 
                                         </table>
@@ -114,29 +81,46 @@
 
                                     <div class="col-lg-6">
                                         <table class="table table-hover mb-0">
+
                                             <tr>
-                                                <th>Parent NIC</th>
-                                                <td>{{$data[0]->parent_nic}}</td>
+                                                <th>Contact Number</th>
+                                                <td>{{$data->contact_number}}</td>
                                             </tr>
                                             <tr>
-                                                <th>Parent Name</th>
-                                                <td>{{$data[0]->parent_name}}</td>
+                                                <th>Address</th>
+                                                <td>{{$data->address}}</td>
                                             </tr>
                                             <tr>
-                                                <th>Parent Email</th>
-                                                <td>{{$data[0]->parent_email}}</td>
+                                                <th>Inquery Type</th>
+                                                <td>{{$data->nationality}}</td>
                                             </tr>
                                             <tr>
-                                                <th>Parent Mobile</th>
-                                                <td>{{$data[0]->parent_mobile}}</td>
+                                                <th>Inquery Status</th>
+                                                <td>@if ($data->inq_status == 1)
+                                                    <span class="badge badge-danger" style="background-color: purple;">Investigating</span>
+                                                   @elseif ($data->inq_status == 2)
+                                                    <span class="badge badge-danger" style="background-color: orange;">Confirm</span>
+                                                    @elseif ($data->inq_status == 3)
+                                                    <span class="badge badge-danger" style="background-color: red;">Not Comming</span>
+                                                    @elseif ($data->inq_status ==4)
+                                                    <span class="badge badge-danger" style="background-color: green;">Student</span>
+                                                   @endif</td>
                                             </tr>
                                             <tr>
-                                                <th>Parent Address</th>
-                                                <td>{{$data[0]->parent_address}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Relationship</th>
-                                                <td>{{$data[0]->parent_relationship}}</td>
+                                                <th>Student Status</th>
+                                                <td>@if ($data->stu_status == 1)
+                                                    <span class="badge badge-danger" style="background-color: purple;">Investigating Step</span>
+                                                   @elseif ($data->stu_status == 2)
+                                                    <span class="badge badge-danger" style="background-color: orange;">Application Step</span>
+                                                    @elseif ($data->stu_status == 3)
+                                                    <span class="badge badge-danger" style="background-color: blue;">Interview Step</span>
+                                                    @elseif ($data->stu_status == 4)
+                                                    <span class="badge badge-danger" style="background-color: green;">Registration Step</span>
+                                                    @elseif ($data->stu_status == 5)
+                                                    <span class="badge badge-danger" style="background-color: green;">Student</span>
+                                                    @elseif ($data->stu_status == 6)
+                                                    <span class="badge badge-danger" style="background-color: red;">Leved</span>
+                                                   @endif</td>
                                             </tr>
 
                                         </table>
@@ -155,7 +139,7 @@
 
                             </div>
                             <div class="tab-pane p-3" id="profile-1" role="tabpanel">
-                                <form action="{{url('/admin/applications/update')}}/{{$data[0]->stid}}" method="POST" autocomplete="off" id="regForm2"  enctype="multipart/form-data" >
+                                <form action="{{url('/admin/applications/update')}}/{{$data->id}}" method="POST" autocomplete="off" id="regForm2"  enctype="multipart/form-data" >
                                     @csrf
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -164,8 +148,8 @@
                                             <label class="col-sm-3 col-form-label text-right">Application Payment</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="app_pay_st">
-                                                    <option value="2" {{$data[0]->application_status=='2'?'selected':''}}>No</option>
-                                                    <option value="1" {{$data[0]->application_status=='1'?'selected':''}}>Yes</option>
+                                                    <option value="2" {{$data->application_status=='2'?'selected':''}}>No</option>
+                                                    <option value="1" {{$data->application_status=='1'?'selected':''}}>Yes</option>
 
                                                 </select>
                                                 @error('app_pay_st')
@@ -179,9 +163,9 @@
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="inter_ty">
                                                     <option value="">Not Partisipate</option>
-                                                    <option value="1" {{$data[0]->interview_type=='1'?'selected':''}}>Online</option>
-                                                    <option value="2" {{$data[0]->interview_type=='2'?'selected':''}}>Over the Phone</option>
-                                                    <option value="3" {{$data[0]->interview_type=='3'?'selected':''}}>Physicaly</option>
+                                                    <option value="1" {{$data->interview_type=='1'?'selected':''}}>Online</option>
+                                                    <option value="2" {{$data->interview_type=='2'?'selected':''}}>Over the Phone</option>
+                                                    <option value="3" {{$data->interview_type=='3'?'selected':''}}>Physicaly</option>
                                                 </select>
                                                 @error('inter_ty')
                                                 <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
@@ -194,8 +178,8 @@
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="inter_st">
                                                     <option value="">Not Partisipate</option>
-                                                    <option value="1" {{$data[0]->interview_status=='1'?'selected':''}}>Pass</option>
-                                                    <option value="2" {{$data[0]->interview_status=='2'?'selected':''}}>Fail</option>
+                                                    <option value="1" {{$data->interview_status=='1'?'selected':''}}>Pass</option>
+                                                    <option value="2" {{$data->interview_status=='2'?'selected':''}}>Fail</option>
                                                 </select>
                                                 @error('inter_st')
                                                 <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
@@ -207,8 +191,8 @@
                                             <label class="col-sm-3 col-form-label text-right">Appeal Process</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="re_int">
-                                                    <option value="2" {{$data[0]->re_interview_apply=='1'?'selected':''}}>No</option>
-                                                    <option value="1" {{$data[0]->re_interview_apply=='1'?'selected':''}}>Yes</option>
+                                                    <option value="2" {{$data->re_interview_apply=='1'?'selected':''}}>No</option>
+                                                    <option value="1" {{$data->re_interview_apply=='1'?'selected':''}}>Yes</option>
                                                 </select>
                                                 @error('re_int')
                                                 <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
@@ -224,14 +208,14 @@
                                     <div class="form-group row">
                                         <label for="recipt_no" class="col-sm-3 col-form-label text-right">Recipt Number</label>
                                         <div class="col-sm-9">
-                                            <input class="form-control" type="text" value="{{$data[0]->resipt_number}}" name="recipt_no" id="recipt_no">
+                                            <input class="form-control" type="text" value="{{$data->resipt_number}}" name="recipt_no" id="recipt_no">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label for="example-search-input" class="col-sm-3 col-form-label text-right">Recipt Image</label>
                                         <div class="col-sm-9">
-                                            <input type="file" id="input-file-now" class="dropify" value="{{$data[0]->resipt_image}}" name="rec_img" id="rec_img" data-default-file="{{url('image/ricipt/'.$data[0]->resipt_image)}}"/>
+                                            <input type="file" id="input-file-now" class="dropify" value="" name="rec_img" id="rec_img" data-default-file="{{url('image/ricipt/')}}"/>
                                         </div>
                                     </div>
 
@@ -252,17 +236,12 @@
                             </div>
 
                             <div class="tab-pane p-3" id="settings-1" role="tabpanel">
-                                <form action="{{url('/admin/inqueries/registration/update')}}/{{$data[0]->stid}}" method="POST" autocomplete="off" id="regForm3"  enctype="multipart/form-data" >
+                                <form action="{{url('/admin/inqueries/registration/update')}}/" method="POST" autocomplete="off" id="regForm3"  enctype="multipart/form-data" >
                                     @csrf
                                 <div class="row">
 
                                     <div class="col-lg-6">
-                                        @if ($data[0]->inq_status == 4)
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label text-right">Student ID</label>
-                                            <label class="col-sm-9 col-form-label text-left">{{$data[0]->student_id}}</label>
-                                        </div>
-                                        @endif
+
 
 
                                         <div class="form-group row">
@@ -270,9 +249,7 @@
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="institute" id="institute">
                                                     <option value="">Select Institute</option>
-                                                    @foreach($institute as $value)
-                                                    <option value="{{$value->id}}" {{ $value->id == $data[0]->in_id ? 'selected' : '' }}>{{$value->institute_name}}</option>
-                                                    @endForeach
+
                                                 </select>
                                             </div>
                                         </div>
@@ -282,18 +259,7 @@
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="grade" id="grade">
                                                     <option value="">Select Grade</option>
-                                                    <option value="0" {{$data[0]->grade_now=='0'?'selected':''}}>Primary</option>
-                                                    <option value="1" {{$data[0]->grade_now=='1'?'selected':''}}>Grade 1</option>
-                                                    <option value="2" {{$data[0]->grade_now=='2'?'selected':''}}>Grade 2</option>
-                                                    <option value="3" {{$data[0]->grade_now=='3'?'selected':''}}>Grade 3</option>
-                                                    <option value="4" {{$data[0]->grade_now=='4'?'selected':''}}>Grade 4</option>
-                                                    <option value="5" {{$data[0]->grade_now=='5'?'selected':''}}>Grade 5</option>
-                                                    <option value="6" {{$data[0]->grade_now=='6'?'selected':''}}>Grade 6</option>
-                                                    <option value="7" {{$data[0]->grade_now=='7'?'selected':''}}>Grade 7</option>
-                                                    <option value="8" {{$data[0]->grade_now=='8'?'selected':''}}>Grade 8</option>
-                                                    <option value="9" {{$data[0]->grade_now=='9'?'selected':''}}>Grade 9</option>
-                                                    <option value="10" {{$data[0]->grade_now=='10'?'selected':''}}>Grade 10</option>
-                                                    <option value="11" {{$data[0]->grade_now=='11'?'selected':''}}>Grade 11</option>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -301,7 +267,7 @@
                                         <div class="form-group row">
                                             <label for="register_date" class="col-sm-3 col-form-label text-right">Registration Date</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="date" value="{{$data[0]->registration_date}}" id="register_date" name="register_date">
+                                                <input class="form-control" type="date" value="" id="register_date" name="register_date">
                                             </div>
                                         </div>
 
@@ -310,8 +276,8 @@
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="gis_pr_sc_at" id="gis_pr_sc_at">
                                                     <option value="">Select</option>
-                                                    <option value="1" {{$data[0]->pre_sc_att=='1'?'selected':''}}>Yes</option>
-                                                    <option value="2" {{$data[0]->pre_sc_att=='2'?'selected':''}}>No</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="2">No</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -319,14 +285,14 @@
                                         <div class="form-group row">
                                             <label for="gis_sid" class="col-sm-3 col-form-label text-right">GIS Pre School SID Number</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text" value="{{$data[0]->pre_school_id}}" name="gis_sid" id="gis_sid">
+                                                <input class="form-control" type="text" value="" name="gis_sid" id="gis_sid">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="recod" class="col-sm-3 col-form-label text-right">Records</label>
                                             <div class="col-sm-9">
-                                                <textarea class="form-control" rows="2" id="recod" name="recod">{{$data[0]->recod}}</textarea>
+                                                <textarea class="form-control" rows="2" id="recod" name="recod"></textarea>
                                             </div>
                                         </div>
 
@@ -335,8 +301,8 @@
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="is_id_issue" id="is_id_issue">
                                                     <option value="">Select</option>
-                                                    <option value="1" {{$data[0]->is_id_issue=='1'?'selected':''}}>Yes</option>
-                                                    <option value="2" {{$data[0]->is_id_issue=='2'?'selected':''}}>No</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="2">No</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -346,8 +312,8 @@
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="is_id_paid" id="is_id_paid">
                                                     <option value="">Select</option>
-                                                    <option value="1" {{$data[0]->is_id_fee_paid=='1'?'selected':''}}>Yes</option>
-                                                    <option value="2" {{$data[0]->is_id_fee_paid=='2'?'selected':''}}>No</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="2">No</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -357,8 +323,8 @@
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="sy_type" id="sy_type">
                                                     <option value="" selected>Select Type</option>
-                                                    <option value="1" {{$data[0]->syllubus_type=='1'?'selected':''}}>Local</option>
-                                                    <option value="2" {{$data[0]->syllubus_type=='2'?'selected':''}}>Edexcel</option>
+                                                    <option value="1">Local</option>
+                                                    <option value="2">Edexcel</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -368,9 +334,9 @@
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="paymnt_type" id="paymnt_type">
                                                     <option value="">Select</option>
-                                                    <option value="1" {{$data[0]->pamt_typ=='1'?'selected':''}}>Anualy</option>
-                                                    <option value="2" {{$data[0]->pamt_typ=='2'?'selected':''}}>Qutar</option>
-                                                    <option value="3" {{$data[0]->pamt_typ=='3'?'selected':''}}>Monthly</option>
+                                                    <option value="1">Anualy</option>
+                                                    <option value="2">Qutar</option>
+                                                    <option value="3">Monthly</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -378,22 +344,11 @@
                                         <div class="form-group row">
                                             <label for="stu_img" class="col-sm-3 col-form-label text-right">Student Image</label>
                                             <div class="col-sm-9">
-                                                <input type="file" id="input-file-now" class="dropify" value="{{$data[0]->stu_img}}" name="stu_img" id="stu_img" data-default-file="{{url('image/student/'.$data[0]->stu_img)}}"/>
+                                                <input type="file" id="input-file-now" class="dropify" value="}" name="stu_img" id="stu_img" data-default-file="{{url('image/student/')}}"/>
                                             </div>
                                         </div>
 
-                                        @if ($data[0]->inq_status == 4)
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label text-right">Student status</label>
-                                            <div class="col-sm-9">
-                                            @if ($data[0]->stu_status == 5)
-                                                <span class="badge badge-danger" style="background-color: green; margin-top:10px;">Student</span>
-                                                @elseif ($data[0]->stu_status == 6)
-                                                <span class="badge badge-danger" style="background-color: red; margin-top:10px;">Leved</span>
-                                            @endif
-                                            </div>
-                                        </div>
-                                        @endif
+
 
                                         <hr>
 
@@ -404,28 +359,28 @@
                                         <div class="form-group row">
                                             <label for="nic" class="col-sm-3 col-form-label text-right">NIC</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text" value="{{$data[0]->emergency_contact_nic}}" name="nic" id="nic">
+                                                <input class="form-control" type="text" value="" name="nic" id="nic">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="name" class="col-sm-3 col-form-label text-right">Name</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text" value="{{$data[0]->emergency_contact_name}}" name="name" id="name">
+                                                <input class="form-control" type="text" value="" name="name" id="name">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="mobile" class="col-sm-3 col-form-label text-right">Mobile</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text" value="{{$data[0]->emergency_contact_mobile}}" name="mobile" id="mobile">
+                                                <input class="form-control" type="text" value="" name="mobile" id="mobile">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="relationship" class="col-sm-3 col-form-label text-right">Relationship</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text" value="{{$data[0]->emergency_contact_relationship}}" name="relationship" id="relationship">
+                                                <input class="form-control" type="text" value="" name="relationship" id="relationship">
                                             </div>
                                         </div>
 
@@ -435,94 +390,71 @@
 
                                     <div class="col-lg-6">
 
-                                        <input class="form-control" type="hidden" value="{{$data[0]->id}}" name="prt_id" id="prt_id">
+                                        <input class="form-control" type="hidden" value="" name="prt_id" id="prt_id">
 
 
                                         <div class="form-group row">
                                             <label for="parent_nic" class="col-sm-3 col-form-label text-right">Parent 1 NIC</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text" value="{{$data[0]->parent_nic}}" name="parent1_nic" id="parent1_nic">
+                                                <input class="form-control" type="text" value="" name="parent1_nic" id="parent1_nic">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="parent_name" class="col-sm-3 col-form-label text-right">Parent 1 Name</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text" value="{{$data[0]->parent_name}}" name="parent1_name" id="parent1_name">
+                                                <input class="form-control" type="text" value="" name="parent1_name" id="parent1_name">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="parent_email" class="col-sm-3 col-form-label text-right">Parent 1 Email</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="email" value="{{$data[0]->parent_email}}" name="parent1_email" id="parent1_email">
+                                                <input class="form-control" type="email" value="" name="parent1_email" id="parent1_email">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="parent_mobile" class="col-sm-3 col-form-label text-right">Parent 1 Mobile</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="number" value="{{$data[0]->parent_mobile}}" name="parent1_mobile" id="parent1_mobile">
+                                                <input class="form-control" type="number" value="" name="parent1_mobile" id="parent1_mobile">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="address" class="col-sm-3 col-form-label text-right">Parent 1 Address</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text" value="{{$data[0]->parent_address}}" name="address1" id="address1">
+                                                <input class="form-control" type="text" value="" name="address1" id="address1">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="relationship" class="col-sm-3 col-form-label text-right">Relationship</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text" value="{{$data[0]->parent_relationship}}" name="relationship1" id="relationship1">
+                                                <input class="form-control" type="text" value="" name="relationship1" id="relationship1">
                                             </div>
                                         </div>
 
-                                        @if ($prt3 != 0)
-                                        <input class="form-control" type="hidden" value="{{$prt2->id}}" name="prt2_id" id="prt2_id">
-                                        @else
-                                        <input class="form-control" type="hidden" value="0" name="prt2_id" id="prt2_id">
-                                        @endif
 
 
                                         <div class="form-group row">
                                             <label for="parent_nic2" class="col-sm-3 col-form-label text-right">Parent 2 NIC</label>
                                             <div class="col-sm-9">
-                                                @if ($prt3 != 0)
-                                                <input class="form-control" type="text" value="{{$prt2->parent_nic}}" name="parent_nic2" id="parent_nic2">
-                                                @else
-                                                <input class="form-control" type="text" value="" name="parent_nic2" id="parent_nic2">
-                                                @endif
-                                                @error('parent_nic2')
-                                                <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
-                                                @enderror
+
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="parent_name2" class="col-sm-3 col-form-label text-right">Parent 2 Name</label>
                                             <div class="col-sm-9">
-                                                @if ($prt3 != 0)
-                                                <input class="form-control" type="text" value="{{$prt2->parent_name}}" name="parent_name2" id="parent_name2">
-                                                @else
-                                                <input class="form-control" type="text" value="" name="parent_name2" id="parent_name2">
-                                                @endif
-                                                @error('parent_name2')
-                                                <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
-                                                @enderror
+
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="parent_email2" class="col-sm-3 col-form-label text-right">Parent 2 Email</label>
                                             <div class="col-sm-9">
-                                                @if ($prt3 != 0)
-                                                <input class="form-control" type="text" value="{{$prt2->parent_email}}" name="parent_email2" id="parent_email2">
-                                                @else
-                                                <input class="form-control" type="email" value="" name="parent_email2" id="parent_email2">
-                                                @endif
+
                                                 @error('parent_email2')
                                                 <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
                                                 @enderror
@@ -532,11 +464,7 @@
                                         <div class="form-group row">
                                             <label for="parent_mobile2" class="col-sm-3 col-form-label text-right">Parent 2 Mobile</label>
                                             <div class="col-sm-9">
-                                                @if ($prt3 != 0)
-                                                <input class="form-control" type="text" value="{{$prt2->parent_mobile}}" name="parent_mobile2" id="parent_email2">
-                                                @else
-                                                <input class="form-control" type="number" value="" name="parent_mobile2" id="parent_mobile2">
-                                                @endif
+
                                                 @error('parent_mobile2')
                                                 <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
                                                 @enderror
@@ -546,11 +474,7 @@
                                         <div class="form-group row">
                                             <label for="address2" class="col-sm-3 col-form-label text-right">Parent 2 Address</label>
                                             <div class="col-sm-9">
-                                                @if ($prt3 != 0)
-                                                <input class="form-control" type="text" value="{{$prt2->parent_address}}" name="address2" id="address2">
-                                                @else
-                                                <input class="form-control" type="text" value="" name="address2" id="address2">
-                                                @endif
+
                                                 @error('address2')
                                                 <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
                                                 @enderror
@@ -560,11 +484,7 @@
                                         <div class="form-group row">
                                             <label for="relationship2" class="col-sm-3 col-form-label text-right">Relationship</label>
                                             <div class="col-sm-9">
-                                                @if ($prt3 != 0)
-                                                <input class="form-control" type="text" value="{{$prt2->parent_relationship}}" name="relationship2" id="relationship2">
-                                                @else
-                                                <input class="form-control" type="text" value="" name="relationship2" id="relationship2">
-                                                @endif
+
                                                 @error('relationship2')
                                                 <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
                                                 @enderror
@@ -692,6 +612,27 @@
             element5.classList.remove("active");
             element6.classList.remove("active");
             }
+
+
+$(document).ready(function() {
+$("#regForm2").validate({
+    rules: {
+        recipt_no: {
+            required: true,
+            maxlength: 12,
+        },
+
+    },
+    messages: {
+        recipt_no: {
+            required: "Recipt Number is required",
+            maxlength: "Recipt Number cannot be more than 10 characters"
+        },
+    }
+});
+
+
+});
 
             $(document).ready(function() {
 
