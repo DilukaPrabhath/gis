@@ -31,15 +31,12 @@ class AdminInqueryCon extends Controller
         $this->validate(request(), [
 
             'student_name'  => 'required',
+            'name_with_initial'  => 'required',
             'dob' => 'required',
-            'institute'  => 'required',
-            'request_grade' => 'required',
+            'religion' => 'required',
+            'nationality' => 'required',
             'inquery_type'  => 'required',
-            'parent_nic' => 'required',
-            'parent_name'  => 'required',
-            'parent_email' => 'required',
-            'parent_mobile'  => 'required',
-            'relationship' => 'required',
+            'contact_number' => 'required',
             'address'  => 'required',
             ]);
 
@@ -70,10 +67,13 @@ class AdminInqueryCon extends Controller
         $stu = new Student();
 
         $stu->student_full_name  = $request->student_name;
+        $stu->nwi  = $request->name_with_initial;
         $stu->inq_number = $num;
-        $stu->dob = $request->dob;
-        $stu->re_ins_id  = $request->institute;
-        $stu->re_grd_id = $request->request_grade;
+        $stu->dob  = $request->dob;
+        $stu->religion  = $request->religion;
+        $stu->nationality  = $request->nationality;
+        $stu->address  = $request->address;
+        $stu->contact_number  = $request->contact_number;
         $stu->inq_type  = $request->inquery_type; //inquery = 1 /appliction = 2/ interview = 3 / registration = 4 / student = 5
         if($request->gender == "on"){
             $stu->gender     = 1; //male = 1 /female = 2
@@ -83,17 +83,6 @@ class AdminInqueryCon extends Controller
         $stu->inq_status  = 1;
         $stu->stu_status = 1;
         $stu->save();
-
-        $parent = new Parentm();
-
-        $parent->st_id = $stu->id;
-        $parent->parent_nic = $request->parent_nic;
-        $parent->parent_name  = $request->parent_name;
-        $parent->parent_mobile = $request->parent_mobile;
-        $parent->parent_email  = $request->parent_email;
-        $parent->parent_address = $request->address;
-        $parent->parent_relationship = $request->relationship;
-        $parent->save();
 
         DB::commit();
 
@@ -107,19 +96,20 @@ class AdminInqueryCon extends Controller
        }
 
        public function view($pid){
-         $prt = Parentm::orderBy('id', 'DESC')->where('st_id',$pid)->first();
-         $id = $prt->id;
-         $data  = Student::data($id);
-         if($data[0]->inq_status == 4){
-            $prt2 =  Parentm::orderBy('id', 'asc')->where('st_id',$pid)->skip(1)->first();
-            $prt3 = 1;
-         }else{
-            $prt3 = 0;
-            $prt2 = 0;
-         }
+        $data  = Student::find($pid);
+         //$prt = Parentm::orderBy('id', 'DESC')->where('st_id',$pid)->first();
+         //$id = $prt->id;
+         //$data  = Student::data($id);
+        //  if($data[0]->inq_status == 4){
+        //     $prt2 =  Parentm::orderBy('id', 'asc')->where('st_id',$pid)->skip(1)->first();
+        //     $prt3 = 1;
+        //  }else{
+        //     $prt3 = 0;
+        //     $prt2 = 0;
+        //  }
 
          $institute = Institute::where('status',1)->get();
-        return view('admin.inquery.view',compact('data','institute','prt2','prt3'));
+        return view('admin.inquery.view',compact('data'));
        }
 
        public function edit($pid){

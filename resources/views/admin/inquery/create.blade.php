@@ -23,6 +23,13 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label for="name_with_initial" class="col-sm-3 col-form-label text-right">Name with Initials</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" value="" name="name_with_initial" id="name_with_initial">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     <label for="dob" class="col-sm-3 col-form-label text-right">Date of Birth</label>
                                     <div class="col-sm-9">
                                         <input class="form-control" type="date" value="" name="dob" id="dob">
@@ -48,35 +55,41 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label text-right">Institute</label>
+                                    <label for="religion" class="col-sm-3 col-form-label text-right">Religion</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" name="institute" id="institute">
-                                            <option value="">Select Institute</option>
-                                            @foreach($institute as $value)
-                                            <option value="{{$value->id}}">{{$value->institute_name}}</option>
-                                            @endForeach
-                                        </select>
+                                        <input class="form-control" type="text" value="" name="religion" id="religion">
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+                            </div>
+
+
+                            <div class="col-lg-6">
+
+                                <div class="form-group row">
+                                    <label for="nationality" class="col-sm-3 col-form-label text-right">Nationality</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" value="" name="nationality" id="nationality">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label text-right">Request Grade</label>
+                                    <label for="address" class="col-sm-3 col-form-label text-right">Address</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" name="request_grade" id="request_grade">
-                                            <option value="">Select Grade</option>
-                                            <option value="0">Primary</option>
-                                            <option value="1">Grade 1</option>
-                                            <option value="2">Grade 2</option>
-                                            <option value="3">Grade 3</option>
-                                            <option value="4">Grade 4</option>
-                                            <option value="5">Grade 5</option>
-                                            <option value="6">Grade 6</option>
-                                            <option value="7">Grade 7</option>
-                                            <option value="8">Grade 8</option>
-                                            <option value="9">Grade 9</option>
-                                            <option value="10">Grade 10</option>
-                                            <option value="11">Grade 11</option>
-                                        </select>
+                                        <textarea class="form-control" name="address" id="address" rows="3" cols="50"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="contact_number" class="col-sm-3 col-form-label text-right">Contact Number</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="number" value="" name="contact_number" id="contact_number">
                                     </div>
                                 </div>
 
@@ -92,14 +105,7 @@
                                     </div>
                                 </div>
 
-
-
-                            </div>
-
-
-                            <div class="col-lg-6">
-
-                                <div class="form-group row">
+                                {{-- <div class="form-group row">
                                     <label for="parent_nic" class="col-sm-3 col-form-label text-right">Parent NIC</label>
                                     <div class="col-sm-9">
                                         <input class="form-control" type="text" value="" name="parent_nic" id="parent_nic">
@@ -139,7 +145,7 @@
                                     <div class="col-sm-9">
                                         <input class="form-control" type="text" value="" name="relationship" id="relationship">
                                     </div>
-                                </div>
+                                </div> --}}
 
                             </div>
 
@@ -175,40 +181,31 @@
                     dob: {
                         required: true,
                     },
-                    institute: {
-                        required: true,
-                    },
-                    request_grade: {
-                        required: true,
-                    },
                     inquery_type: {
                         required: true,
-                    },
-                    parent_nic: {
-                        required: true,
-                        maxlength: 12,
-                    },
-                    parent_name: {
-                        required: true,
-                        maxlength: 100
-                    },
-                    parent_email: {
-                        required: true,
-                        maxlength: 100,
-                        email: true,
-                    },
-                    parent_mobile: {
-                        required: true,
-                        maxlength: 10
-                    },
-                    relationship: {
-                        required: true,
-                        maxlength: 50
                     },
                     address: {
                         required: true,
                         maxlength: 150
-                    }
+                    },
+                    nationality: {
+                        required: true,
+                        maxlength: 50
+                    },
+                    religion: {
+                        required: true,
+                        maxlength: 50
+                    },
+                    name_with_initial: {
+                        required: true,
+                        maxlength: 100
+                    },
+                    contact_number: {
+                        required: true,
+                        maxlength: 10,
+                        minlength: 10,
+                        number: true,
+                    },
 
                 },
                 messages: {
@@ -216,32 +213,29 @@
                         required: "Student Name is required",
                         maxlength: "Student Name cannot be more than 100 characters"
                     },
+                    name_with_initial: {
+                        required: "Name with Initial is required",
+                        maxlength: "Name with Initial cannot be more than 100 characters"
+                    },
+                    religion: {
+                        required: "Religion is required",
+                        maxlength: "Religion cannot be more than 100 characters"
+                    },
+                    nationality: {
+                        required: "Nationality is required",
+                        maxlength: "Nationality cannot be more than 100 characters"
+                    },
                     dob: {
                         required: "Date of Birth is required"
                     },
-                    institute: {
-                        required: "Institute is required",
-                    },
-                    request_grade: {
-                        required: "Grade is required"
+                    contact_number: {
+                        required: "Contact Number is required",
+                        maxlength: "Contact Number cannot be more than 10 characters",
+                        minlength: "Contact Number cannot be less than 10 characters"
+
                     },
                     inquery_type: {
                         required: "Inquery Type is required"
-                    },
-                    parent_nic: {
-                        required: "Parent NIC is required"
-                    },
-                    parent_name: {
-                        required: "Parent Name is required"
-                    },
-                    parent_email: {
-                        required: "Parent Email is required"
-                    },
-                    parent_mobile: {
-                        required: "Parent Mobile is required"
-                    },
-                    relationship: {
-                        required: "Relationship is required"
                     },
                     address: {
                         required: "Address is required"
@@ -253,6 +247,86 @@
 
     </script>
 
+<script>
 
+    $(document).ready(function(){
+        $("#student_name").blur(function(){
+            var name = $("#student_name").val();
+            var lsnm = $("#student_name").val();
+            if(name.split(' ').length > 1){
+                if(name.split(' ').length >= 3){
+                    name = name.split(' ')
+                    lsnm = name.splice(-2);
+                    console.log(name);
+                    console.log(lsnm);
+                    var frnm = lsnm[0]+' '+lsnm[1];
+                    frnm = frnm.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+                        return letter.toUpperCase();
+                    });
+                    $("#name_with_initial").val(getInitials(name)+' '+frnm);
+                }else{
+                    name = name.split(' ')
+                    lsnm = name.splice(-1);
+                    var lssn = lsnm[0];
+                    console.log(name);
+                    console.log(lsnm);
+                    lssn = lssn.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+                        return letter.toUpperCase();
+                    });
+                    $("#name_with_initial").val(getInitials(name)+' '+lssn);
+                }
+            }
+
+        })
+
+    })
+    function getInitials(name){
+        var parts = name
+        var initials = ''
+        for (var i = 0; i < parts.length; i++) {
+            if (parts[i].length > 0 && parts[i] !== '') {
+            initials += parts[i][0].toUpperCase()+'.'
+            }
+        }
+        return initials
+    }
+
+      </script>
+
+<script>
+    //   autocomplete
+$(document).ready(function(){
+ console.log("HI2");
+$('#parent_nic').autocomplete({
+
+ source: function(request, response) {
+   $.getJSON("{{ url('/student/parent2_nic') }}",
+    {parent_nic2:$("#parent_nic").val()},
+       response);
+ },
+ minLength: 1,
+ width: "100%",
+ open: function(event,ui){
+     var autocomplete=$(".ui-autocomplete:visible");
+     var oldTop=autocomplete.offset().top;
+     var newTop = oldTop-$("#parent_nic").height()+25;
+     autocomplete.css("top", newTop);
+ },
+ select:function(event,ui){
+     //console.log(ui);
+     var name = ui.item.parent_name2;
+     var email = ui.item.parent_email2;
+     var mobile = ui.item.parent_mobile2;
+     var address = ui.item.parent_address2;
+
+     document.getElementById('parent_name').value = name;
+     document.getElementById('parent_email').value = email;
+     document.getElementById('parent_mobile').value = mobile;
+     document.getElementById('address').value = address;
+
+ },
+});
+});
+   </script>
     @stop
 

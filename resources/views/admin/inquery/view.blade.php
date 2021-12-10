@@ -991,4 +991,36 @@ $('#parent_nic2').autocomplete({
  });
       </script>
 
+<script>
+    //   autocomplete
+$(document).ready(function(){
+ console.log("HI2");
+$('#nic').autocomplete({
+
+ source: function(request, response) {
+   $.getJSON("{{ url('/student/parent2_nic') }}",
+    {parent_nic2:$("#nic").val()},
+       response);
+ },
+ minLength: 1,
+ width: "100%",
+ open: function(event,ui){
+     var autocomplete=$(".ui-autocomplete:visible");
+     var oldTop=autocomplete.offset().top;
+     var newTop = oldTop-$("#nic").height()+25;
+     autocomplete.css("top", newTop);
+ },
+ select:function(event,ui){
+     //console.log(ui);
+     var name = ui.item.parent_name2;
+     var mobile = ui.item.parent_mobile2;
+
+     document.getElementById('name').value = name;
+     document.getElementById('mobile').value = mobile;
+
+ },
+});
+});
+   </script>
+
 @stop

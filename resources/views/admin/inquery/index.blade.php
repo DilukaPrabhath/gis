@@ -15,8 +15,7 @@
                             <tr>
                                 <th>Inquery Number</th>
                                 <th>Student Name</th>
-                                <th>Request Institute</th>
-                                <th>Request Grade</th>
+                                <th>Contact Number</th>
                                 <th>Status</th>
                                 <th>Process Status</th>
                                 <th>Action</th>
@@ -29,8 +28,7 @@
                                         <tr>
                                             <td>{{$value->inq_number}}</td>
                                             <td>{{$value->student_full_name}}</td>
-                                            <td>{{$value->institute}}</td>
-                                            <td>{{$value->grade}}</td>
+                                            <td>{{$value->contact_number}}</td>
                                             <td>@if ($value->inq_status == 1)
                                                 <span class="badge badge-danger" style="background-color: purple;">Investigating</span>
                                                @elseif ($value->inq_status == 2)

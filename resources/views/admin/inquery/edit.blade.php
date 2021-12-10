@@ -29,6 +29,13 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label for="name_with_initial" class="col-sm-3 col-form-label text-right">Name with Initials</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" value="" name="name_with_initial" id="name_with_initial">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     <label for="dob" class="col-sm-3 col-form-label text-right">Date of Birth</label>
                                     <div class="col-sm-9">
                                         <input class="form-control" type="date" value="{{$data[0]->dob}}" name="dob" id="dob">
@@ -54,6 +61,42 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label for="religion" class="col-sm-3 col-form-label text-right">Religion</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" value="" name="religion" id="religion">
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+
+
+                            <div class="col-lg-6">
+                                <div class="form-group row">
+                                    <label for="nationality" class="col-sm-3 col-form-label text-right">Nationality</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="text" value="" name="nationality" id="nationality">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="address" class="col-sm-3 col-form-label text-right">Address</label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" name="address" id="address" rows="3" cols="50"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="contact_number" class="col-sm-3 col-form-label text-right">Contact Number</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" type="number" value="" name="contact_number" id="contact_number">
+                                    </div>
+                                </div>
+
+                                {{-- <div class="form-group row">
                                     <label class="col-sm-3 col-form-label text-right">Institute</label>
                                     <div class="col-sm-9">
                                         <select class="form-control" name="institute" id="institute">
@@ -75,7 +118,7 @@
                                             @endForeach
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label text-right">Inquery Type</label>
@@ -106,12 +149,7 @@
                                 </div>
 
 
-                            </div>
-
-
-                            <div class="col-lg-6">
-
-                                <div class="form-group row">
+                                {{-- <div class="form-group row">
                                     <label for="parent_nic" class="col-sm-3 col-form-label text-right">Parent NIC</label>
                                     <div class="col-sm-9">
                                         <input class="form-control" type="text" value="{{$data[0]->parent_nic}}" name="parent_nic" id="parent_nic">
@@ -164,7 +202,7 @@
                                             <option value="4" {{$data[0]->inq_status=='4'?'selected':''}}>Student</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
 
 
 
