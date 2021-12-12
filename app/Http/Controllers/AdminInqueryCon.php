@@ -113,12 +113,8 @@ class AdminInqueryCon extends Controller
        }
 
        public function edit($pid){
-        $prt = Parentm::orderBy('id', 'DESC')->where('st_id',$pid)->first();
-        $id = $prt->id;
-        $cls = Grade::where('status',1)->get();
-        $data  = Student::data($id);
-        $institute = Institute::where('status',1)->get();
-        return view('admin.inquery.edit',compact('prt','data','institute','cls'));
+        $data  = Student::find($pid);
+        return view('admin.inquery.edit',compact('data'));
        }
 
        public function update(Request $request,$id){
@@ -127,23 +123,24 @@ class AdminInqueryCon extends Controller
 
             'student_name'  => 'required',
             'dob' => 'required',
-            'institute'  => 'required',
-            'request_grade' => 'required',
+            'name_with_initial'  => 'required',
+            'religion' => 'required',
+            'nationality'  => 'required',
+            'contact_number' => 'required',
             'inquery_type'  => 'required',
-            'parent_nic' => 'required',
-            'parent_name'  => 'required',
-            'parent_email' => 'required',
-            'parent_mobile'  => 'required',
-            'relationship' => 'required',
+            'inquery_status' => 'required',
             'address'  => 'required',
             ]);
 
-            $stu =  Student::find($request->stid);
+            $stu =  Student::find($id);
 
         $stu->student_full_name  = $request->student_name;
         $stu->dob = $request->dob;
-        $stu->re_ins_id  = $request->institute;
-        $stu->re_grd_id = $request->request_grade;
+        $stu->nwi = $request->name_with_initial;
+        $stu->contact_number = $request->contact_number;
+        $stu->religion = $request->religion;
+        $stu->nationality = $request->nationality;
+        $stu->address = $request->address;
         $stu->inq_type  = $request->inquery_type; //inquery = 1 /appliction = 2/ interview = 3 / registration = 4 / student = 5
         if($request->gender == "on"){
             $stu->gender     = 1; //male = 1 /female = 2
@@ -153,17 +150,6 @@ class AdminInqueryCon extends Controller
         $stu->inq_status  = $request->inquery_status;
         // $stu->stu_status = 1;
         $stu->save();
-
-        $parent = Parentm::find($id);
-
-        $parent->st_id = $stu->id;
-        $parent->parent_nic = $request->parent_nic;
-        $parent->parent_name  = $request->parent_name;
-        $parent->parent_mobile = $request->parent_mobile;
-        $parent->parent_email  = $request->parent_email;
-        $parent->parent_address = $request->address;
-        $parent->parent_relationship = $request->relationship;
-        $parent->save();
 
         $notification = array(
             'message' => 'Inquery Updated Successfully!',

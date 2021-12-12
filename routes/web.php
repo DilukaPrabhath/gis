@@ -74,7 +74,7 @@ Route::get('/admin/inqueries', [App\Http\Controllers\AdminInqueryCon::class, 'in
 Route::get('/admin/inqueries/create', [App\Http\Controllers\AdminInqueryCon::class, 'create']);
 Route::post('admin/inqueries/store', [App\Http\Controllers\AdminInqueryCon::class, 'store']);
 Route::get('/admin/inqueries/view/{pid}', [App\Http\Controllers\AdminInqueryCon::class, 'view']);
-Route::get('/admin/inqueries/edit/{pid}', [App\Http\Controllers\AdminInqueryCon::class, 'edit']);
+Route::get('/admin/inqueries/edit/{id}', [App\Http\Controllers\AdminInqueryCon::class, 'edit']);
 Route::post('/admin/inqueries/update/{id}', [App\Http\Controllers\AdminInqueryCon::class, 'update']);
 
 //application
