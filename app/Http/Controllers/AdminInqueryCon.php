@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Grade;
 use App\Models\Institute;
 use App\Models\Parentm;
+use App\Models\Siblin;
 use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class AdminInqueryCon extends Controller
 {
@@ -97,19 +99,23 @@ class AdminInqueryCon extends Controller
 
        public function view($pid){
         $data  = Student::find($pid);
-         //$prt = Parentm::orderBy('id', 'DESC')->where('st_id',$pid)->first();
-         //$id = $prt->id;
-         //$data  = Student::data($id);
-        //  if($data[0]->inq_status == 4){
-        //     $prt2 =  Parentm::orderBy('id', 'asc')->where('st_id',$pid)->skip(1)->first();
-        //     $prt3 = 1;
-        //  }else{
-        //     $prt3 = 0;
-        //     $prt2 = 0;
-        //  }
+        $institute = Institute::orderBy('institute_name', 'ASC')->where('status',1)->get();
+        $grade = Grade::orderBy('grade', 'ASC')->where('status',1)->get();
+        $st = $data->stu_status;
+      if($st == 5 || $st == 6){
 
-         $institute = Institute::where('status',1)->get();
-        return view('admin.inquery.view',compact('data'));
+        $fa = Parentm::where('id',$data->fat_id)->where('fa_or_mom',1)->first();
+        $mo = Parentm::where('id',$data->mom_id)->where('fa_or_mom',2)->first();
+      }else{
+
+        $fa = 0;
+        $mo = 0;
+      }
+      $sibl = Siblin::where('s_id',$pid)->get();
+        // $institute = Institute::where('status',1)->get();
+        $ttn1 = Str::random(6);
+        $ttn2 = Str::random(6);
+        return view('admin.inquery.view',compact('data','institute','grade','ttn1','ttn2','sibl','fa','mo','st'));
        }
 
        public function edit($pid){

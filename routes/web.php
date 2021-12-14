@@ -85,6 +85,9 @@ Route::post('/admin/applications/update/{id}', [App\Http\Controllers\AdminApplic
 Route::post('/admin/inqueries/registration/update/{id}', [App\Http\Controllers\AdminStudentCon::class, 'update']);
 Route::get('/admin/students', [App\Http\Controllers\AdminStudentCon::class, 'index']);
 Route::get('/student/parent2_nic', [App\Http\Controllers\AdminStudentCon::class, 'parent2_details']);
+Route::get('/student/siblins', [App\Http\Controllers\AdminStudentCon::class, 'siblins']);
+Route::post('/sibilin_temp_insert', [App\Http\Controllers\AdminStudentCon::class, 'temp_in']);
+Route::post('/temp_sib_remove', [App\Http\Controllers\AdminStudentCon::class, 'tempremove']);
 
 //Scholarship
 Route::get('admin/scholarship', [App\Http\Controllers\AdmScholarshipCon::class, 'index']);

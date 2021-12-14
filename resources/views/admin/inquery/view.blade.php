@@ -215,7 +215,7 @@
                                     <div class="form-group row">
                                         <label for="example-search-input" class="col-sm-3 col-form-label text-right">Recipt Image</label>
                                         <div class="col-sm-9">
-                                            <input type="file" id="input-file-now" class="dropify" value="" name="rec_img" id="rec_img" data-default-file="{{url('image/ricipt/')}}"/>
+                                            <input type="file" id="input-file-now" class="dropify" value="{{$data->resipt_image}}" name="rec_img" id="rec_img" data-default-file="{{url('image/ricipt')}}/{{$data->resipt_image}}"/>
                                         </div>
                                     </div>
 
@@ -236,7 +236,7 @@
                             </div>
 
                             <div class="tab-pane p-3" id="settings-1" role="tabpanel">
-                                <form action="{{url('/admin/inqueries/registration/update')}}/" method="POST" autocomplete="off" id="regForm3"  enctype="multipart/form-data" >
+                                <form action="{{url('/admin/inqueries/registration/update')}}/{{$data->id}}" method="POST" autocomplete="off" id="regForm3"  enctype="multipart/form-data" >
                                     @csrf
                                 <div class="row">
 
@@ -247,104 +247,186 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Institute</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control" name="institute" id="institute">
-                                                    <option value="">Select Institute</option>
-
+                                                @if ($st == 5 || $st == 6)
+                                                <select class="form-control" name="institute" id="institute" disabled>
+                                                    <option value="">Select </option>
+                                                    @foreach($institute as $value)
+                                                    <option value="{{ $value->id }}" {{ $value->id == $data->institute ? 'selected' : '' }}>{{ $value->institute_name }}</option>
+                                                    @endForeach
                                                 </select>
+                                                    @else
+                                                    <select class="form-control" name="institute" id="institute">
+                                                        <option value="">Select </option>
+                                                        @foreach($institute as $value)
+                                                        <option value="{{ $value->id }}" >{{ $value->institute_name }}</option>
+                                                        @endForeach
+                                                    </select>
+                                                    @endif
+
+
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Grade</label>
                                             <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <select class="form-control" name="grade" id="grade" disabled>
+                                                    <option value="">Select Grade</option>
+                                                    @foreach($grade as $value)
+                                                    <option value="{{ $value->id }}" {{ $value->id == $data->grade_now ? 'selected' : '' }}>{{ $value->grade }}</option>
+                                                    @endForeach
+                                                </select>
+                                                @else
                                                 <select class="form-control" name="grade" id="grade">
                                                     <option value="">Select Grade</option>
-
+                                                    @foreach($grade as $value)
+                                                    <option value="{{ $value->id }}" >{{ $value->grade }}</option>
+                                                    @endForeach
                                                 </select>
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="register_date" class="col-sm-3 col-form-label text-right">Registration Date</label>
                                             <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="date" value="{{$data->registration_date}}" disabled id="register_date" name="register_date">
+                                                @else
                                                 <input class="form-control" type="date" value="" id="register_date" name="register_date">
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">GIS Pre School Attend</label>
                                             <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <select class="form-control" name="gis_pr_sc_at" id="gis_pr_sc_at" disabled>
+                                                    <option value="">Select</option>
+                                                    <option value="1" {{$data->pre_sc_att=='1'?'selected':''}}>Yes</option>
+                                                    <option value="2" {{$data->pre_sc_att=='2'?'selected':''}}>No</option>
+                                                </select>
+                                                @else
                                                 <select class="form-control" name="gis_pr_sc_at" id="gis_pr_sc_at">
                                                     <option value="">Select</option>
-                                                    <option value="1">Yes</option>
-                                                    <option value="2">No</option>
+                                                    <option value="1" >Yes</option>
+                                                    <option value="2" >No</option>
                                                 </select>
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="gis_sid" class="col-sm-3 col-form-label text-right">GIS Pre School SID Number</label>
                                             <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$data->pre_school_id}}" disabled name="gis_sid" id="gis_sid">
+                                                @else
                                                 <input class="form-control" type="text" value="" name="gis_sid" id="gis_sid">
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="recod" class="col-sm-3 col-form-label text-right">Records</label>
                                             <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <textarea class="form-control" rows="2" id="recod" name="recod" disabled>{{$data->recod}}</textarea>
+                                                @else
                                                 <textarea class="form-control" rows="2" id="recod" name="recod"></textarea>
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Is Student ID issue?</label>
                                             <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <select class="form-control" name="is_id_issue" id="is_id_issue" disabled>
+                                                    <option value="">Select</option>
+                                                    <option value="1" {{$data->is_id_issue=='1'?'selected':''}}>Yes</option>
+                                                    <option value="2" {{$data->is_id_issue=='2'?'selected':''}}>No</option>
+                                                </select>
+                                                @else
                                                 <select class="form-control" name="is_id_issue" id="is_id_issue">
                                                     <option value="">Select</option>
                                                     <option value="1">Yes</option>
                                                     <option value="2">No</option>
                                                 </select>
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Is ID Fee Paid ?</label>
                                             <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <select class="form-control" name="is_id_paid" id="is_id_paid" disabled>
+                                                    <option value="">Select</option>
+                                                    <option value="1" {{$data->is_id_fee_paid=='1'?'selected':''}}>Yes</option>
+                                                    <option value="2" {{$data->is_id_fee_paid=='2'?'selected':''}}>No</option>
+                                                </select>
+                                                @else
                                                 <select class="form-control" name="is_id_paid" id="is_id_paid">
                                                     <option value="">Select</option>
-                                                    <option value="1">Yes</option>
-                                                    <option value="2">No</option>
+                                                    <option value="1" >Yes</option>
+                                                    <option value="2" >No</option>
                                                 </select>
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Syllubus Type</label>
                                             <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <select class="form-control" name="sy_type" id="sy_type" disabled>
+                                                    <option value="" selected>Select Type</option>
+                                                    <option value="1" {{$data->syllubus_type=='1'?'selected':''}}>Local</option>
+                                                    <option value="2" {{$data->syllubus_type=='2'?'selected':''}}>Edexcel</option>
+                                                </select>
+                                                @else
                                                 <select class="form-control" name="sy_type" id="sy_type">
                                                     <option value="" selected>Select Type</option>
-                                                    <option value="1">Local</option>
-                                                    <option value="2">Edexcel</option>
+                                                    <option value="1" >Local</option>
+                                                    <option value="2" >Edexcel</option>
                                                 </select>
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Payment Type</label>
                                             <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <select class="form-control" name="paymnt_type" id="paymnt_type" disabled>
+                                                    <option value="">Select</option>
+                                                    <option value="1" {{$data->pamt_typ=='1'?'selected':''}}>Anualy</option>
+                                                    <option value="2" {{$data->pamt_typ=='2'?'selected':''}}>Qutar</option>
+                                                    <option value="3" {{$data->pamt_typ=='3'?'selected':''}}>Monthly</option>
+                                                </select>
+                                                @else
                                                 <select class="form-control" name="paymnt_type" id="paymnt_type">
                                                     <option value="">Select</option>
                                                     <option value="1">Anualy</option>
                                                     <option value="2">Qutar</option>
                                                     <option value="3">Monthly</option>
                                                 </select>
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="stu_img" class="col-sm-3 col-form-label text-right">Student Image</label>
                                             <div class="col-sm-9">
-                                                <input type="file" id="input-file-now" class="dropify" value="}" name="stu_img" id="stu_img" data-default-file="{{url('image/student/')}}"/>
+                                                @if ($st == 5 || $st == 6)
+                                                <input type="file" id="input-file-now" class="dropify" value="{{$data->stu_img}}" name="stu_img" id="stu_img" disabled="disabled" data-default-file="{{url('image/student/')}}/{{$data->stu_img}}"/>
+                                                @else
+                                                <input type="file" id="input-file-now" class="dropify" value="" name="stu_img" id="stu_img" />
+                                                @endif
+
                                             </div>
                                         </div>
 
@@ -353,34 +435,54 @@
                                         <hr>
 
                                         <div class="form-group row">
-                                            <label for="gis_sid" class="col-form-label text-left">Emergency Contact Details</label>
+                                            <label for="gis_sid" class="col-form-label text-left" style="color: black;">Emergency Contact Details</label>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="nic" class="col-sm-3 col-form-label text-right">NIC</label>
                                             <div class="col-sm-9">
+
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$data->emergency_contact_nic}}" readonly name="nic" id="nic">
+                                                @else
                                                 <input class="form-control" type="text" value="" name="nic" id="nic">
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="name" class="col-sm-3 col-form-label text-right">Name</label>
                                             <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$data->emergency_contact_name}}" readonly name="name" id="name">
+                                                @else
                                                 <input class="form-control" type="text" value="" name="name" id="name">
+                                                @endif
+
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="mobile" class="col-sm-3 col-form-label text-right">Mobile</label>
                                             <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$data->emergency_contact_mobile}}" readonly name="mobile" id="mobile">
+                                                @else
                                                 <input class="form-control" type="text" value="" name="mobile" id="mobile">
+                                                @endif
+
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="relationship" class="col-sm-3 col-form-label text-right">Relationship</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text" value="" name="relationship" id="relationship">
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$data->emergency_contact_relationship}}" readonly name="relationship" id="relationship">
+                                                @else
+                                                <input class="form-control" type="text" name="relationship" id="relationship">
+                                                @endif
+
                                             </div>
                                         </div>
 
@@ -388,108 +490,281 @@
                                     </div>
 
 
-                                    <div class="col-lg-6">
 
+
+                                    <div class="col-lg-6">
+                                        {{-- <hr> --}}
+
+                                        <hr>
+                                        <div class="form-group row">
+                                            <label for="" class="col-sm-3 text-left"></label>
+                                            <label for="gis_sid" class="col-sm-9 text-left" style="color: black;">Siblings's Infomation</label>
+                                            <div class="form-group row">
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            @if ($st == 5 || $st == 6)
+                                            <div class="col-md-12">
+                                                <table class="table" id="rsrvtbl2">
+                                                    <thead>
+                                                        <th>ID</th>
+                                                        <th>Relationship</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($sibl as $value)
+                                                        <tr>
+                                                        <td>{{$value->stu_id}}</td>
+                                                        <td>{{$value->relationship}}</td>
+                                                    </tr>
+                                                        @endforeach
+                                                    </tbody>
+
+                                                  </table>
+
+                                            </div>
+                                            @else
+
+
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label for="st_id" class="col-sm-3 col-form-label text-right">Student ID</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" type="text" value="" name="st_id" id="st_id">
+                                                </div>
+                                            </div>
+
+                                            <input class="form-control" type="hidden" value="{{$ttn1}}" name="ttn1" id="ttn1">
+                                            <input class="form-control" type="hidden" value="{{$ttn2}}" name="ttn2" id="ttn2">
+
+
+                                            <div class="form-group row">
+                                                <label for="st_id" class="col-sm-3 col-form-label text-right">Student Name</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" type="hidden" value="" name="sid" id="sid">
+                                                    <label for="" id="st_name"></label>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group row">
+
+                                                <label for="st_rel" class="col-sm-3 col-form-label text-right">Relationship</label>
+                                                <div class="col-sm-7">
+                                                    <input class="form-control" type="text" value="" name="st_rel" id="st_rel">
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <a href="#" id="adsr" class="btn btn-info" style="height: 30pt;"><i class="fa fa-plus" style="margin-top: 5pt;" aria-hidden="true"></i></a>
+                                                 </div>
+                                            </div>
+
+                                            <table class="table" id="rsrvtbl">
+                                                <thead>
+                                                    <th>No</th>
+                                                    <th>ID</th>
+                                                    <th>Relationship</th>
+                                                    <th>Op</th>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+
+                                              </table>
+                                        </div>
+
+                                        @endif
+
+                                    </div>
+
+
+                                          <div class="row">
+                                              <div class="col-12">
+                                                &nbsp;
+                                              </div>
+
+                                          </div>
+
+                                          <hr>
+
+                                        <div class="form-group row">
+                                            <label for="" class="col-sm-3 text-left"></label>
+                                            <label for="gis_sid" class="col-sm-9 text-left" style="color: black;">Father's Infomation</label>
+                                            <div class="form-group row">
+
+                                            </div>
+
+                                        </div>
+
+
+                                        {{-- <hr> --}}
                                         <input class="form-control" type="hidden" value="" name="prt_id" id="prt_id">
 
 
                                         <div class="form-group row">
-                                            <label for="parent_nic" class="col-sm-3 col-form-label text-right">Parent 1 NIC</label>
+                                            <label for="father_nic" class="col-sm-3 col-form-label text-right">NIC</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text" value="" name="parent1_nic" id="parent1_nic">
+
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$fa->parent_nic}}" readonly name="father_nic" id="father_nic">
+                                                @else
+                                                <input class="form-control" type="text" value="" name="father_nic" id="father_nic">
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="parent_name" class="col-sm-3 col-form-label text-right">Parent 1 Name</label>
+                                            <label for="father_name" class="col-sm-3 col-form-label text-right">Name</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="text" value="" name="parent1_name" id="parent1_name">
+
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$fa->parent_name}}" readonly name="father_name" id="father_name">
+                                                @else
+                                                <input class="form-control" type="text" value="" name="father_name" id="father_name">
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="parent_email" class="col-sm-3 col-form-label text-right">Parent 1 Email</label>
+                                            <label for="father_email" class="col-sm-3 col-form-label text-right">Email</label>
                                             <div class="col-sm-9">
-                                                <input class="form-control" type="email" value="" name="parent1_email" id="parent1_email">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="parent_mobile" class="col-sm-3 col-form-label text-right">Parent 1 Mobile</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" type="number" value="" name="parent1_mobile" id="parent1_mobile">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="address" class="col-sm-3 col-form-label text-right">Parent 1 Address</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" type="text" value="" name="address1" id="address1">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="relationship" class="col-sm-3 col-form-label text-right">Relationship</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" type="text" value="" name="relationship1" id="relationship1">
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="form-group row">
-                                            <label for="parent_nic2" class="col-sm-3 col-form-label text-right">Parent 2 NIC</label>
-                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$fa->parent_email}}" readonly name="father_email" id="father_email">
+                                                @else
+                                                <input class="form-control" type="email" value="" name="father_email" id="father_email">
+                                                @endif
 
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="parent_name2" class="col-sm-3 col-form-label text-right">Parent 2 Name</label>
+                                            <label for="father_mobile" class="col-sm-3 col-form-label text-right">Mobile</label>
                                             <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$fa->parent_mobile}}" readonly name="father_mobile" id="father_mobile">
+                                                @else
+                                                <input class="form-control" type="number" value="" name="father_mobile" id="father_mobile">
+                                                @endif
 
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="parent_email2" class="col-sm-3 col-form-label text-right">Parent 2 Email</label>
+                                            <label for="father_occupation" class="col-sm-3 col-form-label text-right">Occupation</label>
                                             <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$fa->parent_ocupation}}" readonly name="father_occupation" id="father_occupation">
+                                                @else
+                                                <input class="form-control" type="text" value="" name="father_occupation" id="father_occupation">
+                                                @endif
 
-                                                @error('parent_email2')
-                                                <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
-                                                @enderror
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="parent_mobile2" class="col-sm-3 col-form-label text-right">Parent 2 Mobile</label>
+                                            <label for="father_address_of_work_place" class="col-sm-3 col-form-label text-right">Address of Work Place</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$fa->parent_work_address}}" readonly name="father_address_of_work_place" id="father_address_of_work_place">
+                                                @else
+                                                <input class="form-control" type="text" value="" name="father_address_of_work_place" id="father_address_of_work_place">
+                                                @endif
+
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                        <div class="form-group row">
+                                            <label for="" class="col-sm-3 text-left"></label>
+                                            <label for="gis_sid" class="col-sm-9 text-left" style="color: black;">Mother's Infomation</label>
+                                            <div class="form-group row">
+
+                                            </div>
+
+                                        </div>
+
+
+                                        {{-- <hr> --}}
+                                        <input class="form-control" type="hidden" value="" name="prt_id" id="prt_id">
+
+
+                                        <div class="form-group row">
+                                            <label for="mother_nic" class="col-sm-3 col-form-label text-right">NIC</label>
                                             <div class="col-sm-9">
 
-                                                @error('parent_mobile2')
-                                                <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
-                                                @enderror
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$mo->parent_nic}}" readonly name="mother_nic" id="mother_nic">
+                                                @else
+                                                <input class="form-control" type="text" value="" name="mother_nic" id="mother_nic">
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="address2" class="col-sm-3 col-form-label text-right">Parent 2 Address</label>
+                                            <label for="mother_name" class="col-sm-3 col-form-label text-right">Name</label>
                                             <div class="col-sm-9">
-
-                                                @error('address2')
-                                                <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
-                                                @enderror
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$mo->parent_name}}" readonly name="mother_name" id="mother_name">
+                                                @else
+                                                <input class="form-control" type="text" value=""   name="mother_name" id="mother_name">
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="relationship2" class="col-sm-3 col-form-label text-right">Relationship</label>
+                                            <label for="mother_email" class="col-sm-3 col-form-label text-right">Email</label>
                                             <div class="col-sm-9">
 
-                                                @error('relationship2')
-                                                <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
-                                                @enderror
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$mo->parent_email}}" readonly name="mother_email" id="mother_email">
+                                                @else
+                                                <input class="form-control" type="email" value="" name="mother_email" id="mother_email">
+                                                @endif
                                             </div>
                                         </div>
+
+                                        <div class="form-group row">
+                                            <label for="mother_mobile" class="col-sm-3 col-form-label text-right">Mobile</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$mo->parent_mobile}}" readonly name="mother_mobile" id="mother_mobile">
+                                                @else
+                                                <input class="form-control" type="number" value="" name="mother_mobile" id="mother_mobile">
+                                                @endif
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="mother_occupation" class="col-sm-3 col-form-label text-right">Occupation</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$mo->parent_ocupation}}" readonly name="mother_occupation" id="mother_occupation">
+                                                @else
+                                                <input class="form-control" type="text" value="" name="mother_occupation" id="mother_occupation">
+                                                @endif
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="mother_address_of_work_place" class="col-sm-3 col-form-label text-right">Address of Work Place</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$mo->parent_work_address}}" readonly name="mother_address_of_work_place" id="mother_address_of_work_place">
+                                                @else
+                                                <input class="form-control" type="text" value="" name="mother_address_of_work_place" id="mother_address_of_work_place">
+                                                @endif
+
+                                            </div>
+                                        </div>
+
+
+
+                                    {{-- </div> --}}
 
                                     </div>
 
@@ -521,7 +796,63 @@
             </div> <!-- end col -->
         </div> <!-- end row -->
 
+            <!-- Comformation 2-->
+{{-- <div class="message-box message-box-info animated fadeIn" data-sound="alert" id="message-box-conformb">
+    <div class="mb-container">
+      <div class="mb-middle">
+        <div class="mb-title"><span class="fa fa-question">&nbsp;</span>Conformation</div>
+        <div class="mb-content">
+          <p id="test1" style="text-align:justify;">Do You want to remove this data ?</p>
+        </div>
+
+        <input type="hidden" id="tbl_rw_id" name="tbl_rw_id">
+            <input type="hidden" id="tbl_rw_ttn1" name="tbl_rw_ttn1">
+            <input type="hidden" id="tbl_rw_ttn2" name="tbl_rw_ttn2">
+
+        <div class="mb-footer">
+          <div class="pull-right">
+            <a href="#" class="btn btn-default btn-lg cnfmsg" id="cnfmid" name="">Yes</a>
+            <a href="#" class="btn btn-default btn-lg mb-control-close clse" id="clseid" >No</a>
+          </div>
+        </div>
+      </div>
     </div>
+  </div> --}}
+
+  <div class="modal fade bs-example-modal-center" tabindex="-1" data-sound="alert" id="message-box-conformb" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="exampleModalLabel">Conformation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="mb-content">
+                <p style="text-align: center;font-size: 14pt;">Do You want to remove this data ?</p>
+              </div>
+
+              <input type="hidden" id="tbl_rw_id" name="tbl_rw_id">
+                  <input type="hidden" id="tbl_rw_ttn1" name="tbl_rw_ttn1">
+                  <input type="hidden" id="tbl_rw_ttn2" name="tbl_rw_ttn2">
+
+              <div class="justify-content-center mb-footer" >
+                <div class="row">
+                <div class="col-md-4"></div>
+                <div class="pull-right col-md-4" style="margin-bottom: 5px;">
+                  <a href="#" class="btn btn-danger btn-lg cnfmsg" id="cnfmid" name="" style="height: 30pt; margin:5px;">Yes</a>
+                  <a href="#" class="btn btn-info btn-lg mb-control-close clse" id="clseid" style="height: 30pt;margin:5px;">No</a>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+              </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+    </div>
+
+
     @stop
 
     @section('scripts')
@@ -634,8 +965,7 @@ $("#regForm2").validate({
 
 });
 
-            $(document).ready(function() {
-
+$(document).ready(function() {
 $("#regForm3").validate({
     rules: {
         institute: {
@@ -681,55 +1011,59 @@ $("#regForm3").validate({
             minlength: 10,
             number: true,
         },
-        parent_nic1: {
+        father_nic: {
             required: true,
             maxlength: 12,
             minlength: 10,
         },
-        parent_name1: {
+        father_name: {
             required: true,
             maxlength: 100
         },
-        parent_email1: {
+        father_email: {
+            email: true,
             required: true,
             maxlength: 100,
         },
-        parent_mobile1: {
+        father_mobile: {
             required: true,
-            maxlength: 150,
+            maxlength: 10,
+            minlength: 10,
         },
-        address1: {
-            required: true,
-            maxlength: 100,
-        },
-        relationship1: {
+        father_occupation: {
             required: true,
             maxlength: 50,
         },
-        parent_nic2: {
+        father_address_of_work_place: {
+            required: true,
+            maxlength: 120,
+        },
+        mother_nic: {
             required: true,
             maxlength: 12,
             minlength: 10,
         },
-        parent_name2: {
+        mother_name: {
             required: true,
             maxlength: 100
         },
-        parent_email2: {
+        mother_email: {
+            email: true,
             required: true,
             maxlength: 100,
         },
-        parent_mobile2: {
+        mother_mobile: {
             required: true,
-            maxlength: 150,
+            maxlength: 10,
+            minlength: 10,
         },
-        address2: {
-            required: true,
-            maxlength: 100,
-        },
-        relationship2: {
+        mother_occupation: {
             required: true,
             maxlength: 50,
+        },
+        mother_address_of_work_place: {
+            required: true,
+            maxlength: 120,
         },
 
 
@@ -777,57 +1111,57 @@ $("#regForm3").validate({
             required: "Emargancy Contact Relationship is required",
             maxlength: "Emargancy Contact Relationship cannot be more than 100 characters"
         },
-        parent_nic1: {
-            required: "Parent 1 NIC is required",
-            maxlength: "Parent 1 Contact NIC cannot be more than 12 characters",
-            minlength: "Parent 1 Contact NIC cannot be less than 10 characters"
+        father_nic: {
+            required: "Father's NIC is required",
+            maxlength: "Father's NIC cannot be more than 12 characters",
+            minlength: "Father's NIC cannot be less than 10 characters"
         },
-        parent_name1: {
-            required: "Parent 1 Contact Name is required",
-            maxlength: "Parent 1 Contact Name cannot be more than 100 characters"
+        father_name: {
+            required: "Father's Name is required",
+            maxlength: "Father's Name cannot be more than 100 characters"
         },
-        parent_email1: {
-            required: "Parent 1 email is required",
-            maxlength: "Parent 1 Contact NIC cannot be more than 100 characters"
+        father_email: {
+            required: "Father's email is required",
+            maxlength: "Father's email cannot be more than 100 characters"
         },
-        parent_mobile1: {
-            required: "Parent 1 Number is required",
-            maxlength: "Parent 1 Number cannot be more than 10 characters",
-            minlength: "Parent 1 cannot be less than 10 characters"
+        father_mobile: {
+            required: "Father's Contact Number is required",
+            maxlength: "Father's Contact Number cannot be more than 10 characters",
+            minlength: "Father's Contact cannot be less than 10 characters"
         },
-        address1: {
-            required: "Parent 1 Address is required",
-            maxlength: "Parent 1 Address cannot be more than 150 characters",
+        father_occupation: {
+            required: "Father's Ocupation is required",
+            maxlength: "Father's Ocupation cannot be more than 100 characters",
         },
-        relationship1: {
-            required: "Parent 1  Relationship is required",
-            maxlength: "Parent 1 Contact Relationship cannot be more than 50 characters"
+        father_address_of_work_place: {
+            required: "Father's Address of Work Place is required",
+            maxlength: "Father's Address of Work Place cannot be more than 50 characters"
         },
-        parent_nic2: {
-            required: "Parent 2 NIC is required",
-            maxlength: "Parent 2 Contact NIC cannot be more than 12 characters",
-            minlength: "Parent 2 Contact NIC cannot be less than 10 characters"
+        mother_nic: {
+            required: "Mother's NIC is required",
+            maxlength: "Mother's NIC cannot be more than 12 characters",
+            minlength: "Mother's NIC cannot be less than 10 characters"
         },
-        parent_name2: {
-            required: "Parent 2 Contact Name is required",
-            maxlength: "Parent 2 Contact Name cannot be more than 100 characters"
+        mother_name: {
+            required: "Mother's Name is required",
+            maxlength: "Mother's Name cannot be more than 100 characters"
         },
-        parent_email2: {
-            required: "Parent 2 email is required",
-            maxlength: "Parent 2 Contact NIC cannot be more than 100 characters"
+        mother_email: {
+            required: "Mother's email is required",
+            maxlength: "Mother's email cannot be more than 100 characters"
         },
-        parent_mobile2: {
-            required: "Parent 2 Number is required",
-            maxlength: "Parent 2 Number cannot be more than 10 characters",
-            minlength: "Parent 2 cannot be less than 10 characters"
+        mother_mobile: {
+            required: "Mother's Contact Number is required",
+            maxlength: "Mother's Contact Number cannot be more than 10 characters",
+            minlength: "Mother's Contact cannot be less than 10 characters"
         },
-        address2: {
-            required: "Parent 2 Address is required",
-            maxlength: "Parent 2 Address cannot be more than 150 characters",
+        mother_occupation: {
+            required: "Mother's Ocupation is required",
+            maxlength: "Mother's Ocupation cannot be more than 100 characters",
         },
-        relationship2: {
-            required: "Parent 2  Relationship is required",
-            maxlength: "Parent 2 Contact Relationship cannot be more than 50 characters"
+        mother_address_of_work_place: {
+            required: "Mother's Address of Work Place is required",
+            maxlength: "Mother's Address of Work Place cannot be more than 50 characters"
         },
     }
 });
@@ -836,74 +1170,17 @@ $("#regForm3").validate({
 });
 
 
-
-
-
-
-// //autocomplete
-// $(document).ready(function(){
-// $('#nic').autocomplete({
-
-// source: function(request, response) {
-//     console.log('"Hi"');
-// var bankname = $('#nic').val().length;
-// if (bankname>2) {
-
-
-//   $.getJSON("{{ url('/student/parent2_nic') }}",
-//    {nic:$("#nic").val()},
-//       response);
-//     }
-// },
-// minLength: 1,
-// width: "100%",
-// open: function(event,ui){
-//     var autocomplete=$(".ui-autocomplete:visible");
-//     var oldTop=autocomplete.offset().top;
-//     var newTop = oldTop-$("#nic").height()+25;
-//     autocomplete.css("top", newTop);
-// },
-
-//     select:function(event,ui){
-//     },
-// });
-// });
-// select:function(event,ui){
-//     var items = ui.item;
-//     var baid = ui.item.cdn;
-//     var bni = ui.item.cdi;
-//     if(items != ''){
-
-//     document.getElementById('bidn').value = bni;
-//     document.getElementById('bcd').value = baid;
-//     document.getElementById("bcd").readOnly = true;
-
-//     }
-// },
-// response: function(event, ui) {
-//   $("#cdi").removeClass('data_loading');
-//     if (!ui.content.length) {
-//       console.log('PIC NEW');
-//       $("input[name='bcd']").removeAttr("readonly");
-//       document.getElementById('bidn').value = '';
-//       document.getElementById('bcd').value = '';
-//       $("#bcd").selectpicker('refresh');
-//       $("#cdi").val('0');
-//     }
-// }
-// });
-
       </script>
 
-      <script>
-       //   autocomplete
- $(document).ready(function(){
-    console.log("HI");
-$('#parent_nic2').autocomplete({
+<script>
+//   autocomplete
+$(document).ready(function(){
+//console.log("HI");
+$('#father_nic').autocomplete({
 
     source: function(request, response) {
       $.getJSON("{{ url('/student/parent2_nic') }}",
-       {parent_nic2:$("#parent_nic2").val()},
+       {father_nic:$("#father_nic").val()},
           response);
     },
     minLength: 1,
@@ -911,26 +1188,63 @@ $('#parent_nic2').autocomplete({
     open: function(event,ui){
         var autocomplete=$(".ui-autocomplete:visible");
         var oldTop=autocomplete.offset().top;
-        var newTop = oldTop-$("#parent_nic2").height()+25;
+        var newTop = oldTop-$("#father_nic").height()+25;
         autocomplete.css("top", newTop);
     },
     select:function(event,ui){
         //console.log(ui);
-        var parent_name2 = ui.item.parent_name2;
-        var parent_address2 = ui.item.parent_address2;
-        var parent_mobile2 = ui.item.parent_mobile2;
-        var parent_email2 = ui.item.parent_email2;
-        var parent_relationship2 = ui.item.parent_relationship2;
+        var father_name = ui.item.father_name;
+        var father_mobile = ui.item.father_mobile;
+        var father_email = ui.item.father_email;
+        var father_work_address = ui.item.father_work_address;
+        var parent_ocupation = ui.item.parent_ocupation;
 
-        document.getElementById('parent_name2').value = parent_name2;
-        document.getElementById('parent_email2').value = parent_email2;
-        document.getElementById('parent_mobile2').value = parent_mobile2;
-        document.getElementById('address2').value = parent_address2;
-        document.getElementById('relationship2').value = parent_relationship2;
-    },
+        document.getElementById('father_name').value = father_name;
+        document.getElementById('father_email').value = father_email;
+        document.getElementById('father_mobile').value = father_mobile;
+        document.getElementById('father_address_of_work_place').value = father_work_address;
+        document.getElementById('father_occupation').value = parent_ocupation;
+     },
 });
  });
       </script>
+
+<script>
+    //   autocomplete
+$(document).ready(function(){
+ console.log("HI");
+$('#mother_nic').autocomplete({
+
+ source: function(request, response) {
+   $.getJSON("{{ url('/student/parent2_nic') }}",
+    {father_nic:$("#mother_nic").val()},
+       response);
+ },
+ minLength: 1,
+ width: "100%",
+ open: function(event,ui){
+     var autocomplete=$(".ui-autocomplete:visible");
+     var oldTop=autocomplete.offset().top;
+     var newTop = oldTop-$("#mother_nic").height()+25;
+     autocomplete.css("top", newTop);
+ },
+ select:function(event,ui){
+     //console.log(ui);
+     var father_name = ui.item.father_name;
+     var father_mobile = ui.item.father_mobile;
+     var father_email = ui.item.father_email;
+     var father_work_address = ui.item.father_work_address;
+     var parent_ocupation = ui.item.parent_ocupation;
+
+     document.getElementById('mother_name').value = father_name;
+     document.getElementById('mother_email').value = father_email;
+     document.getElementById('mother_mobile').value = father_mobile;
+     document.getElementById('mother_address_of_work_place').value = father_work_address;
+     document.getElementById('mother_occupation').value = parent_ocupation;
+  },
+});
+});
+</script>
 
 <script>
     //   autocomplete
@@ -940,7 +1254,7 @@ $('#nic').autocomplete({
 
  source: function(request, response) {
    $.getJSON("{{ url('/student/parent2_nic') }}",
-    {parent_nic2:$("#nic").val()},
+    {father_nic:$("#nic").val()},
        response);
  },
  minLength: 1,
@@ -953,15 +1267,156 @@ $('#nic').autocomplete({
  },
  select:function(event,ui){
      //console.log(ui);
-     var name = ui.item.parent_name2;
-     var mobile = ui.item.parent_mobile2;
+     var father_name = ui.item.father_name;
+     var father_mobile = ui.item.father_mobile;
 
-     document.getElementById('name').value = name;
-     document.getElementById('mobile').value = mobile;
+     document.getElementById('name').value = father_name;
+     document.getElementById('mobile').value = father_mobile;
 
  },
 });
 });
    </script>
+
+
+<script>
+//   autocomplete
+$(document).ready(function(){
+// console.log("HI2");
+$('#st_id').autocomplete({
+
+ source: function(request, response) {
+   $.getJSON("{{ url('/student/siblins') }}",
+    {st_id:$("#st_id").val()},
+       response);
+ },
+ minLength: 1,
+ width: "100%",
+ open: function(event,ui){
+     var autocomplete=$(".ui-autocomplete:visible");
+     var oldTop=autocomplete.offset().top;
+     var newTop = oldTop-$("#st_id").height()+25;
+     autocomplete.css("top", newTop);
+ },
+ select:function(event,ui){
+     //console.log(ui);
+     var st_name = ui.item.student_name;
+     var sid = ui.item.sid;
+
+     document.getElementById('st_name').innerHTML = st_name;
+     document.getElementById('sid').value = sid;
+
+ },
+});
+});
+   </script>
+
+
+<script>
+
+  //Table click function
+  $(document).ready(function(){
+    $('#adsr').click(function(e){
+        console.log("Hi");
+        addTabledata();
+    });
+});
+
+
+///Table insert
+
+function addTabledata(){
+  var sid = $("#sid").val();
+  var st_id = $("#st_id").val();
+  var st_rel = $("#st_rel").val();
+  var ttn1 = $("#ttn1").val();
+  var ttn2 = $("#ttn2").val();
+  //var panel = $("#rsrvtbl tbody");
+  if(st_id != '' || st_rel != ''){
+  $.ajax({
+      type:"POST",
+      url:"{{ url('/sibilin_temp_insert') }}",
+      async:false,
+      data:{"st_id":st_id, "st_rel":st_rel,"sid":sid,"ttn1":ttn1, "ttn2":ttn2},
+      headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      beforeSend: function(){
+       // $("body").css("cursor","wait")
+       // panel_refresh(panel);
+      },
+      success: function(data){
+      //console.log("HI");
+          $("#rsrvtbl tbody").html(data);
+          $("#sid").val('');
+          $("#st_id").val('');
+          $("#st_rel").val('');
+          $("#st_name").html('');
+      },
+      error:function(){
+      }
+    });
+  }else{
+
+  }
+}
+
+</script>
+<script>
+    //Table remove
+
+
+  $('#rsrvtbl').on('click', '.delete', function(e) {
+      //var token=$(this).attr('id');
+      var id=$(this).attr('id');
+      var ttn1 = $("#ttn1").val();
+      var ttn2 = $("#ttn2").val();
+      console.log(id);
+      document.getElementById('tbl_rw_id').value = id;
+      document.getElementById('tbl_rw_ttn1').value = ttn1;
+      document.getElementById('tbl_rw_ttn2').value = ttn2;
+    //   document.getElementById('info_msgcontent').innerHTML="Bank Detaile remove is Successful.";
+    //       $('#message-box-success').toggleClass("open");
+          $('#message-box-conformb').modal('show');
+      });
+
+
+      $("#clseid").on('click', function(event){
+        $('#message-box-conformb').modal('hide');
+      });
+
+      $("#cnfmid").on('click', function(event){
+
+      var remid = $("#tbl_rw_id").val();
+      var tbttn1 = $("#tbl_rw_ttn1").val();
+      var tbttn2 = $("#tbl_rw_ttn2").val();
+    //   console.log(remid);
+    //   console.log(tbttn1);
+    $.ajax({
+      type:"POST",
+      url:"{{ url('/temp_sib_remove') }}",
+      async:false,
+      data:{"remid":remid,"tbttn1":tbttn1,"tbttn2":tbttn2},
+      headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+      beforeSend: function(){
+
+      },
+      success: function(data){
+         console.log("removed!");
+         $('#message-box-conformb').modal('hide');
+          $("#rsrvtbl tbody").html(data);
+
+          $("#rsrvtbl tbody").html(data);
+          $("#sid").val('');
+          $("#st_id").val('');
+          $("#st_rel").val('');
+          $("#st_name").html('');
+
+
+      },
+      error:function(){   }
+    });
+          return false;
+
+        });
+</script>
 
 @stop

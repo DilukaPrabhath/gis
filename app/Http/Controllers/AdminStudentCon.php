@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Parentm;
+use App\Models\Siblin;
 use App\Models\Student;
+use App\Models\TemTbl;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AdminStudentCon extends Controller
 {
@@ -26,34 +29,83 @@ class AdminStudentCon extends Controller
         //     'relationship2' => 'required',
         //     ]);
 
-
-        $now = Carbon::now();
+            //$inst = $request->institute;
+            $sc_po = Student::where('institute',$request->institute)->count();
+            $gd_po = Student::where('institute',$request->institute)->where('grade_now',$request->grade)->count();
+            $grd = $request->grade;
+            $gd  = str_pad($grd,2,"0", STR_PAD_LEFT);
+            $now = Carbon::now();
             $year = $now->year;
-            $mon    = $now->month;
-            $timcode = $year.$mon;
             $isemty = Student::where('stu_status',5)->get();
             if($isemty->isEmpty()){
               // return "Empt";
-               $num = 'GIS'.'/'.$year.$mon.'/'. '0001';
+                       $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
             }else{
                 // return "Not em";
               $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->first()->student_id;
               $string =  preg_replace("/[^0-9\.]/", '', $latnum);
-              $otputnum = substr($string, 6); //last 4 number ex 0001
-              $otputyemo = substr($string, 0, 6); // last number's first 6 digit, year and month 2021-05 -> 202105
-              $otputyea = substr($string, 0, 4); //last number's first 4 digit,year
-                if( $year != $otputyea){
-                        $num = 'GIS'.'/'.$year.$mon.'/'.'0001';
+              $otputnum = substr($string, 6); //last 3 number ex 001
+              $otputyear = substr($string, 0, 4); // last number's first 4 digit, year 2021-05-10 -> 2021
+              $otputgr = substr($string,4,2); //last number's first 4 digit,year
+                if( $year != $otputyear){
+                        $num = 'GIS'.'/'.$year.'/'.$grd.'/'.'001';
                 }else{
-                    if($timcode != $otputyemo){
-                         $num = 'GIS'.'/'.$year.$mon.'/'.'0001';
+                    if($otputgr != $gd){
+                        $num = 'GIS'.'/'.$year.'/'.$grd.'/'.'0001';
                         }else{
-                        $num = 'GIS'.'/'.$year.$mon.'/'. sprintf('%04d', $otputnum+1); //increment IQ number in same month
+                        $num = 'GIS'.'/'.$year.'/'.$grd.'/'. sprintf('%03d', $otputnum+1); //increment SID number in same grade
                         }
                  }
             }
 
-        // return $request;
+        $fa_av = Parentm::select('parent_nic')->where('parent_nic',$request->father_nic)->where('fa_or_mom',1)->get();
+
+        if($fa_av->isEmpty()){
+            // return "Emp";
+            $father = new Parentm();
+
+            $father->parent_nic = $request->father_nic;
+            $father->parent_name  = $request->father_name;
+            $father->parent_mobile = $request->father_mobile;
+            $father->parent_email  = $request->father_email;
+            $father->parent_work_address = $request->father_address_of_work_place;
+            $father->parent_ocupation = $request->father_occupation;
+            $father->fa_or_mom = 1; //father
+            $father->save();
+
+            $fatherid = $father->id;
+        }else{
+            $fter = Parentm::where('parent_nic',$request->father_nic)->get();
+            $fatherid = $fter[0]->id;
+            //return "not Emp";
+        }
+
+        $mo_av = Parentm::select('parent_nic')->where('parent_nic',$request->mother_nic)->where('fa_or_mom',2)->get();
+
+        if($mo_av->isEmpty()){
+            // return "Emp";
+
+        $mom = new Parentm();
+
+        $mom->parent_nic = $request->mother_nic;
+        $mom->parent_name  = $request->mother_name;
+        $mom->parent_mobile = $request->mother_mobile;
+        $mom->parent_email  = $request->mother_email;
+        $mom->parent_work_address = $request->mother_address_of_work_place;
+        $mom->parent_ocupation = $request->mother_occupation;
+        $mom->fa_or_mom = 2; //mother
+        $mom->save();
+
+        $motherid = $father->id;
+
+        }else{
+
+        $mter = Parentm::where('parent_nic',$request->father_nic)->get();
+        $motherid = $mter[0]->id;
+        //return "not Emp";
+        }
+
+       // return $request;
        $s_id = Student::find($id)->student_id;
 
         $student = Student::find($id);
@@ -77,6 +129,8 @@ class AdminStudentCon extends Controller
         $student->emergency_contact_relationship = $request->relationship;
         $student->stu_status  = 5;
         $student->inq_status =4;
+        $student->mom_id = $motherid;
+        $student->fat_id = $fatherid;
 
         if($request->hasfile('stu_img')){
 
@@ -90,34 +144,26 @@ class AdminStudentCon extends Controller
 
            }
 
-        $student->save();
+       $student->save();
 
+       $ttn1 = $request->ttn1;
+       $ttn2 = $request->ttn2;
 
-        $parent = Parentm::find($request->prt_id);
+       $temp = TemTbl::where('temp_id_1', $request->ttn1)->where('temp_id_2', $request->ttn2)->get();
 
-        $parent->st_id = $student->id;
-        $parent->parent_nic = $request->parent1_nic;
-        $parent->parent_name  = $request->parent1_name;
-        $parent->parent_mobile = $request->parent1_mobile;
-        $parent->parent_email  = $request->parent1_email;
-        $parent->parent_address = $request->address1;
-        $parent->parent_relationship = $request->relationship1;
-        $parent->save();
+       if( $temp ){
+        $temp->map(function($emp) use($student){
 
-           if($request->prt2_id == 0){
-            $parent = new Parentm();
-           }else{
-            $parent = Parentm::find($request->prt2_id);
-           }
+          $siblin = new Siblin();
 
-        $parent->st_id = $student->id;
-        $parent->parent_nic = $request->parent_nic2;
-        $parent->parent_name  = $request->parent_name2;
-        $parent->parent_mobile = $request->parent_mobile2;
-        $parent->parent_email  = $request->parent_email2;
-        $parent->parent_address = $request->address2;
-        $parent->parent_relationship = $request->relationship2;
-        $parent->save();
+          $siblin->s_id   = $student->id;
+          $siblin->stu_id = $emp->str_2;
+          $siblin->relationship = $emp->str_3;
+          $siblin->save();
+
+          $emp->delete();
+        });
+      }
 
         $notification = array(
             'message' => 'Stutend Registration Successfully!',
@@ -132,6 +178,7 @@ class AdminStudentCon extends Controller
        }
 
        public function view(){
+
         return view('admin.student.view');
        }
 
@@ -139,10 +186,58 @@ class AdminStudentCon extends Controller
         return view('admin.student.edit');
        }
 
+       public function temp_in(Request $request){
+
+        $data = new TemTbl();
+
+        $data->temp_id_1 = $request->ttn1;
+        $data->temp_id_2 = $request->ttn2;
+        $data->int_1     = $request->sid;
+        $data->str_2     = $request->st_id;
+        $data->str_3     = $request->st_rel;
+        $data->save();
+
+        $ttn1 = $request->ttn1;
+        $ttn2 = $request->ttn2;
+        return $this->createReservicetbl($ttn1, $ttn2);
+       }
+
+       //create temp table
+public function createReservicetbl($ttn1, $ttn2){
+
+    $data = TemTbl::where('temp_id_1',$ttn1)->where('temp_id_2',$ttn2)->get();
+    $tbdt = '';
+    $numb = 1;
+    if(count($data) > 0){
+        foreach($data as $row){
+            $tbdt.="
+                <tr>
+                <td>".str_pad($numb,2,"0",STR_PAD_LEFT)."</td>
+                <td>".$row->str_2."</td>
+                <td>".$row->str_3."</td>
+                <td>"."<a href='#' class='btn btn-danger btn-condensed delete' title='Delete Item' id='$row->id' ><i class='fa fa-trash'></i></a></td>
+                </tr>
+            ";
+            $numb ++;
+        }
+    }
+    return $tbdt;
+}
+
+
+public function tempremove(Request $request){
+
+
+     $tememp = TemTbl::find($request->remid)->delete();
+     $ttn1 = $request->tbttn1;
+     $ttn2 = $request->tbttn2;
+     return $this->createReservicetbl($ttn1, $ttn2);
+}
+
        public function parent2_details(Request $request){
         $puar = array();
         $dtar = array();
-        $nic = $request->parent_nic2;
+        $nic = $request->father_nic;
 
         //return $request;
         // exit();
@@ -153,12 +248,12 @@ class AdminStudentCon extends Controller
         //$data = Parentm::load_drdwn_data($nic);
         if(count($data) > 0){
             foreach($data as $row){
-                $dtar['parent_nic2'] = $row->parent_nic;
-                $dtar['parent_name2'] = $row->parent_name;
-                $dtar['parent_mobile2'] = $row->parent_mobile;
-                $dtar['parent_email2'] = $row->parent_email;
-                $dtar['parent_address2'] = $row->parent_address;
-                $dtar['parent_relationship2'] = $row->parent_relationship;
+                $dtar['father_nic'] = $row->parent_nic;
+                $dtar['father_name'] = $row->parent_name;
+                $dtar['father_mobile'] = $row->parent_mobile;
+                $dtar['father_email'] = $row->parent_email;
+                $dtar['father_work_address'] = $row->parent_work_address;
+                $dtar['parent_ocupation'] = $row->parent_ocupation;
                 $dtar['label'] = $row->parent_nic;
                 $dtar['value'] = $row->parent_nic;
 
@@ -167,4 +262,33 @@ class AdminStudentCon extends Controller
         }
             return $puar;
        }
+
+
+       public function siblins(Request $request){
+        $puar = array();
+        $dtar = array();
+        $sid = $request->st_id;
+
+        //return $nic;
+        // exit();
+        // $data =Parentm::select("parent_nic")
+        //         ->where("parent_nic","LIKE","{$request->parent_nic2}%")
+        //         ->get();
+        $data =Student::whereRaw('student_id LIKE "%'.$sid.'%"')->get();
+        //$data = Parentm::load_drdwn_data($nic);
+        if(count($data) > 0){
+            foreach($data as $row){
+
+                $dtar['student_name'] = $row->student_full_name;
+                $dtar['sid'] = $row->id;
+                $dtar['label'] = $row->student_id;
+                $dtar['value'] = $row->student_id;
+
+                array_push($puar, $dtar);
+            }
+        }
+            return $puar;
+       }
+
+
 }
