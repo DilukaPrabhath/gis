@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class AdminPrimaryApplicCon extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
+
     public function update(Request $request,$id){
 
         $stu =  Student::find($id);

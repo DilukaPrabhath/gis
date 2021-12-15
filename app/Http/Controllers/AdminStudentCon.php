@@ -12,6 +12,11 @@ use Illuminate\Support\Str;
 
 class AdminStudentCon extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
+
     public function index(){
         $reg = Student::reg_tbldata();
         return view('admin.student.index',compact('reg'));

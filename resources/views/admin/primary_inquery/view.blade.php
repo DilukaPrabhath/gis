@@ -796,7 +796,7 @@
                                             <button type="submit" id="x" class="btn btn-success waves-effect waves-light" style="color: white;"><i class="mdi mdi-check-all mr-2"></i>Submit</button>
                                             @endif
 
-                                            <a type="button" href="{{url('admin/primary/students')}}" class="btn btn-primary waves-effect waves-light"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
+                                            <a type="button" href="{{url('admin/primary/inqueries')}}" class="btn btn-primary waves-effect waves-light"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
                                         </div>
                                     </div>
                                 </div>

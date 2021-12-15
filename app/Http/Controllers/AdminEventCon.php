@@ -10,6 +10,11 @@ use Illuminate\Support\Str;
 
 class AdminEventCon extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
+
     public function index(){
        $data = Event::tbldata();
         return view('admin.event.index',compact('data'));

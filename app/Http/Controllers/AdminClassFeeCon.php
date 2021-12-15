@@ -14,6 +14,11 @@ use Illuminate\Validation\Rule;
 
 class AdminClassFeeCon extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
+
     public function index(){
 
         $data = Institute::all();

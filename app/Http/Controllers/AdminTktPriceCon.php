@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class AdminTktPriceCon extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
+
     public function index(){
         $data = Event::tbldata();
         return view('admin.eventticket.index',compact('data'));

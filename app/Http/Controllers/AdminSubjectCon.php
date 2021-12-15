@@ -8,6 +8,11 @@ use Illuminate\Validation\Rule;
 
 class AdminSubjectCon extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
+
     public function create(){
         $data = Subject::all();
         return view('admin.subject.create',compact('data'));

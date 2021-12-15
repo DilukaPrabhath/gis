@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class AdminPrimaryStudentCon extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
     public function update(Request $request,$id){
         //return $request;
         // $this->validate(request(), [

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class AdminBankCon extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
+
     public function create(){
         $data = Bank::all();
         return view('admin.bank.create',compact('data'));

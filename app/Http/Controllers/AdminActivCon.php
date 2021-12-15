@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class AdminActivCon extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
     public function index(){
         return view('admin.activity_pay.index');
        }

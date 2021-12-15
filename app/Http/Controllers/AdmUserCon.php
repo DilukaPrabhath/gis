@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AdmUserCon extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
+
    public function index(){
     return view('admin.user.index');
    }

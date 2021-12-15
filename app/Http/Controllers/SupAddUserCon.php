@@ -11,6 +11,10 @@ use Illuminate\Validation\Rule;
 
 class SupAddUserCon extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
     public function add(){
         return view('superadmin.useradd');
     }
