@@ -129,7 +129,7 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <a type="button" data-toggle="tab" id="homebtnext"  href="#profile-1" class="btn btn-outline-info waves-effect waves-light" onClick="refresh1(this)" role="tab"><i class="fas fa-chevron-right" style="margin-right: 5px;"></i>Next</a>
-                                            <a type="button" href="{{url('admin/inqueries')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
+                                            <a type="button" href="{{url('admin/primary/inqueries')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
 
                                         </div>
                                     </div>
@@ -139,7 +139,7 @@
 
                             </div>
                             <div class="tab-pane p-3" id="profile-1" role="tabpanel">
-                                <form action="{{url('/admin/applications/update')}}/{{$data->id}}" method="POST" autocomplete="off" id="regForm2"  enctype="multipart/form-data" >
+                                <form action="{{url('/admin/primary/applications/update')}}/{{$data->id}}" method="POST" autocomplete="off" id="regForm2"  enctype="multipart/form-data" >
                                     @csrf
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -226,7 +226,7 @@
                                         <div class="col-lg-12">
                                             <a type="button" data-toggle="tab" id="proprebtn" href="#home-1" onClick="refresh2(this)" class="btn btn-outline-info waves-effect waves-light"  role="tab"><i class="fas fa-chevron-left" style="margin-right: 5px;"></i>Previous</a>
                                             <a type="button" data-toggle="tab" id="pronextbtn" href="#settings-1" onClick="refresh3(this)" class="btn btn-outline-info waves-effect waves-light"  role="tab"><i class="fas fa-chevron-right" style="margin-right: 5px;"></i>Next</a>
-                                            <a type="button" href="{{url('admin/inqueries')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
+                                            <a type="button" href="{{url('admin/primary/inqueries')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
                                             @if ($st == 5 || $st == 6)
                                             @else
                                             <button type="submit" id="x" class="btn btn-success waves-effect waves-light" style="color: white;"><i class="mdi mdi-check-all mr-2"></i>Submit</button>
@@ -239,7 +239,7 @@
                             </div>
 
                             <div class="tab-pane p-3" id="settings-1" role="tabpanel">
-                                <form action="{{url('/admin/inqueries/registration/update')}}/{{$data->id}}" method="POST" autocomplete="off" id="regForm3"  enctype="multipart/form-data" >
+                                <form action="{{url('/admin/primary/inqueries/registration/update')}}/{{$data->id}}" method="POST" autocomplete="off" id="regForm3"  enctype="multipart/form-data" >
                                     @csrf
                                 <div class="row">
 
@@ -271,74 +271,12 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label text-right">Grade</label>
-                                            <div class="col-sm-9">
-                                                @if ($st == 5 || $st == 6)
-                                                <select class="form-control" name="grade" id="grade" disabled>
-                                                    <option value="">Select Grade</option>
-                                                    @foreach($grade as $value)
-                                                    <option value="{{ $value->id }}" {{ $value->id == $data->grade_now ? 'selected' : '' }}>{{ $value->grade }}</option>
-                                                    @endForeach
-                                                </select>
-                                                @else
-                                                <select class="form-control" name="grade" id="grade">
-                                                    <option value="">Select Grade</option>
-                                                    @foreach($grade as $value)
-                                                    <option value="{{ $value->id }}" >{{ $value->grade }}</option>
-                                                    @endForeach
-                                                </select>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
                                             <label for="register_date" class="col-sm-3 col-form-label text-right">Registration Date</label>
                                             <div class="col-sm-9">
                                                 @if ($st == 5 || $st == 6)
                                                 <input class="form-control" type="date" value="{{$data->registration_date}}" disabled id="register_date" name="register_date">
                                                 @else
                                                 <input class="form-control" type="date" value="" id="register_date" name="register_date">
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label text-right">GIS Pre School Attend</label>
-                                            <div class="col-sm-9">
-                                                @if ($st == 5 || $st == 6)
-                                                <select class="form-control" name="gis_pr_sc_at" id="gis_pr_sc_at" disabled>
-                                                    <option value="">Select</option>
-                                                    <option value="1" {{$data->pre_sc_att=='1'?'selected':''}}>Yes</option>
-                                                    <option value="2" {{$data->pre_sc_att=='2'?'selected':''}}>No</option>
-                                                </select>
-                                                @else
-                                                <select class="form-control" name="gis_pr_sc_at" id="gis_pr_sc_at">
-                                                    <option value="">Select</option>
-                                                    <option value="1" >Yes</option>
-                                                    <option value="2" >No</option>
-                                                </select>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="gis_sid" class="col-sm-3 col-form-label text-right">GIS Pre School SID Number</label>
-                                            <div class="col-sm-9">
-                                                @if ($st == 5 || $st == 6)
-                                                <input class="form-control" type="text" value="{{$data->pre_school_id}}" disabled name="gis_sid" id="gis_sid">
-                                                @else
-                                                <input class="form-control" type="text" value="" name="gis_sid" id="gis_sid">
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="recod" class="col-sm-3 col-form-label text-right">Records</label>
-                                            <div class="col-sm-9">
-                                                @if ($st == 5 || $st == 6)
-                                                <textarea class="form-control" rows="2" id="recod" name="recod" disabled>{{$data->recod}}</textarea>
-                                                @else
-                                                <textarea class="form-control" rows="2" id="recod" name="recod"></textarea>
                                                 @endif
                                             </div>
                                         </div>
@@ -380,7 +318,7 @@
                                                 @endif
                                             </div>
                                         </div>
-
+{{--
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Syllubus Type</label>
                                             <div class="col-sm-9">
@@ -398,7 +336,7 @@
                                                 </select>
                                                 @endif
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Payment Type</label>
@@ -433,12 +371,135 @@
                                             </div>
                                         </div>
 
+                                        <div class="form-group row">
+                                            <label for="" class="col-sm-3 text-left"></label>
+                                            <label for="gis_sid" class="col-sm-9 text-left" style="color: black;">Special need for Child</label>
+                                            <div class="form-group row">
 
+                                            </div>
 
-                                        <hr>
+                                        </div>
 
                                         <div class="form-group row">
-                                            <label for="gis_sid" class="col-form-label text-left" style="color: black;">Emergency Contact Details</label>
+                                            <label class="col-sm-3 col-form-label text-right">Has any Disability or Medical Condition</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <select class="form-control" name="any_medi_con" id="any_medi_con" disabled>
+                                                    <option value="">Select</option>
+                                                    <option value="1" {{$data->any_medi_con=='1'?'selected':''}}>Yes</option>
+                                                    <option value="2" {{$data->any_medi_con=='2'?'selected':''}}>No</option>
+                                                </select>
+                                                @else
+                                                <select class="form-control" name="any_medi_con" id="any_medi_con">
+                                                    <option value="">Select</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="2">No</option>
+                                                </select>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="medi_con_det" class="col-sm-3 col-form-label text-right">Details about Medical Condition</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <textarea class="form-control" rows="2" id="medi_con_det" name="medi_con_det" disabled>{{$data->medi_con_det}}</textarea>
+                                                @else
+                                                <textarea class="form-control" rows="2" id="medi_con_det" name="medi_con_det"></textarea>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="special_attention" class="col-sm-3 col-form-label text-right">need any Special attention ?</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <textarea class="form-control" rows="2" id="special_attention" name="special_attention" disabled>{{$data->special_attention}}</textarea>
+                                                @else
+                                                <textarea class="form-control" rows="2" id="special_attention" name="special_attention"></textarea>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="" class="col-sm-3 text-left"></label>
+                                            <label for="gis_sid" class="col-sm-9 text-left" style="color: black;">Other Details</label>
+                                            <div class="form-group row">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label text-right">Have any Siblins</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <select class="form-control" name="have_siblin" id="have_siblin" disabled>
+                                                    <option value="">Select</option>
+                                                    <option value="1" {{$data->have_siblin=='1'?'selected':''}}>Yes</option>
+                                                    <option value="2" {{$data->have_siblin=='2'?'selected':''}}>No</option>
+                                                </select>
+                                                @else
+                                                <select class="form-control" name="have_siblin" id="have_siblin">
+                                                    <option value="">Select</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="2">No</option>
+                                                </select>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="siblin_details" class="col-sm-3 col-form-label text-right">Siblin's Details</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <textarea class="form-control" rows="2" id="siblin_details" name="siblin_details" disabled>{{$data->siblin_details}}</textarea>
+                                                @else
+                                                <textarea class="form-control" rows="2" id="siblin_details" name="siblin_details"></textarea>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="leisure" class="col-sm-3 col-form-label text-right">How does the child spend leisure time</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <textarea class="form-control" rows="2" id="leisure" name="leisure" disabled>{{$data->leisure}}</textarea>
+                                                @else
+                                                <textarea class="form-control" rows="2" id="leisure" name="leisure"></textarea>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="whome_les" class="col-sm-3 col-form-label text-right">With whome does the child spend leisure time</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <textarea class="form-control" rows="2" id="whome_les" name="whome_les" disabled>{{$data->whome_les}}</textarea>
+                                                @else
+                                                <textarea class="form-control" rows="2" id="whome_les" name="whome_les"></textarea>
+                                                @endif
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+
+
+
+
+                                    <div class="col-lg-6">
+
+
+                                          <div class="form-group row">
+                                            <label for="" class="col-sm-3 text-left"></label>
+                                            <label for="gis_sid" class="col-sm-9 text-left" style="color: black;">Emergency Contact Details</label>
+                                            <div class="form-group row">
+
+                                            </div>
+
                                         </div>
 
                                         <div class="form-group row">
@@ -489,106 +550,61 @@
                                             </div>
                                         </div>
 
-                                        <hr>
-                                    </div>
-
-
-
-
-                                    <div class="col-lg-6">
-                                        {{-- <hr> --}}
-
-                                        <hr>
-                                        <div class="form-group row">
+                                          <div class="form-group row">
                                             <label for="" class="col-sm-3 text-left"></label>
-                                            <label for="gis_sid" class="col-sm-9 text-left" style="color: black;">Siblings's Infomation</label>
+                                            <label for="gis_sid" class="col-sm-9 text-left" style="color: black;">Family Doctors's Infomation</label>
                                             <div class="form-group row">
 
                                             </div>
 
                                         </div>
-                                        <div class="row">
-                                            @if ($st == 5 || $st == 6)
-                                            <div class="col-md-12">
-                                                <table class="table" id="rsrvtbl2">
-                                                    <thead>
-                                                        <th>ID</th>
-                                                        <th>Relationship</th>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach ($sibl as $value)
-                                                        <tr>
-                                                        <td>{{$value->stu_id}}</td>
-                                                        <td>{{$value->relationship}}</td>
-                                                    </tr>
-                                                        @endforeach
-                                                    </tbody>
 
-                                                  </table>
 
+                                        {{-- <hr> --}}
+                                        <input class="form-control" type="hidden" value="" name="prt_id" id="prt_id">
+
+                                        <div class="form-group row">
+                                            <label for="doc_name" class="col-sm-3 col-form-label text-right">Name</label>
+                                            <div class="col-sm-9">
+
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$data->doc_name}}" readonly name="doc_name" id="doc_name">
+                                                @else
+                                                <input class="form-control" type="text" value="" name="doc_name" id="doc_name">
+                                                @endif
                                             </div>
-                                            @else
-
-
-                                        <div class="col-md-12">
-                                            <div class="form-group row">
-                                                <label for="st_id" class="col-sm-3 col-form-label text-right">Student ID</label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" type="text" value="" name="st_id" id="st_id">
-                                                </div>
-                                            </div>
-
-                                            <input class="form-control" type="hidden" value="{{$ttn1}}" name="ttn1" id="ttn1">
-                                            <input class="form-control" type="hidden" value="{{$ttn2}}" name="ttn2" id="ttn2">
-
-
-                                            <div class="form-group row">
-                                                <label for="st_id" class="col-sm-3 col-form-label text-right">Student Name</label>
-                                                <div class="col-sm-9">
-                                                    <input class="form-control" type="hidden" value="" name="sid" id="sid">
-                                                    <label for="" id="st_name"></label>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-group row">
-
-                                                <label for="st_rel" class="col-sm-3 col-form-label text-right">Relationship</label>
-                                                <div class="col-sm-7">
-                                                    <input class="form-control" type="text" value="" name="st_rel" id="st_rel">
-                                                </div>
-                                                <div class="col-sm-1">
-                                                    <a href="#" id="adsr" class="btn btn-info" style="height: 30pt;"><i class="fa fa-plus" style="margin-top: 5pt;" aria-hidden="true"></i></a>
-                                                 </div>
-                                            </div>
-
-                                            <table class="table" id="rsrvtbl">
-                                                <thead>
-                                                    <th>No</th>
-                                                    <th>ID</th>
-                                                    <th>Relationship</th>
-                                                    <th>Op</th>
-                                                </thead>
-                                                <tbody>
-
-                                                </tbody>
-
-                                              </table>
                                         </div>
 
-                                        @endif
-
-                                    </div>
 
 
-                                          <div class="row">
-                                              <div class="col-12">
-                                                &nbsp;
-                                              </div>
+                                        <div class="form-group row">
+                                            <label for="doc_address" class="col-sm-3 col-form-label text-right">Address</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$data->doc_address}}" readonly name="doc_address" id="doc_address">
+                                                @else
+                                                <input class="form-control" type="text" value="" name="doc_address" id="doc_address">
+                                                @endif
 
-                                          </div>
+                                            </div>
+                                        </div>
 
-                                          <hr>
+                                        <div class="form-group row">
+                                            <label for="helthcard" class="col-sm-3 col-form-label text-right">Helth Card No</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="text" value="{{$data->helthcard}}" readonly name="helthcard" id="helthcard">
+                                                @else
+                                                <input class="form-control" type="number" value="" name="helthcard" id="helthcard">
+                                                @endif
+
+                                            </div>
+                                        </div>
+
+
+
+
+
 
                                         <div class="form-group row">
                                             <label for="" class="col-sm-3 text-left"></label>
@@ -780,7 +796,7 @@
                                             <button type="submit" id="x" class="btn btn-success waves-effect waves-light" style="color: white;"><i class="mdi mdi-check-all mr-2"></i>Submit</button>
                                             @endif
 
-                                            <a type="button" href="{{url('admin/students')}}" class="btn btn-primary waves-effect waves-light"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
+                                            <a type="button" href="{{url('admin/primary/students')}}" class="btn btn-primary waves-effect waves-light"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
                                         </div>
                                     </div>
                                 </div>
@@ -984,9 +1000,6 @@ $("#regForm3").validate({
         register_date: {
             required: true,
         },
-        sy_type: {
-            required: true,
-        },
         paymnt_type: {
             required: true,
         },
@@ -994,9 +1007,6 @@ $("#regForm3").validate({
             required: true,
         },
         is_id_issue: {
-            required: true,
-        },
-        gis_pr_sc_at: {
             required: true,
         },
         nic: {
@@ -1072,8 +1082,16 @@ $("#regForm3").validate({
             required: true,
             maxlength: 120,
         },
-
-
+        have_siblin: {
+            required: true,
+        },
+        any_medi_con: {
+            required: true,
+        },
+        helthcard: {
+            maxlength: 10,
+            minlength: 10,
+        },
     },
     messages: {
         institute: {
@@ -1085,9 +1103,6 @@ $("#regForm3").validate({
         register_date: {
             required: "Date is required",
         },
-        sy_type: {
-            required: "Syllubus Type is required"
-        },
         paymnt_type: {
             required: "Payment Type is required"
         },
@@ -1096,9 +1111,6 @@ $("#regForm3").validate({
         },
         is_id_issue: {
             required: "Student ID Issue Status is required"
-        },
-        gis_pr_sc_at: {
-            required: "GIS Pre School Attend? Status is required"
         },
         nic: {
             required: "Emargancy Contact NIC is required",
@@ -1169,6 +1181,16 @@ $("#regForm3").validate({
         mother_address_of_work_place: {
             required: "Mother's Address of Work Place is required",
             maxlength: "Mother's Address of Work Place cannot be more than 50 characters"
+        },
+        have_siblin: {
+            required: "Have Siblins ? is required",
+        },
+        any_medi_con: {
+            required: "Have Any Madical Conditions ? is required",
+        },
+        helthcard:{
+            maxlength: "Doctor's Contact Number cannot be more than 10 characters",
+            minlength: "Doctor's Contact cannot be less than 10 characters"
         },
     }
 });

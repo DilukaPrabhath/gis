@@ -20,6 +20,7 @@ Route::get('/', function () {
 Route::get('/test', function () {
     return view('admin.layouts.master');
 });
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Auth::routes();
 
@@ -77,9 +78,20 @@ Route::get('/admin/inqueries/view/{pid}', [App\Http\Controllers\AdminInqueryCon:
 Route::get('/admin/inqueries/edit/{id}', [App\Http\Controllers\AdminInqueryCon::class, 'edit']);
 Route::post('/admin/inqueries/update/{id}', [App\Http\Controllers\AdminInqueryCon::class, 'update']);
 
+//inquries primary
+Route::get('/admin/primary/inqueries', [App\Http\Controllers\AdminPrimaryInquCon::class, 'index']);
+Route::get('/admin/primary/inqueries/create', [App\Http\Controllers\AdminPrimaryInquCon::class, 'create']);
+Route::post('admin/primary/inqueries/store', [App\Http\Controllers\AdminPrimaryInquCon::class, 'store']);
+Route::get('/admin/primary/inqueries/view/{pid}', [App\Http\Controllers\AdminPrimaryInquCon::class, 'view']);
+Route::get('/admin/primary/inqueries/edit/{id}', [App\Http\Controllers\AdminPrimaryInquCon::class, 'edit']);
+Route::post('/admin/primary/inqueries/update/{id}', [App\Http\Controllers\AdminPrimaryInquCon::class, 'update']);
+
 //application
-Route::get('/admin/applications', [App\Http\Controllers\AdminApplicationCon::class, 'index']);
+
 Route::post('/admin/applications/update/{id}', [App\Http\Controllers\AdminApplicationCon::class, 'update']);
+
+//application primary
+Route::post('/admin/primary/applications/update/{id}', [App\Http\Controllers\AdminPrimaryApplicCon::class, 'update']);
 
 //student
 Route::post('/admin/inqueries/registration/update/{id}', [App\Http\Controllers\AdminStudentCon::class, 'update']);
@@ -88,6 +100,9 @@ Route::get('/student/parent2_nic', [App\Http\Controllers\AdminStudentCon::class,
 Route::get('/student/siblins', [App\Http\Controllers\AdminStudentCon::class, 'siblins']);
 Route::post('/sibilin_temp_insert', [App\Http\Controllers\AdminStudentCon::class, 'temp_in']);
 Route::post('/temp_sib_remove', [App\Http\Controllers\AdminStudentCon::class, 'tempremove']);
+
+//Student Primary
+Route::post('/admin/primary/inqueries/registration/update/{id}', [App\Http\Controllers\AdminPrimaryStudentCon::class, 'update']);
 
 //Scholarship
 Route::get('admin/scholarship', [App\Http\Controllers\AdmScholarshipCon::class, 'index']);

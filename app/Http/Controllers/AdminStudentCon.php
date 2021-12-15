@@ -30,8 +30,17 @@ class AdminStudentCon extends Controller
         //     ]);
 
             //$inst = $request->institute;
-            $sc_po = Student::where('institute',$request->institute)->count();
-            $gd_po = Student::where('institute',$request->institute)->where('grade_now',$request->grade)->count();
+//        return     $users = Student::select('id', 'created_at')
+// ->get()
+// ->groupBy(function($date) {
+//     return Carbon::parse($date->created_at)->format('Y'); // grouping by years
+//     //return Carbon::parse($date->created_at)->format('m'); // grouping by months
+// });
+
+
+            $sc_po_co = Student::where('institute',$request->institute)->count();
+            $sc_po    = $sc_po_co + 1;
+
             $grd = $request->grade;
             $gd  = str_pad($grd,2,"0", STR_PAD_LEFT);
             $now = Carbon::now();
@@ -100,7 +109,7 @@ class AdminStudentCon extends Controller
 
         }else{
 
-        $mter = Parentm::where('parent_nic',$request->father_nic)->get();
+        $mter = Parentm::where('parent_nic',$request->mother_nic)->get();
         $motherid = $mter[0]->id;
         //return "not Emp";
         }
@@ -131,6 +140,7 @@ class AdminStudentCon extends Controller
         $student->inq_status =4;
         $student->mom_id = $motherid;
         $student->fat_id = $fatherid;
+        $student->scl_po_no = $sc_po;
 
         if($request->hasfile('stu_img')){
 

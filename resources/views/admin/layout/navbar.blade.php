@@ -25,7 +25,13 @@
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="{{url('admin/profile')}}"><i class="dripicons-user text-muted mr-2"></i> Profile</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#"><i class="dripicons-exit text-muted mr-2"></i> Logout</a>
+                <a class="dropdown-item" href="{{ url('/logout') }}"><i class="dripicons-exit text-muted mr-2"></i> Logout</a> </a>
+
+                {{-- <a class="dropdown-item" href="#"><i class="dripicons-exit text-muted mr-2"></i> Logout</a> --}}
+                {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit"> <a class="dropdown-item" href="#"> <i class="dripicons-exit text-muted mr-2"></i> Logout</a></button>
+                </form> --}}
             </div>
         </li>
     </ul>

@@ -20,6 +20,17 @@ class Student extends Model
             return $sql;
         }
 
+        public static function primarytbldata() {
+            $sql= DB::table('students')
+                ->select('students.*', 'institutes.institute_name as institute','grades.grade')
+                ->leftjoin('institutes','students.re_ins_id', '=', 'institutes.id')
+                ->leftjoin('grades','students.re_grd_id', '=', 'grades.id')
+                ->Where('students.prmy','=',1)
+                ->orderBy('students.id','DESC')
+                ->get();
+                return $sql;
+            }
+
 
         public static function application_tbldata() {
             $sql= DB::table('students')

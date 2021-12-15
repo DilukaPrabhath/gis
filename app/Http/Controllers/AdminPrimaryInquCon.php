@@ -12,18 +12,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class AdminInqueryCon extends Controller
+class AdminPrimaryInquCon extends Controller
 {
     public function index(){
 
-        $inq = Student::tbldata();
-        //$inq = Student::orderBy('id','DESC')->tbldata();
-        return view('admin.inquery.index',compact('inq'));
+        $inq = Student::primarytbldata();
+        return view('admin.primary_inquery.index',compact('inq'));
        }
 
        public function create(){
-        $institute = Institute::where('status',1)->get();
-        return view('admin.inquery.create',compact('institute'));
+        $institute = Institute::where('status',1)->where('pre_or_sch',1)->get();
+        return view('admin.primary_inquery.create',compact('institute'));
        }
 
        public function store(Request $request){
@@ -84,6 +83,7 @@ class AdminInqueryCon extends Controller
         }
         $stu->inq_status  = 1;
         $stu->stu_status = 1;
+        $stu->prmy = 1;
         $stu->save();
 
         DB::commit();
@@ -93,13 +93,63 @@ class AdminInqueryCon extends Controller
             'alert-type' => 'Success'
         );
 
-        return redirect('admin/inqueries')->with($notification);
+        return redirect('admin/primary/inqueries')->with($notification);
 
        }
 
-       public function view($pid){
+
+       public function edit($pid){
         $data  = Student::find($pid);
-        $institute = Institute::orderBy('institute_name', 'ASC')->where('status',1)->get();
+        return view('admin.primary_inquery.edit',compact('data'));
+       }
+
+       public function update(Request $request,$id){
+        //return  $request;
+       $this->validate(request(), [
+
+           'student_name'  => 'required',
+           'dob' => 'required',
+           'name_with_initial'  => 'required',
+           'religion' => 'required',
+           'nationality'  => 'required',
+           'contact_number' => 'required',
+           'inquery_type'  => 'required',
+           'inquery_status' => 'required',
+           'address'  => 'required',
+           ]);
+
+           $stu =  Student::find($id);
+
+       $stu->student_full_name  = $request->student_name;
+       $stu->dob = $request->dob;
+       $stu->nwi = $request->name_with_initial;
+       $stu->contact_number = $request->contact_number;
+       $stu->religion = $request->religion;
+       $stu->nationality = $request->nationality;
+       $stu->address = $request->address;
+       $stu->inq_type  = $request->inquery_type; //inquery = 1 /appliction = 2/ interview = 3 / registration = 4 / student = 5
+       if($request->gender == "on"){
+           $stu->gender     = 1; //male = 1 /female = 2
+           }else{
+           $stu->gender     = 2;
+       }
+       $stu->inq_status  = $request->inquery_status;
+       // $stu->stu_status = 1;
+       $stu->save();
+
+       $notification = array(
+           'message' => 'Inquery Updated Successfully!',
+           'alert-type' => 'Success'
+       );
+
+       return redirect('admin/primary/inqueries')->with($notification);
+
+      }
+
+
+      public function view($pid){
+        $data  = Student::find($pid);
+        $institute = Institute::orderBy('institute_name', 'ASC')->where('status',1)->where('pre_or_sch',1)->get();
         $grade = Grade::orderBy('grade', 'ASC')->where('status',1)->get();
         $st = $data->stu_status;
       if($st == 5 || $st == 6){
@@ -116,54 +166,7 @@ class AdminInqueryCon extends Controller
         // $institute = Institute::where('status',1)->get();
         $ttn1 = Str::random(6);
         $ttn2 = Str::random(6);
-        return view('admin.inquery.view',compact('data','institute','grade','ttn1','ttn2','sibl','fa','mo','st'));
+        return view('admin.primary_inquery.view',compact('data','institute','grade','ttn1','ttn2','sibl','fa','mo','st'));
        }
 
-       public function edit($pid){
-        $data  = Student::find($pid);
-        return view('admin.inquery.edit',compact('data'));
-       }
-
-       public function update(Request $request,$id){
-         //return  $request;
-        $this->validate(request(), [
-
-            'student_name'  => 'required',
-            'dob' => 'required',
-            'name_with_initial'  => 'required',
-            'religion' => 'required',
-            'nationality'  => 'required',
-            'contact_number' => 'required',
-            'inquery_type'  => 'required',
-            'inquery_status' => 'required',
-            'address'  => 'required',
-            ]);
-
-            $stu =  Student::find($id);
-
-        $stu->student_full_name  = $request->student_name;
-        $stu->dob = $request->dob;
-        $stu->nwi = $request->name_with_initial;
-        $stu->contact_number = $request->contact_number;
-        $stu->religion = $request->religion;
-        $stu->nationality = $request->nationality;
-        $stu->address = $request->address;
-        $stu->inq_type  = $request->inquery_type; //inquery = 1 /appliction = 2/ interview = 3 / registration = 4 / student = 5
-        if($request->gender == "on"){
-            $stu->gender     = 1; //male = 1 /female = 2
-            }else{
-            $stu->gender     = 2;
-        }
-        $stu->inq_status  = $request->inquery_status;
-        // $stu->stu_status = 1;
-        $stu->save();
-
-        $notification = array(
-            'message' => 'Inquery Updated Successfully!',
-            'alert-type' => 'Success'
-        );
-
-        return redirect('admin/inqueries')->with($notification);
-
-       }
 }
