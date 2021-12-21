@@ -12,14 +12,14 @@
                         <input type="hidden" name="old_email" id="mbna" value="{{ $value->email }}"/>
                         <input type="hidden" name="old_name" id="mbna" value="{{ $value->institute_name }}"/>
                         <input type="hidden" name="old_phone" id="mbna" value="{{ $value->contact_number }}"/>
-                        <h4 class="mt-0 header-title">Update Institute</h4>
+                        <h4 class="mt-0 header-title">Update School</h4>
 
                         <form action="{{url('admin/institutes/update')}}/{{$value->id}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
                             @csrf
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group row">
-                                    <label for="institute_name" class="col-sm-2 col-form-label text-right">Institute Name</label>
+                                    <label for="institute_name" class="col-sm-2 col-form-label text-right">School Name</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="text" value="{{$value->institute_name}}" id="institute_name" name="institute_name">
                                         @error('institute_name')
@@ -28,7 +28,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label text-right">Is Pre School ?</label>
+                                    <label class="col-sm-2 col-form-label text-right">Is Nursery School ?</label>
                                     <div class="col-md-9">
                                         <div class="form-check-inline my-1">
                                             <div class="custom-control custom-radio">
@@ -181,9 +181,9 @@
                 },
                 messages: {
                     name: {
-                        required: "Institute Name is required",
-                        remote:"Institute Name already exist",
-                        maxlength: "Institute Name cannot be more than 150 characters"
+                        required: "School Name is required",
+                        remote:"School Name already exist",
+                        maxlength: "School Name cannot be more than 150 characters"
                     },
                     email: {
                         required: "Email name is required",

@@ -24,7 +24,7 @@
                             <thead>
                                 <tr>
                                     <th>Student ID</th>
-                                    <th>Institute</th>
+                                    <th>School</th>
                                     <th>Payment</th>
                                     <th>Activity</th>
                                     <th>Payment Type</th>

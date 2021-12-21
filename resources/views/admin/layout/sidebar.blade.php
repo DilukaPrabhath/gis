@@ -16,7 +16,7 @@
             <a href="javascript: void(0);"><i class="mdi mdi-settings"></i><span>Master</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li><a href="{{url('/admin/activities/create')}}">Activities</a></li>
-                <li><a href="{{url('/admin/institutes')}}">Institutes</a></li>
+                <li><a href="{{url('/admin/institutes')}}">Schools</a></li>
                 <li><a href="{{url('/admin/subjects')}}">Subjects</a></li>
                 <li><a href="{{url('/admin/events')}}">Create Events</a></li>
                 <li><a href="{{url('/admin/event_tickets')}}">Event Tickets</a></li>
@@ -26,7 +26,7 @@
         </li>
 
         <li>
-            <a href="javascript: void(0);"><i class="mdi mdi-school"></i><span>Primary Students</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+            <a href="javascript: void(0);"><i class="mdi mdi-school"></i><span>Nursary Students</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li><a href="{{url('/admin/primary/inqueries')}}">Inqueries</a></li>
                 {{-- <li><a href="{{url('/admin/primary/applications')}}">Applications</a></li>
@@ -36,7 +36,7 @@
         </li>
 
         <li>
-            <a href="javascript: void(0);"><i class="mdi mdi-school"></i><span>Secondary Students</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+            <a href="javascript: void(0);"><i class="mdi mdi-school"></i><span>School Students</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li><a href="{{url('/admin/inqueries')}}">Inqueries</a></li>
                 {{-- <li><a href="{{url('/admin/applications')}}">Applications</a></li>

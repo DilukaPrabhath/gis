@@ -248,7 +248,7 @@
 
 
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label text-right">Institute</label>
+                                            <label class="col-sm-3 col-form-label text-right">School</label>
                                             <div class="col-sm-9">
                                                 @if ($st == 5 || $st == 6)
                                                 <select class="form-control" name="institute" id="institute" disabled>
@@ -1077,7 +1077,7 @@ $("#regForm3").validate({
     },
     messages: {
         institute: {
-            required: "Institute Name is required",
+            required: "School Name is required",
         },
         grade: {
             required: "Grade is required"

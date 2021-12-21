@@ -16,7 +16,7 @@
                             <div class="col-lg-6">
                                 <table class="table table-hover mb-0">
                                     <tr>
-                                        <th>Institute</th>
+                                        <th>School</th>
                                         <td>{{$institute->institute_name}}</td>
                                     </tr>
                                     <tr>

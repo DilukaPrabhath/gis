@@ -17,7 +17,7 @@
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th>Venue</th>
-                                <th>Institute</th>
+                                <th>School</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>

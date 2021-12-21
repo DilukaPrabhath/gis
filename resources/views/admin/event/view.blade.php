@@ -19,7 +19,7 @@
                                         <td>{{$evet[0]->event}}</td>
                                     </tr>
                                     <tr>
-                                        <th>Institute</th>
+                                        <th>School</th>
                                         <td>{{$evet[0]->institute}}</td>
                                     </tr>
                                     <tr>

@@ -8,14 +8,14 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">View Inatitute</h4>
+                        <h4 class="mt-0 header-title">View School</h4>
 
 
                         <div class="row">
                             <div class="col-lg-6">
                                 <table class="table table-hover mb-0">
                                     <tr>
-                                        <th>Inatitute Name</th>
+                                        <th>School Name</th>
                                         <td>{{$value->institute_name}}</td>
                                     </tr>
                                     <tr>

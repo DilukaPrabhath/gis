@@ -22,7 +22,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="example-text-input" class="col-sm-3 col-form-label text-right">Institute</label>
+                                    <label for="example-text-input" class="col-sm-3 col-form-label text-right">School</label>
                                     <div class="col-sm-9">
                                         <label for="" style="padding-top: 6px;">Institute One</label>
                                     </div>

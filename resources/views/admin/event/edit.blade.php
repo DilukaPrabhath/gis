@@ -24,7 +24,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label text-right">Institute</label>
+                                    <label class="col-sm-2 col-form-label text-right">School</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" id="institute" name="institute">
                                             <option value="">Select </option>
@@ -153,7 +153,7 @@
                         maxlength: "Activity Name cannot be more than 100 characters"
                     },
                     institute: {
-                        required: "Institute is required"
+                        required: "School is required"
                     },
                     date: {
                         required: "Date is required",

@@ -14,7 +14,7 @@
                             <thead>
                             <tr>
                                 <th>Event</th>
-                                <th>Institute</th>
+                                <th>School</th>
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th>Status</th>
