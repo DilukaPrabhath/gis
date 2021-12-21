@@ -49,7 +49,7 @@
             <a href="javascript: void(0);"><i class="mdi mdi-cash-multiple"></i><span>Payments</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li><a href="{{url('/admin/payments')}}">Class Fees</a></li>
-                <li><a href="{{url('/admin/activities_pay')}}">Activities Fee</a></li>
+                <li><a href="{{url('/admin/activities_payments')}}">Activities Fee</a></li>
                 <li><a href="{{url('/admin/application_pay')}}">Application Fee</a></li>
                 <li><a href="{{url('/admin/events')}}">Events</a></li>
             </ul>

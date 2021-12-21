@@ -34,7 +34,7 @@
                                                @elseif ($value->inq_status == 2)
                                                 <span class="badge badge-danger" style="background-color: orange;">Confirm</span>
                                                 @elseif ($value->inq_status == 3)
-                                                <span class="badge badge-danger" style="background-color: red;">Not Comming</span>
+                                                <span class="badge badge-danger" style="background-color: red;">Not Coming</span>
                                                 @elseif ($value->inq_status ==4)
                                                 <span class="badge badge-danger" style="background-color: green;">Student</span>
                                                @endif

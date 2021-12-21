@@ -172,4 +172,22 @@ Route::post('/admin/classfee/update/{id}', [App\Http\Controllers\AdminClassFeeCo
 Route::get('/check_grade_validation',[App\Http\Controllers\AdminClassFeeCon::class, 'validateclassfee']);
 
 Route::get('/admin/studentprofile', [App\Http\Controllers\AdmStuProfileCon::class, 'view']);
+
+//application Payment
+Route::get('admin/application_pay', [App\Http\Controllers\AdminApplicatPayCon::class, 'index']);
+Route::get('admin/application_pay/create', [App\Http\Controllers\AdminApplicatPayCon::class, 'create']);
+Route::post('admin/application_pay/store', [App\Http\Controllers\AdminApplicatPayCon::class, 'store']);
+Route::get('admin/application_pay/view/{id}', [App\Http\Controllers\AdminApplicatPayCon::class, 'view']);
+Route::get('admin/application_pay/print/{id}', [App\Http\Controllers\AdminApplicatPayCon::class, 'print']);
+
+//Activity Payment
+Route::get('admin/activities_payments', [App\Http\Controllers\AdminActiFeePayCon::class, 'index']);
+Route::get('admin/activities_payments/create', [App\Http\Controllers\AdminActiFeePayCon::class, 'create']);
+Route::post('admin/activities_payments/store', [App\Http\Controllers\AdminActiFeePayCon::class, 'store']);
+Route::get('admin/activities_payments/view/{id}', [App\Http\Controllers\AdminActiFeePayCon::class, 'view']);
+Route::get('admin/activities_payments/print/{id}', [App\Http\Controllers\AdminActiFeePayCon::class, 'print']);
+Route::post('/activity_price_get', [App\Http\Controllers\AdminActiFeePayCon::class, 'select_price']);
+Route::get('/student_id', [App\Http\Controllers\AdminActiFeePayCon::class, 'student_id']);
+Route::get('/validate-activity-pay', [App\Http\Controllers\AdminActiFeePayCon::class, 'validate_student_id']);
+
 });
