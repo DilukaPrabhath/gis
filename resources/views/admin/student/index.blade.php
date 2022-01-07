@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="mt-0 header-title">Registration Table</h4>
+                        <h4 class="mt-0 header-title">Student Table</h4>
 
 
                         <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -15,10 +15,10 @@
                             <tr>
                                 <th>Student ID</th>
                                 <th>Student Name</th>
-                                <th>Request Institute</th>
-                                <th>Request Grade</th>
+                                <th>Institute</th>
+                                <th>Grade</th>
                                 <th>Status</th>
-                                <th>Process Status</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -29,8 +29,8 @@
                                         <tr>
                                             <td>{{$value->student_id}}</td>
                                             <td>{{$value->student_full_name}}</td>
-                                            <td>{{$value->institute}}</td>
-                                            <td>{{$value->grade}}</td>
+                                            <td>{{$value->institute_nm}}</td>
+                                            <td>{{$value->grade_name}}</td>
                                             <td>@if ($value->inq_status == 1)
                                                 <span class="badge badge-danger" style="background-color: purple;">Investigating</span>
                                                @elseif ($value->inq_status == 2)
@@ -56,12 +56,12 @@
                                                @endif
                                             </td>
                                             <td>
-                                                <a href="{{url('admin/inqueries/view')}}/{{$value->id}}" type="button" class="btn btn-dropbox">
+                                                <a href="{{url('admin/school/student/view')}}/{{$value->id}}" type="button" class="btn btn-dropbox">
                                                     <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
                                                 </a>
-                                                {{-- <a href="{{url('admin/inqueries/edit')}}/{{$value->id}}" type="button" class="btn btn-danger">
+                                                <a href="{{url('admin/school/student/edit')}}/{{$value->id}}" type="button" class="btn btn-danger">
                                                     <i class="fab fas fa-pencil-alt" style="color: white; font-size:8px;"></i>
-                                                </a> --}}
+                                                </a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -78,7 +78,7 @@
     @stop
 
     @section('button')
-    <div class="float-right align-item-center mt-2">
+    {{-- <div class="float-right align-item-center mt-2">
         <a href="{{url('admin/inqueries/create')}}" class="btn btn-info px-4 align-self-center report-btn">Add</a>
-    </div>
+    </div> --}}
     @stop

@@ -15,6 +15,7 @@ class Student extends Model
             ->select('students.*', 'institutes.institute_name as institute','grades.grade')
             ->leftjoin('institutes','students.re_ins_id', '=', 'institutes.id')
             ->leftjoin('grades','students.re_grd_id', '=', 'grades.id')
+            ->Where('students.prmy','=',2)
             ->orderBy('students.id','DESC')
             ->get();
             return $sql;
@@ -34,15 +35,24 @@ class Student extends Model
 
         public static function application_tbldata() {
             $sql= DB::table('students')
-                ->select('students.*', 'institutes.institute_name as institute','grades.grade')
-                ->leftjoin('institutes','students.re_ins_id', '=', 'institutes.id')
-                ->leftjoin('grades','students.re_grd_id', '=', 'grades.id')
-                ->orWhere('students.stu_status','=',2)
-                ->orWhere('students.stu_status','=',3)
-                ->orWhere('students.stu_status','=',4)
+                ->select('students.*', 'institutes.institute_name as institute_nm','grades.grade as grade_name')
+                ->leftjoin('institutes','students.institute', '=', 'institutes.id')
+                ->leftjoin('grades','students.grade_now', '=', 'grades.id')
+                ->orWhere('students.stu_status','=',5)
+                ->orWhere('students.stu_status','=',6)
                 ->get();
                 return $sql;
             }
+
+            public static function nursary_tbldata() {
+                $sql= DB::table('students')
+                    ->select('students.*', 'institutes.institute_name as institute_nm')
+                    ->leftjoin('institutes','students.institute', '=', 'institutes.id')
+                    ->orWhere('students.stu_status','=',5)
+                    ->orWhere('students.stu_status','=',6)
+                    ->get();
+                    return $sql;
+                }
 
             public static function reg_tbldata() {
                 $sql= DB::table('students')

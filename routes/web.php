@@ -38,17 +38,24 @@ Route::group(['middleware' => 'App\Http\Middleware\IsAdmin'], function()
 Route::get('admin/users', [App\Http\Controllers\AdmUserCon::class, 'index']);
 Route::get('admin/users/create', [App\Http\Controllers\AdmUserCon::class, 'create']);
 Route::post('admin/users/store', [App\Http\Controllers\AdmUserCon::class, 'store']);
-Route::get('admin/users/view', [App\Http\Controllers\AdmUserCon::class, 'view']);
-Route::get('admin/users/edit', [App\Http\Controllers\AdmUserCon::class, 'edit']);
-Route::get('admin/users/password', [App\Http\Controllers\AdmUserCon::class, 'update_password']);
+Route::get('admin/users/view/{id}', [App\Http\Controllers\AdmUserCon::class, 'view']);
+Route::get('admin/users/edit/{id}', [App\Http\Controllers\AdmUserCon::class, 'edit']);
+Route::post('admin/users/update/{id}', [App\Http\Controllers\AdmUserCon::class, 'update']);
+Route::get('admin/users/password/{id}', [App\Http\Controllers\AdmUserCon::class, 'update_pas_view']);
+Route::post('admin/users/password/update/{id}', [App\Http\Controllers\AdmUserCon::class, 'update_pasword']);
 Route::get('/validate-email',[App\Http\Controllers\AdmUserCon::class, 'emailvalidate']);
 Route::get('/validate-nic',[App\Http\Controllers\AdmUserCon::class, 'nicvalidate']);
 Route::get('/validate-mobile',[App\Http\Controllers\AdmUserCon::class, 'mobilevalidate']);
-
+Route::post('/profile_update_email', [App\Http\Controllers\AdmUserCon::class, 'profile_update_email_validation']);
+Route::post('/profile_update_mobile', [App\Http\Controllers\AdmUserCon::class, 'mobilevalidate_edit']);
+Route::post('/profile_update_nic', [App\Http\Controllers\AdmUserCon::class, 'edit_nicvalidate']);
 
 Route::get('/admin/profile', [App\Http\Controllers\AdmUserCon::class, 'profileView']);
 Route::get('/admin/profile/update', [App\Http\Controllers\AdmUserCon::class, 'profileEdit']);
 Route::get('/admin/profile/password', [App\Http\Controllers\AdmUserCon::class, 'profilePassword']);
+Route::get('/admin/profile/password/edit', [App\Http\Controllers\AdmUserCon::class, 'profile_pass_update']);
+Route::post('/admin/profile/password/update', [App\Http\Controllers\AdmUserCon::class, 'profilepassword_update']);
+Route::post('/admin/profile/edit/update', [App\Http\Controllers\AdmUserCon::class, 'profile_update']);
 
 //institute
 Route::get('/admin/institutes', [App\Http\Controllers\AdmInstiCon::class, 'index']);
@@ -61,7 +68,11 @@ Route::get('/validate-email',[App\Http\Controllers\AdmInstiCon::class, 'emailval
 Route::get('/validate-phone',[App\Http\Controllers\AdmInstiCon::class, 'phonevalidate']);
 Route::get('/validate-name',[App\Http\Controllers\AdmInstiCon::class, 'namevalidate']);
 Route::get('/check_edit_email',[App\Http\Controllers\AdmInstiCon::class, 'oldemailvalidate']);
-
+Route::get('/validate-code',[App\Http\Controllers\AdmInstiCon::class, 'codevalidate']);
+Route::post('/validate_code_edit',[App\Http\Controllers\AdmInstiCon::class, 'edit_codevalidate']);
+Route::post('/validate_ins_mail_edit',[App\Http\Controllers\AdmInstiCon::class, 'edit_mail_validate']);
+Route::post('/validate_ins_cont_edit',[App\Http\Controllers\AdmInstiCon::class, 'edit_cont_validate']);
+Route::post('/validate_ins_name_edit',[App\Http\Controllers\AdmInstiCon::class, 'edit_name_validate']);
 
 //Bank
 Route::get('/admin/banks', [App\Http\Controllers\AdminBankCon::class, 'create']);
@@ -95,24 +106,40 @@ Route::post('/admin/primary/applications/update/{id}', [App\Http\Controllers\Adm
 
 //student
 Route::post('/admin/inqueries/registration/update/{id}', [App\Http\Controllers\AdminStudentCon::class, 'update']);
-Route::get('/admin/students', [App\Http\Controllers\AdminStudentCon::class, 'index']);
 Route::get('/student/parent2_nic', [App\Http\Controllers\AdminStudentCon::class, 'parent2_details']);
 Route::get('/student/siblins', [App\Http\Controllers\AdminStudentCon::class, 'siblins']);
 Route::post('/sibilin_temp_insert', [App\Http\Controllers\AdminStudentCon::class, 'temp_in']);
+Route::post('/admin/school/student/update/{id}', [App\Http\Controllers\AdminStudentCon::class, 'update_data']);
 Route::post('/temp_sib_remove', [App\Http\Controllers\AdminStudentCon::class, 'tempremove']);
+Route::post('/lord_temp_edit_syblin_tbl', [App\Http\Controllers\AdminStudentCon::class, 'temp_edit_load']);
+Route::get('/admin/school/students/table', [App\Http\Controllers\AdminStudentCon::class, 'index']);
+Route::get('/admin/school/student/view/{id}', [App\Http\Controllers\AdminStudentCon::class, 'view']);
+Route::get('/admin/school/student/edit/{id}', [App\Http\Controllers\AdminStudentCon::class, 'edit']);
+Route::post('/class_payment_check', [App\Http\Controllers\AdminPaymentCon::class, 'check_payment']);
 
 //Student Primary
 Route::post('/admin/primary/inqueries/registration/update/{id}', [App\Http\Controllers\AdminPrimaryStudentCon::class, 'update']);
+Route::get('/admin/nursary/students/table', [App\Http\Controllers\AdminPrimaryStudentCon::class, 'index']);
+Route::get('/admin/nursary/student/view/{id}', [App\Http\Controllers\AdminPrimaryStudentCon::class, 'view']);
+Route::get('/admin/nursary/student/edit/{id}', [App\Http\Controllers\AdminPrimaryStudentCon::class, 'edit']);
+Route::post('/admin/nursary/student/update/{id}', [App\Http\Controllers\AdminPrimaryStudentCon::class, 'update_nersary']);
 
 //Scholarship
 Route::get('admin/scholarship', [App\Http\Controllers\AdmScholarshipCon::class, 'index']);
 Route::get('admin/scholarship/create', [App\Http\Controllers\AdmScholarshipCon::class, 'create']);
 Route::post('admin/scholarship/store', [App\Http\Controllers\AdmScholarshipCon::class, 'store']);
+Route::get('/sholarship_st_id_num', [App\Http\Controllers\AdmScholarshipCon::class, 'autoload']);
 
+//Student Payment
 Route::get('/admin/payments', [App\Http\Controllers\AdminPaymentCon::class, 'index']);
 Route::get('/admin/payments/create', [App\Http\Controllers\AdminPaymentCon::class, 'create']);
+Route::post('/admin/payments/store', [App\Http\Controllers\AdminPaymentCon::class, 'store']);
 Route::get('/admin/payments/view', [App\Http\Controllers\AdminPaymentCon::class, 'view']);
 Route::get('/admin/payments/old/view', [App\Http\Controllers\AdminPaymentCon::class, 'old_payment']);
+Route::get('/class_st_id_num', [App\Http\Controllers\AdminPaymentCon::class, 'student_class_fee']);
+Route::post('/select_pay_student', [App\Http\Controllers\AdminPaymentCon::class, 'student_select']);
+Route::get('/student_pay_print/{id}', [App\Http\Controllers\AdminPaymentCon::class, 'print']);
+
 
 Route::get('/admin/awards/create', [App\Http\Controllers\AdminAwordsCon::class, 'create']);
 Route::get('/admin/students/awards/view', [App\Http\Controllers\AdminAwordsCon::class, 'view']);
@@ -171,7 +198,11 @@ Route::post('/admin/classfee/store', [App\Http\Controllers\AdminClassFeeCon::cla
 Route::post('/admin/classfee/update/{id}', [App\Http\Controllers\AdminClassFeeCon::class, 'update']);
 Route::get('/check_grade_validation',[App\Http\Controllers\AdminClassFeeCon::class, 'validateclassfee']);
 
-Route::get('/admin/studentprofile', [App\Http\Controllers\AdmStuProfileCon::class, 'view']);
+//application Payment
+Route::get('/admin/student/profile', [App\Http\Controllers\AdmStuProfileCon::class, 'index']);
+Route::get('/student/profile/id', [App\Http\Controllers\AdmStuProfileCon::class, 'auto_cmplt']);
+Route::get('/validate_profile', [App\Http\Controllers\AdmStuProfileCon::class, 'validate_student_id']);
+Route::post('/admin/student/find', [App\Http\Controllers\AdmStuProfileCon::class, 'profile_search']);
 
 //application Payment
 Route::get('admin/application_pay', [App\Http\Controllers\AdminApplicatPayCon::class, 'index']);

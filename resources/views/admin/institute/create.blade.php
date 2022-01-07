@@ -22,19 +22,18 @@
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label text-right">Is Nursary School ?</label>
-                                    <div class="col-md-9">
-                                        <div class="form-check-inline my-1">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="customRadio9" checked="" name="pre_or_sch" class="custom-control-input">
-                                                <label class="custom-control-label" for="customRadio9">Yes</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-check-inline my-1">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="customRadio10" name="pre_or_sch" class="custom-control-input">
-                                                <label class="custom-control-label" for="customRadio10">No</label>
-                                            </div>
-                                        </div>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="pre_or_sch" name="pre_or_sch">
+                                            <option value="">Select</option>
+                                            <option value="1">Yes</option>
+                                            <option value="2">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row" id="code_div">
+                                    <label for="code" class="col-sm-2 col-form-label text-right">Short Code</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" type="text" value="" name="code" id="code">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -109,6 +108,34 @@
     @section('scripts')
 
     <script>
+        $( document ).ready(function() {
+            // console.log("Onload");
+        $("#code_div").hide();
+        });
+
+    </script>
+
+<script>
+    $(document).ready(function() {
+
+    $("#pre_or_sch").change(function(){
+    var type = $('#pre_or_sch').val();
+    console.log(type);
+    if(type == "1"){
+        $("#code_div").show();
+    }else if (type == "2") {
+        $("#code_div").hide();
+        $( "#code" ).val("")
+    } else {
+
+    }
+
+     });
+    });
+
+    </script>
+
+    <script>
         $(document).ready(function() {
             $("#regForm").validate({
                 rules: {
@@ -138,7 +165,19 @@
                     },
                     city: {
                         required: true,
-                    }
+                    },
+                    pre_or_sch: {
+                        required: true,
+                    },
+                    code: {
+                        remote:'/validate-code',
+                        maxlength: 3,
+                        required: function () {
+                                if($("#pre_or_sch").val() == 1){
+                                    return true;
+                                }
+                            }
+                    },
 
                 },
                 messages: {
@@ -167,6 +206,14 @@
                     },
                     city: {
                         required: "City is required"
+                    },
+                    pre_or_sch: {
+                        required: "Status is required"
+                    },
+                    code: {
+                        remote:"Code already exist",
+                        maxlength: "Code cannot be more than 3 characters",
+                        required: "Code is required",
                     }
                 }
             });

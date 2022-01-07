@@ -107,6 +107,7 @@ class SupAddUserCon extends Controller
 
     public function view($id){
         $adminuser = User::find($id);
+        $school = Institute::where('id',$adminuser->ins_id)->first();
         return view('superadmin/userview',compact('adminuser'));
     }
 

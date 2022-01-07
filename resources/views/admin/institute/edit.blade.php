@@ -16,6 +16,8 @@
 
                         <form action="{{url('admin/institutes/update')}}/{{$value->id}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
                             @csrf
+                        <input type="hidden" id="i_id" name="i_id" value="{{$value->id}}">
+
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group row">
@@ -27,7 +29,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                {{-- <div class="form-group row">
                                     <label class="col-sm-2 col-form-label text-right">Is Nursery School ?</label>
                                     <div class="col-md-9">
                                         <div class="form-check-inline my-1">
@@ -43,21 +45,40 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div> --}}
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label text-right">Is Nursary School ?</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="pre_or_sch" name="pre_or_sch">
+                                            <option value="">Select</option>
+                                            <option value="1" {{$value->pre_or_sch=='1'?'selected':''}}>Yes</option>
+                                            <option value="2" {{$value->pre_or_sch=='2'?'selected':''}}>No</option>
+                                        </select>
+                                        @error('pre_or_sch')
+                                        <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row" id="code_div">
+                                    <label for="code" class="col-sm-2 col-form-label text-right">Short Code</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" type="text" value="{{$value->code}}" name="code" id="code">
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="email" class="col-sm-2 col-form-label text-right">Email</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="email" value="{{$value->email}}" name="email" id="email">
+                                        <input class="form-control" type="email" value="{{$value->email}}" name="ins_email" id="ins_email">
                                         @error('email')
                                         <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="contact_number" class="col-sm-2 col-form-label text-right">Phone</label>
+                                    <label for="con_number" class="col-sm-2 col-form-label text-right">Phone</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="phone" value="{{$value->contact_number}}" name="contact_number" id="contact_number">
-                                        @error('contact_number')
+                                        <input class="form-control" type="text" value="{{$value->contact_number}}" name="con_number" id="con_number">
+                                        @error('con_number')
                                         <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -146,26 +167,87 @@
     @section('scripts')
 
     <script>
+        $( document ).ready(function() {
+        var type = $('#pre_or_sch').val();
+        if(type == 2){
+            $("#code_div").hide();
+        }
+        });
+
+    </script>
+
+<script>
+    $(document).ready(function() {
+
+    $("#pre_or_sch").change(function(){
+    var type = $('#pre_or_sch').val();
+    console.log(type);
+    if(type == "1"){
+        $("#code_div").show();
+    }else if (type == "2") {
+        $("#code_div").hide();
+        $( "#code" ).val("")
+    } else {
+
+    }
+
+     });
+    });
+
+    </script>
+
+    <script>
         $(document).ready(function() {
             $("#regForm").validate({
+
                 rules: {
-                    name: {
+                    institute_name: {
+
                         required: true,
                         maxlength: 150,
+                        remote: {
+                          url: '/validate_ins_name_edit',
+                            type: 'post',
+                            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+
+                            data: {
+
+                                'i_id': $('#i_id').val()
+                            }
+
+                        },
 
                     },
-                    email:{
+                    ins_email:{
                         email: true,
                         required: true,
                         maxlength: 100,
+                        remote: {
+                          url: '/validate_ins_mail_edit',
+                            type: 'post',
+                            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                            data: {
+                                'i_id': $('#i_id').val()
+                            }
+
+                        },
                         // eml:function(element){return $("#email").val()!= ''},
 
                     },
-                    contact_number: {
+                    con_number: {
                         required: true,
                         minlength: 10,
                         maxlength: 10,
                         number: true,
+                        remote: {
+                          url: '/validate_ins_cont_edit',
+                            type: 'post',
+                            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                            data: {
+                                'i_id': $('#i_id').val()
+                            }
+
+                        },
 
                     },
                     address_line_1: {
@@ -176,23 +258,43 @@
                     },
                     city: {
                         required: true,
-                    }
+                    },
+                    pre_or_sch: {
+                        required: true,
+                    },
+                    code: {
+                        remote: {
+                          url: '/validate_code_edit',
+                            type: 'post',
+                            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                            data: {
+                                'i_id': $('#i_id').val()
+                            }
+
+                        },
+                        maxlength: 3,
+                        required: function () {
+                                if($("#pre_or_sch").val() == 1){
+                                    return true;
+                                }
+                            }
+                    },
 
                 },
                 messages: {
-                    name: {
+                    institute_name: {
                         required: "School Name is required",
                         remote:"School Name already exist",
                         maxlength: "School Name cannot be more than 150 characters"
                     },
-                    email: {
+                    ins_email: {
                         required: "Email name is required",
                         email: "Email must be a valid email address",
                         remote:"Email already exist",
                         maxlength: "Email cannot be more than 100 characters",
                         //eml:"Alredy exist"
                     },
-                    contact_number: {
+                    con_number: {
                         required: "Contact number is required",
                         minlength: "Contact number must be of 10 digits",
                         maxlength: "Contact number must be of 10 digits",
@@ -206,6 +308,14 @@
                     },
                     city: {
                         required: "City is required"
+                    },
+                    pre_or_sch: {
+                        required: "Status is required"
+                    },
+                    code: {
+                        remote:"Code already exist",
+                        maxlength: "Code cannot be more than 3 characters",
+                        required: "Code is required",
                     }
                 }
             });

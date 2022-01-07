@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Models\ActivityFeePayment;
 use App\Models\Institute;
+use App\Models\Parentm;
 use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AdminActiFeePayCon extends Controller
 {
@@ -85,7 +87,19 @@ class AdminActiFeePayCon extends Controller
                         }
                  }
             }
-            //$id = $request->id;
+            $studata = Student::where('student_id',$request->st_id_num)->get();
+            $insdata = Institute::find($studata[0]->institute);
+            $stuname = $studata[0]->student_full_name;
+            $fatherdata = Parentm::find($studata[0]->fat_id);
+            $fatemail = $fatherdata->parent_email;
+            $fatname = $fatherdata->parent_name;
+            $motherdata = Parentm::find($studata[0]->mom_id);
+            $motname = $fatherdata->parent_name;
+            $motemail = $motherdata->parent_email;
+            $activitydata = Activity::find($request->activity);
+            $activityname = $activitydata->activity;
+
+
             $actpat = new ActivityFeePayment();
 
             $actpat->price = $request->price;
@@ -95,6 +109,57 @@ class AdminActiFeePayCon extends Controller
             $actpat->inst_id = 1;
             $actpat->status = 1;
             $actpat->save();
+
+
+
+            $data = [
+                'subject' => "Activity Payments",
+                'stuname' => "$stuname",
+                'pay_time'=> Carbon::parse($actpat->created_at)->format('d/m/Y'),
+                'email' => $fatemail,
+                'parname' => $fatname,
+                'fromemail' => 'task123test123@gmail.com',
+                'content' => $activityname,
+                'number'  => $num,
+                'price'  => $request->price,
+                'stu_no'  => $request->st_id_num,
+                'institute' => $insdata->institute_name,
+                'insemail' => $insdata->email,
+                'insadd_line_1' => $insdata->address_line_1,
+                'insadd_line_2' => $insdata->address_line_2,
+                'city' => $insdata->city,
+              ];
+
+              $data2 = [
+                'subject' => "Activity Payments",
+                'stuname' => "$stuname",
+                'pay_time'=> Carbon::parse($actpat->created_at)->format('d/m/Y'),
+                'email' => $motemail,
+                'parname' => $motname,
+                'fromemail' => 'task123test123@gmail.com',
+                'content' => $activityname,
+                'number'  => $num,
+                'price'  => $request->price,
+                'stu_no'  => $request->st_id_num,
+                'institute' => $insdata->institute_name,
+                'insemail' => $insdata->email,
+                'insadd_line_1' => $insdata->address_line_1,
+                'insadd_line_2' => $insdata->address_line_2,
+                'city' => $insdata->city,
+              ];
+
+            Mail::send('admin.emails.mail', $data, function($message) use ($data) {
+                $message->to($data['email'])
+                ->from('task123test123@gmail.com','test mail')
+                ->subject($data['subject']);
+              });
+
+            Mail::send('admin.emails.mail', $data2, function($message) use ($data) {
+                $message->to($data['email'])
+                ->from('task123test123@gmail.com','test mail')
+                ->subject($data['subject']);
+              });
+
 
             $notification = array(
                 'message' => 'Activity Payment Successfully!',
@@ -115,7 +180,7 @@ class AdminActiFeePayCon extends Controller
 
            // validation ________________________________________________________________________________________
 
-           //name
+           //ID
        public function  validate_student_id(Request $request){
         {
             //return $request;

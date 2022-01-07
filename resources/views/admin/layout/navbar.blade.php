@@ -2,14 +2,14 @@
 
     <!-- LOGO -->
     <div class="topbar-left">
-        <a href="{{url('/home')}}" class="logo">
+        {{-- <a href="{{url('/home')}}" class="logo">
             <span>
-                <img src="{{asset('frogetor/assets/images/logo-sm3.png')}}" alt="logo-small" class="logo-sm">
+                <img src="{{asset('image/user/'.Auth::user()->image)}}" alt="logo-small" class="logo-sm">
             </span>
             <span>
-                <img src="{{asset('frogetor/assets/images/logo-dark3.png')}}" alt="logo-large" class="logo-lg">
+                <img src="{{asset('image/user/'.Auth::user()->image)}}" alt="logo-large" class="logo-lg">
             </span>
-        </a>
+        </a> --}}
     </div>
 
     <ul class="list-unstyled topbar-nav float-right mb-0">
@@ -19,7 +19,7 @@
         <li class="dropdown">
             <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
                 aria-haspopup="false" aria-expanded="false">
-                <img src="{{asset('frogetor/assets/images/users/user1.jpg')}}" alt="profile-user" class="rounded-circle" />
+                <img src="{{asset('image/user/'.Auth::user()->image)}}" alt="profile-user" class="rounded-circle" />
                 <span class="ml-1 nav-user-name hidden-sm"> <i class="mdi mdi-chevron-down"></i> </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right">

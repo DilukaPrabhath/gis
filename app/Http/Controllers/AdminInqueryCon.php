@@ -50,23 +50,24 @@ class AdminInqueryCon extends Controller
             $now = Carbon::now();
             $year = $now->year;
             $mon    = $now->month;
-            $timcode = $year.$mon;
+            $mo  = str_pad($mon,2,"0", STR_PAD_LEFT);
+            $timcode = $year.$mo;
             $isemty = Student::all();
             if($isemty->isEmpty()){
-                $num = 'IQ'.'/'.$year.$mon.'/'. '0001';
+            $num = 'IQ'.'/'.$year.$mo.'/'. '0001';
             }else{
               $latnum = Student::orderBy('inq_number', 'desc')->first()->inq_number;
               $string =  preg_replace("/[^0-9\.]/", '', $latnum);
-              $otputnum = substr($string, 6); //last 4 number ex 0001
+              $otputnum = substr($string, 6); //last 3 number ex 0001
               $otputyemo = substr($string, 0, 6); // last number's first 6 digit, year and month 2021-05 -> 202105
               $otputyea = substr($string, 0, 4); //last number's first 4 digit,year
                 if( $year != $otputyea){
-                        $num = 'IQ'.'/'.$year.$mon.'/'.'0001';
+                        $num = 'IQ'.'/'.$year.$mo.'/'.'0001';
                 }else{
                     if($timcode != $otputyemo){
-                         $num = 'IQ'.'/'.$year.$mon.'/'.'0001';
+                         $num = 'IQ'.'/'.$year.$mo.'/'.'0001';
                         }else{
-                        $num = 'IQ'.'/'.$year.$mon.'/'. sprintf('%04d', $otputnum+1); //increment IQ number in same month
+                         $num = 'IQ'.'/'.$year.$mo.'/'. sprintf('%04d', $otputnum+1); //increment IQ number in same month
                         }
                  }
             }
@@ -89,6 +90,7 @@ class AdminInqueryCon extends Controller
         }
         $stu->inq_status  = 1;
         $stu->stu_status = 1;
+        $stu->prmy = 2;
         $stu->save();
 
         DB::commit();

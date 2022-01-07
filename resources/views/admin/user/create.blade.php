@@ -43,8 +43,9 @@
                                     <div class="col-sm-10">
                                         <select class="form-control" id="usertype" name="usertype">
                                             <option value="">Select</option>
-                                            <option value="1">Admin</option>
-                                            <option value="2">User</option>
+                                            @foreach ($user_type as $value)
+                                            <option value="{{ $value->id}}">{{ $value->user_role }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -54,9 +55,9 @@
                                     <div class="col-sm-10">
                                         <select class="form-control" id="institute" name="institute">
                                             <option value="">Select</option>
-                                            <option value="1">Institute 1</option>
-                                            <option value="2">Institute 2</option>
-                                            <option value="3">Institute 3</option>
+                                            @foreach ($school as $value)
+                                            <option value="{{ $value->id}}">{{ $value->institute_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -150,7 +151,7 @@
                         remote:"Mobile already exist"
                     },
                     institute: {
-                        required: "Institute is required"
+                        required: "School is required"
                     },
                     usertype: {
                         required:  "User Type password is required"
@@ -196,6 +197,7 @@
 
     </script>
 
-
+    <script src="{{asset('frogetor/assets/plugins/dropify/js/dropify.min.js')}}"></script>
+    <script src="{{asset('frogetor/assets/pages/jquery.form-upload.init.js')}}"></script>
     @stop
 

@@ -16,35 +16,35 @@
                                 <table class="table table-hover mb-0">
                                     <tr>
                                         <th>Full Name</th>
-                                        <td>Garrett Winters</td>
+                                        <td>{{$adminuser->name}}</td>
                                     </tr>
                                     <tr>
                                         <th>NIC</th>
-                                        <td>942722742V</td>
+                                        <td>{{$adminuser->nic}}</td>
                                     </tr>
                                     <tr>
                                         <th>Mobile</th>
-                                        <td>0770668362</td>
+                                        <td>{{$adminuser->mobile}}</td>
                                     </tr>
                                     <tr>
                                         <th>Email</th>
-                                        <td>garrett@g.com</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Address</th>
-                                        <td>Pellawaththa,Colombo</td>
+                                        <td>{{$adminuser->email}}</td>
                                     </tr>
                                     <tr>
                                         <th>Status</th>
+                                        @if ($adminuser->status)
                                         <td><span class="badge badge-success">Active</span></td>
+                                        @else
+                                        <td><span class="badge badge-danger">Inactive</span></td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <th>User Type</th>
-                                        <td>User</td>
+                                        <td>{{$u_tyo->user_role}}</td>
                                     </tr>
                                     <tr>
                                         <th>Inatitute</th>
-                                        <td>Inatitute 01</td>
+                                        <td>{{$school->institute_name}}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -52,7 +52,7 @@
                                 <table class="table table-hover mb-0">
                                     <tr>
                                         <th>Image</th>
-                                        <td><img src="{{url('frogetor/assets/images/users/user1.jpg')}}" alt=""></td>
+                                        <td><img src="{{asset('image/user')}}/{{$adminuser->image}}" width="300" height="300" alt=""></td>
                                     </tr>
                                 </table>
                             </div>
@@ -72,6 +72,6 @@
         </div> <!-- end row -->
 
     </div>
-    @stop
-    <script src="{{asset('frogetor/assets/plugins/dropify/js/dropify.min.js')}}"></script>
+     <script src="{{asset('frogetor/assets/plugins/dropify/js/dropify.min.js')}}"></script>
     <script src="{{asset('frogetor/assets/pages/jquery.form-upload.init.js')}}"></script>
+    @stop

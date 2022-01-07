@@ -15,49 +15,49 @@
                             <tr>
                                 <th>Name</th>
                                 <th>User Type</th>
-                                <th>Institute</th>
+                                <th>School</th>
                                 <th>Mobile</th>
                                 <th>Status</th>
-                                <th>Start date</th>
+                                <th>Image</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
 
 
                             <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>User</td>
-                                <td>School one</td>
-                                <td>0770668362</td>
-                                <td><span class="badge badge-success">Active</span></td>
-                                <td>2011/04/25</td>
-                                <td>
-                                    <a href="{{url('admin/users/view')}}" type="button" class="btn btn-dropbox">
-                                        <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
-                                    </a>
-                                    <a href="{{url('admin/users/edit')}}" type="button" class="btn btn-danger">
-                                        <i class="fab fas fa-pencil-alt" style="color: white; font-size:8px;"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Garrett Winters</td>
-                                <td>User</td>
-                                <td>School 2</td>
-                                <td>0770668363</td>
-                                <td><span class="badge badge-success">Active</span></td>
-                                <td>2011/07/25</td>
-                                <td>
-                                    <a href="{{url('admin/users/view')}}" type="button" class="btn btn-dropbox">
-                                        <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
-                                    </a>
-                                    <a href="{{url('admin/users/edit')}}" type="button" class="btn btn-danger">
-                                        <i class="fab fas fa-pencil-alt" style="color: white; font-size:8px;"></i>
-                                    </a>
-                                </td>
-                            </tr>
 
+                                @foreach ($usr_tbl as $value)
+                                <tr>
+                                    <td>{{$value->name}}</td>
+                                    @if ($value->user_role == 1)
+                                    <td>Admin</td>
+                                    @elseif ($value->user_role == 2)
+                                    <td>Registrar</td>
+                                    @elseif ($value->user_role == 3)
+                                    <td>Accountant</td>
+                                    @elseif ($value->user_role == 4)
+                                    <td>User</td>
+                                    @endif
+
+                                    <td>{{$value->school}}</td>
+                                    <td>{{$value->mobile}}</td>
+
+                                    @if ($value->status == 1)
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    @elseif ($value->status == 2)
+                                    <td><span class="badge badge-danger">Inactive</span></td>
+                                    @endif
+                                    <td><img src="{{asset('image/user')}}/{{$value->image}}" alt="" width="50" height="50"></td>
+                                    <td>
+                                        <a href="{{url('admin/users/view')}}/{{$value->id}}" type="button" class="btn btn-dropbox">
+                                            <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
+                                        </a>
+                                        <a href="{{url('admin/users/edit')}}/{{$value->id}}" type="button" class="btn btn-danger">
+                                            <i class="fab fas fa-pencil-alt" style="color: white; font-size:8px;"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
 
                             </tbody>
                         </table>

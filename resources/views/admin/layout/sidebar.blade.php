@@ -9,7 +9,7 @@
         </li>
 
         <li>
-            <a href="{{url('/admin/studentprofile')}}"><i class="mdi mdi-account-card-details"></i><span>Student Profile</span></a>
+            <a href="{{url('/admin/student/profile')}}"><i class="mdi mdi-account-card-details"></i><span>Student Profile</span></a>
         </li>
 
         <li>
@@ -29,8 +29,8 @@
             <a href="javascript: void(0);"><i class="mdi mdi-school"></i><span>Nursary Students</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li><a href="{{url('/admin/primary/inqueries')}}">Inqueries</a></li>
-                {{-- <li><a href="{{url('/admin/primary/applications')}}">Applications</a></li>
-                <li><a href="{{url('/admin/primary/students')}}">Registrations</a></li> --}}
+                {{-- <li><a href="{{url('/admin/primary/applications')}}">Applications</a></li> --}}
+                <li><a href="{{url('/admin/nursary/students/table')}}">Nursary Students</a></li>
                 <li><a href="{{url('/admin/primary/scholarship')}}">Request Scholarship</a></li>
             </ul>
         </li>
@@ -41,6 +41,7 @@
                 <li><a href="{{url('/admin/inqueries')}}">Inqueries</a></li>
                 {{-- <li><a href="{{url('/admin/applications')}}">Applications</a></li>
                 <li><a href="{{url('/admin/students')}}">Registrations</a></li> --}}
+                <li><a href="{{url('/admin/school/students/table')}}">School Students</a></li>
                 <li><a href="{{url('/admin/scholarship')}}">Request Scholarship</a></li>
             </ul>
         </li>

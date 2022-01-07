@@ -13,14 +13,14 @@
                                 <div class="col-lg-4 mb-3 mb-lg-0">
                                     <div class="fro_profile-main">
                                         <div class="fro_profile-main-pic">
-                                            <img src="{{asset('frogetor/assets/images/users/user-4.jpg')}}" alt="" class="rounded-circle">
-                                            <span class="fro-profile_main-pic-change">
+                                            <img src="{{asset('image/user/'.Auth::user()->image)}}" alt="" width="100" height="100" class="rounded-circle">
+                                            {{-- <span class="fro-profile_main-pic-change">
                                                 <i class="fas fa-camera"></i>
-                                            </span>
+                                            </span> --}}
                                         </div>
                                         <div class="fro_profile_user-detail">
-                                            <h5 class="fro_user-name">Dhanushka</h5>
-                                            <p class="mb-0 fro_user-name-post">Admin</p>
+                                            <h5 class="fro_user-name">{{Auth::user()->name}}</h5>
+                                            <p class="mb-0 fro_user-name-post">{{$u_tyo->user_role}}</p>
                                         </div>
                                     </div>
                                 </div><!--end col-->
@@ -35,35 +35,35 @@
                                 <table class="table table-hover mb-0">
                                     <tr>
                                         <th>Full Name</th>
-                                        <td>Garrett Winters</td>
+                                        <td>{{$adminuser->name}}</td>
                                     </tr>
                                     <tr>
                                         <th>NIC</th>
-                                        <td>942722742V</td>
+                                        <td>{{$adminuser->nic}}</td>
                                     </tr>
                                     <tr>
                                         <th>Mobile</th>
-                                        <td>0770668362</td>
+                                        <td>{{$adminuser->mobile}}</td>
                                     </tr>
                                     <tr>
                                         <th>Email</th>
-                                        <td>garrett@g.com</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Address</th>
-                                        <td>Pellawaththa,Colombo</td>
+                                        <td>{{$adminuser->email}}</td>
                                     </tr>
                                     <tr>
                                         <th>Status</th>
+                                        @if ($adminuser->status)
                                         <td><span class="badge badge-success">Active</span></td>
+                                        @else
+                                        <td><span class="badge badge-danger">Inactive</span></td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <th>User Type</th>
-                                        <td>User</td>
+                                        <td>{{$u_tyo->user_role}}</td>
                                     </tr>
                                     <tr>
                                         <th>Inatitute</th>
-                                        <td>Inatitute 01</td>
+                                        <td>{{$school->institute_name}}</td>
                                     </tr>
                                 </table>
                             </div>

@@ -22,6 +22,13 @@
                                         <th>Email</th>
                                         <td>{{$value->email}}</td>
                                     </tr>
+                                    @if($value->pre_or_sch == 1)
+                                        <tr>
+                                            <th>Code</th>
+                                            <td>{{$value->code}}</td>
+                                        </tr>
+
+                                    @endif
                                     <tr>
                                         <th>Telephone</th>
                                         <td>{{$value->contact_number}}</td>
@@ -37,6 +44,14 @@
                                     <tr>
                                         <th>City</th>
                                         <td>{{$value->city}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>School Type</th>
+                                        @if ($value->pre_or_sch == 1)
+                                        <td><span class="badge badge-danger" style="background-color:rgb(0, 47, 255);">Nursary</span></td>
+                                        @elseif ($value->pre_or_sch == 2)
+                                        <td><span class="badge badge-danger" style="background-color:rgb(0, 47, 255);">School</span></td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <th>Status</th>

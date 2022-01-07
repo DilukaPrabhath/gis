@@ -191,7 +191,7 @@
                                             <label class="col-sm-3 col-form-label text-right">Appeal Process</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="re_int">
-                                                    <option value="2" {{$data->re_interview_apply=='1'?'selected':''}}>No</option>
+                                                    <option value="2" {{$data->re_interview_apply=='2'?'selected':''}}>No</option>
                                                     <option value="1" {{$data->re_interview_apply=='1'?'selected':''}}>Yes</option>
                                                 </select>
                                                 @error('re_int')
@@ -868,6 +868,19 @@
     <script src="{{asset('frogetor/assets/plugins/dropify/js/dropify.min.js')}}"></script>
     <script src="{{asset('frogetor/assets/pages/jquery.form-upload.init.js')}}"></script>
 
+    {{-- <script>
+        $(document).ready(function(){
+          $("#register_date").keyup(function(){
+            var amt = $("#institute").val();
+            var ptg = $("#grade").val();
+            var register_date = $("#register_date").val();
+            console.log(amt);
+            console.log(ptg);
+            console.log(register_date);
+          });
+        });
+    </script> --}}
+
     <script>
         // function refresh(){
 
@@ -957,14 +970,14 @@ $("#regForm2").validate({
     rules: {
         recipt_no: {
             required: true,
-            maxlength: 12,
+            maxlength: 18,
         },
 
     },
     messages: {
         recipt_no: {
             required: "Recipt Number is required",
-            maxlength: "Recipt Number cannot be more than 10 characters"
+            maxlength: "Recipt Number cannot be more than 18 characters"
         },
     }
 });
@@ -973,6 +986,8 @@ $("#regForm2").validate({
 });
 
 $(document).ready(function() {
+
+
 $("#regForm3").validate({
     rules: {
         institute: {
@@ -986,6 +1001,14 @@ $("#regForm3").validate({
         },
         sy_type: {
             required: true,
+            // remote: {
+            //     url: '/class_payment_check',
+            //     type: 'post',
+            //     headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            //     data: {
+            //            'sid': $('#institute').val()
+            //             }
+            //     }
         },
         paymnt_type: {
             required: true,
@@ -1086,7 +1109,8 @@ $("#regForm3").validate({
             required: "Date is required",
         },
         sy_type: {
-            required: "Syllubus Type is required"
+            required: "Syllubus Type is required",
+           // remote: "Class Payment Not Added"
         },
         paymnt_type: {
             required: "Payment Type is required"

@@ -36,10 +36,11 @@ class AdminApplicatPayCon extends Controller
             $now = Carbon::now();
             $year = $now->year;
             $mon    = $now->month;
-            $timcode = $year.$mon;
+            $mo  = str_pad($mon,2,"0", STR_PAD_LEFT);
+            $timcode = $year.$mo;
             $isemty = ApplicationPay::all();
             if($isemty->isEmpty()){
-                $num = 'RE'.'/'.$year.$mon.'/'. '0001';
+                $num = 'RE'.'/'.$year.$mo.'/'. '0001';
             }else{
               $latnum = ApplicationPay::orderBy('slip_num', 'desc')->first()->slip_num;
               $string =  preg_replace("/[^0-9\.]/", '', $latnum);
@@ -47,12 +48,12 @@ class AdminApplicatPayCon extends Controller
               $otputyemo = substr($string, 0, 6); // last number's first 6 digit, year and month 2021-05 -> 202105
               $otputyea = substr($string, 0, 4); //last number's first 4 digit,year
                 if( $year != $otputyea){
-                        $num = 'RE'.'/'.$year.$mon.'/'.'0001';
+                        $num = 'RE'.'/'.$year.$mo.'/'.'0001';
                 }else{
                     if($timcode != $otputyemo){
-                         $num = 'RE'.'/'.$year.$mon.'/'.'0001';
+                         $num = 'RE'.'/'.$year.$mo.'/'.'0001';
                         }else{
-                         $num = 'RE'.'/'.$year.$mon.'/'. sprintf('%04d', $otputnum+1); //increment RE number in same month
+                         $num = 'RE'.'/'.$year.$mo.'/'. sprintf('%04d', $otputnum+1); //increment RE number in same month
                         }
                  }
             }

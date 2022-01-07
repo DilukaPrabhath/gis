@@ -28,13 +28,13 @@
                                                 <div class="col-lg-4 mb-3 mb-lg-0">
                                                     <div class="fro_profile-main">
                                                         <div class="fro_profile-main-pic">
-                                                            <img src="{{asset('frogetor/assets/images/users/user-4.jpg')}}" alt="" class="rounded-circle">
+                                                            <img src="{{asset('frogetor/assets/images/users/user-4.jpg')}}" id="stu_image" alt="" class="rounded-circle">
                                                         </div>
                                                         <div class="fro_profile_user-detail">
-                                                            <h5 class="fro_user-name">Rosa Dodson</h5>
-                                                            <p class="mb-0 fro_user-name-post">STU/211005/0001</p>
-                                                            <p class="mb-0 fro_user-name-post">Grade 10</p>
-                                                            <p class="mb-0 fro_user-name-post">Local Sylabus</p>
+                                                            <h5 class="fro_user-name" id="stu_name"></h5>
+                                                            <p class="mb-0 fro_user-name-post" id="stu_id_no"></p>
+                                                            <p class="mb-0 fro_user-name-post" id="stu_grd"></p>
+                                                            <p class="mb-0 fro_user-name-post" id="stu_sub_type"></p>
                                                         </div>
                                                     </div>
                                                 </div><!--end col-->
@@ -45,9 +45,9 @@
                                                         <div class="col-7">
                                                             <div class="seling-report">
                                                                 <ul class="list-inline mb-0">
-                                                                    <li class="mb-2 list-inline-item text-muted font-13"><i class="mdi mdi-label text-success mr-2"></i>0770668361</li>
-                                                                    <li class="mb-2 list-inline-item text-muted font-13"><i class="mdi mdi-label text-danger mr-2"></i>father1@gmail.com</li>
-                                                                    <li class="mb-2 list-inline-item text-muted font-13"><i class="mdi mdi-label text-warning mr-2"></i>360/B,Temple road,Uggalbode west, Gampaha.</li>
+                                                                    <li class="mb-2 list-inline-item text-muted font-13"><i class="mdi mdi-label text-success mr-2" id="stu_mobi"></i></li>
+                                                                    <li class="mb-2 list-inline-item text-muted font-13"><i class="mdi mdi-label text-danger mr-2" id="stu_email"></i></li>
+                                                                    <li class="mb-2 list-inline-item text-muted font-13"><i class="mdi mdi-label text-warning mr-2" id="stu_address"></i></li>
                                                                 </ul>
 
                                                             </div>
@@ -649,6 +649,43 @@
            });
         });
         </script>
+
+<script>
+    //   autocomplete
+    $(document).ready(function(){
+    //console.log("HI");
+    $('#rnum').autocomplete({
+
+        source: function(request, response) {
+          $.getJSON("{{ url('/student/profile/id') }}",
+           {rnum:$("#rnum").val()},
+              response);
+        },
+        minLength: 1,
+        width: "100%",
+        open: function(event,ui){
+            var autocomplete=$(".ui-autocomplete:visible");
+            var oldTop=autocomplete.offset().top;
+            var newTop = oldTop-$("#rnum").height()+25;
+            autocomplete.css("top", newTop);
+        },
+        select:function(event,ui){
+            console.log(ui);
+            // var father_name = ui.item.father_name;
+            // var father_mobile = ui.item.father_mobile;
+            // var father_email = ui.item.father_email;
+            // var father_work_address = ui.item.father_work_address;
+            // var parent_ocupation = ui.item.parent_ocupation;
+
+            // document.getElementById('father_name').value = father_name;
+            // document.getElementById('father_email').value = father_email;
+            // document.getElementById('father_mobile').value = father_mobile;
+            // document.getElementById('father_address_of_work_place').value = father_work_address;
+            // document.getElementById('father_occupation').value = parent_ocupation;
+         },
+    });
+     });
+          </script>
     @stop
 
 

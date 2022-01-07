@@ -40,10 +40,10 @@
         <div class="page-wrapper-img">
             <div class="page-wrapper-img-inner">
                 <div class="sidebar-user media">
-                    <img src="{{asset('frogetor/assets/images/users/user1.jpg')}}" alt="user" class="rounded-circle img-thumbnail mb-1">
+                    <img src="{{asset('image/user/'.Auth::user()->image)}}" alt="user" class="rounded-circle img-thumbnail mb-1">
                     <span class="online-icon"><i class="mdi mdi-record text-success"></i></span>
                     <div class="media-body">
-                        <h5 class="text-light">Dhanushka</h5>
+                        <h5 class="text-light">{{Auth::user()->name;}}</h5>
                         <ul class="list-unstyled list-inline mb-0 mt-2">
 
 
@@ -57,10 +57,10 @@
 
                             @yield('button')
 
-                            <h4 class="page-title mb-2"><i class="mdi mdi-view-dashboard-outline mr-2"></i>Dashboard</h4>
+                            <h4 class="page-title mb-2"></h4>
                             <div class="">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item active">Dashboard</li>
+                                    <li class="breadcrumb-item active"></li>
                                 </ol>
                             </div>
                         </div><!--end page title box-->

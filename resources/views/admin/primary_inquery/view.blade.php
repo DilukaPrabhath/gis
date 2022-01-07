@@ -973,14 +973,14 @@ $("#regForm2").validate({
     rules: {
         recipt_no: {
             required: true,
-            maxlength: 12,
+            maxlength: 18,
         },
 
     },
     messages: {
         recipt_no: {
             required: "Recipt Number is required",
-            maxlength: "Recipt Number cannot be more than 10 characters"
+            maxlength: "Recipt Number cannot be more than 18 characters"
         },
     }
 });
