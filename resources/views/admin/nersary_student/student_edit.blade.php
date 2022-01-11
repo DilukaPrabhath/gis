@@ -239,7 +239,12 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Grade</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" disabled value="Nursary">
+                                                <select class="form-control" name="grade" id="grade">
+                                                    <option value="">Select </option>
+                                                    @foreach($grade as $value)
+                                                    <option value="{{ $value->id }}" {{ $value->id == $data->grade_now ? 'selected' : '' }}>{{ $value->grade }}</option>
+                                                    @endForeach
+                                                </select>
                                             </div>
                                         </div>
 

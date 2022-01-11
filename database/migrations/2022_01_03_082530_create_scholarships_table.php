@@ -17,7 +17,7 @@ class CreateScholarshipsTable extends Migration
             $table->increments('id');
             $table->string('st_num',20)->nullable();
             $table->float('disc_prtg',5)->nullable();
-            $table->decimal('disc_amount',6,2)->nullable();
+            $table->decimal('disc_amount',9,2)->nullable();
             $table->integer('user_id')->nullable();
             $table->date('sta_date')->nullable();
             $table->date('end_date')->nullable();

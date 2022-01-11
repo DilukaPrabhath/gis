@@ -60,7 +60,7 @@
             <a href="javascript: void(0);"><i class="mdi mdi-certificate"></i><span>Achivments</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li><a href="{{url('/admin/awards/create')}}">Academic</a></li>
-                <li><a href="{{url('/admin/nonacadamic/create')}}">Non Academic</a></li>
+                <li><a href="{{url('/admin/nonacc/awards/create')}}">Non Academic</a></li>
             </ul>
         </li>
 

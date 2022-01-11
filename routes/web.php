@@ -140,14 +140,27 @@ Route::get('/class_st_id_num', [App\Http\Controllers\AdminPaymentCon::class, 'st
 Route::post('/select_pay_student', [App\Http\Controllers\AdminPaymentCon::class, 'student_select']);
 Route::get('/student_pay_print/{id}', [App\Http\Controllers\AdminPaymentCon::class, 'print']);
 
-
+//Academic Awards
 Route::get('/admin/awards/create', [App\Http\Controllers\AdminAwordsCon::class, 'create']);
+Route::post('/admin/awards/store', [App\Http\Controllers\AdminAwordsCon::class, 'store']);
 Route::get('/admin/students/awards/view', [App\Http\Controllers\AdminAwordsCon::class, 'view']);
 Route::get('/admin/students/awards/edit', [App\Http\Controllers\AdminAwordsCon::class, 'edit']);
+Route::get('/admin/students/awards/search', [App\Http\Controllers\AdminAwordsCon::class, 'auto_cmplt']);
 
+//Non Academic Awards
+Route::get('/admin/nonacc/awards/create', [App\Http\Controllers\AdminNonAcadAwordsCon::class, 'create']);
+Route::post('/admin/nonacc/awards/store', [App\Http\Controllers\AdminNonAcadAwordsCon::class, 'store']);
+Route::get('/admin/nonacc/students/awards/view', [App\Http\Controllers\AdminNonAcadAwordsCon::class, 'view']);
+Route::get('/admin/nonacc/students/awards/edit', [App\Http\Controllers\AdminNonAcadAwordsCon::class, 'edit']);
+Route::get('/admin/nonacc/students/awards/search', [App\Http\Controllers\AdminNonAcadAwordsCon::class, 'auto_cmplt']);
+
+// complaints
 Route::get('/admin/complaints/create', [App\Http\Controllers\AdminComplaintsCon::class, 'create']);
 Route::get('/admin/students/complaints/view', [App\Http\Controllers\AdminComplaintsCon::class, 'view']);
 Route::get('/admin/students/complaints/edit', [App\Http\Controllers\AdminComplaintsCon::class, 'edit']);
+Route::get('/admin/complaints/students/search', [App\Http\Controllers\AdminComplaintsCon::class, 'auto_cmplt']);
+Route::post('/admin/complaints/store', [App\Http\Controllers\AdminComplaintsCon::class, 'store']);
+
 
 Route::get('/admin/activities_pay', [App\Http\Controllers\AdminActivCon::class, 'index']);
 Route::get('/admin/activities_pay/create', [App\Http\Controllers\AdminActivCon::class, 'create']);

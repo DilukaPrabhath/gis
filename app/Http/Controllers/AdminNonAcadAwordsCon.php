@@ -8,15 +8,10 @@ use App\Models\Institute;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
-class AdminAwordsCon extends Controller
+class AdminNonAcadAwordsCon extends Controller
 {
-
-    public function index(){
-        return view('admin.acc_aworde.index');
-       }
-
     public function create(){
-        return view('admin.acc_aworde.create');
+        return view('admin.non_ac_aword.create');
        }
 
     public function store(Request $request){
@@ -29,7 +24,7 @@ class AdminAwordsCon extends Controller
         $awa->ins_id = $request->ins;
         $awa->title = $request->award;
         $awa->discription = $request->discription;
-        $awa->ac_or_ex = 1;
+        $awa->ac_or_ex = 2;
         $awa->save();
 
         $notification = array(

@@ -271,6 +271,27 @@
                                         </div>
 
                                         <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label text-right"> Class Category</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <select class="form-control" name="grade" id="grade" disabled>
+                                                    <option value="">Select Class Category</option>
+                                                    @foreach($grade as $value)
+                                                    <option value="{{ $value->id }}" {{ $value->id == $data->grade_now ? 'selected' : '' }}>{{ $value->grade }}</option>
+                                                    @endForeach
+                                                </select>
+                                                @else
+                                                <select class="form-control" name="grade" id="grade">
+                                                    <option value="">Select Class Category</option>
+                                                    @foreach($grade as $value)
+                                                    <option value="{{ $value->id }}" >{{ $value->grade }}</option>
+                                                    @endForeach
+                                                </select>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
                                             <label for="register_date" class="col-sm-3 col-form-label text-right">Registration Date</label>
                                             <div class="col-sm-9">
                                                 @if ($st == 5 || $st == 6)
@@ -318,7 +339,7 @@
                                                 @endif
                                             </div>
                                         </div>
-{{--
+
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Syllubus Type</label>
                                             <div class="col-sm-9">
@@ -336,7 +357,7 @@
                                                 </select>
                                                 @endif
                                             </div>
-                                        </div> --}}
+                                        </div>
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Payment Type</label>

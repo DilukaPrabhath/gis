@@ -28,13 +28,14 @@ class AdminClassFeeCon extends Controller
     public function create($id){
 
         $sch = Institute::select('pre_or_sch','institute_name')->where('id',$id)->first();
-        $cls = Grade::where('status',1)->get();
+        $cls = Grade::where('status',1)->where('nur_or_sch',1)->get();
+        $cls_n = Grade::where('status',1)->where('nur_or_sch',2)->get();
         $syl = Syllabus::where('status',1)->get();
         $ins_id = $id;
         $grd = InstClassFee::data($ins_id);
         $c_id = $id;
 
-        return view('admin.classfee.create',compact('cls','grd','c_id','sch','syl'));
+        return view('admin.classfee.create',compact('cls','grd','c_id','sch','syl','cls_n'));
     }
 
     public function store(Request $request){
@@ -47,17 +48,18 @@ class AdminClassFeeCon extends Controller
                 'year'     => 'required',
                 'grade'     => ['required', function($attr, $value, $fail) use ($request){
                     if( InstClassFee::where('grd_id', $request->grade)->where('syl_id',$request->syllabus)->where('year',$request->year)->count() > 0 ){
-                        $fail("This Grade alredy fild.");
+                        $fail("This Grade already fild.");
                     }
                 }]
             ];
         }else{
             $rules = [
+                'syllabus' => 'required',
                 'fee'      => 'required',
                 'year'     => 'required',
                 'grade'     => ['required', function($attr, $value, $fail) use ($request){
-                    if( InstClassFee::where('grd_id', $request->grade)->where('year',$request->year)->count() > 0 ){
-                        $fail("This Grade alredy fild");
+                    if( InstClassFee::where('grd_id', $request->grade)->where('syl_id',$request->syllabus)->where('year',$request->year)->count() > 0 ){
+                        $fail("This Class Category already fild.");
                     }
                 }]
             ];

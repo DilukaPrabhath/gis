@@ -230,7 +230,8 @@ class AdminStudentCon extends Controller
 
         $data  = Student::find($id);
         $institute = Institute::orderBy('institute_name', 'ASC')->where('status',1)->get();
-        $grade = Grade::orderBy('grade', 'ASC')->where('status',1)->get();
+        $grade = Grade::orderBy('grade', 'ASC')->where('status',1)->where('nur_or_sch',1)->get();
+        //$grade = Grade::orderBy('grade', 'ASC')->where('status',1)->get();
         $st = $data->stu_status;
       if($st == 5 || $st == 6){
 
@@ -251,8 +252,9 @@ class AdminStudentCon extends Controller
 
        public function edit($id){
         $data  = Student::find($id);
-        $institute = Institute::orderBy('institute_name', 'ASC')->where('status',1)->get();
-        $grade = Grade::orderBy('grade', 'ASC')->where('status',1)->get();
+        $institute = Institute::orderBy('institute_name', 'ASC')->where('status',1)->where('pre_or_sch',2)->get();
+        //$grade = Grade::orderBy('grade', 'ASC')->where('status',1)->get();
+        $grade = Grade::orderBy('grade', 'ASC')->where('status',1)->where('nur_or_sch',1)->get();
         $st = $data->stu_status;
       if($st == 5 || $st == 6){
 

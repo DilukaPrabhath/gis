@@ -53,7 +53,7 @@ class AdminPrimaryApplicCon extends Controller
         $stu->save();
 
         $notification = array(
-            'message' => 'Registration  Successfully!',
+            'message' => 'Application Data Stord Successfully!',
             'alert-type' => 'Success'
         );
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Achievement;
+use App\Models\Complaint;
 use App\Models\Grade;
 use App\Models\Institute;
 use App\Models\Parentm;
@@ -61,7 +63,10 @@ class AdmStuProfileCon extends Controller
         $grd = Grade::find($stu_data[0]->grade_now);
         $father = Parentm::find($stu_data[0]->fat_id);
         $mother = Parentm::find($stu_data[0]->mom_id);
-        return view('admin.studentprofile.profile',compact('stu_data','grd','father','mother','data','school','stu_img_count','stu_img'));
+        $acc_award = Achievement::where('stu_id',$stu_data[0]->id)->where('ac_or_ex',1)->get();
+        $non_acc_award = Achievement::where('stu_id',$stu_data[0]->id)->where('ac_or_ex',2)->get();
+        $complain = Complaint::where('stu_id',$stu_data[0]->id)->where('status',1)->get();
+        return view('admin.studentprofile.profile',compact('stu_data','grd','father','mother','data','school','stu_img_count','stu_img','non_acc_award','acc_award','complain'));
     }
 
 

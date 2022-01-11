@@ -31,9 +31,9 @@
                                 <td>{{$value->contact_number}}</td>
                                 <td>{{$value->city}}</td>
                                 <td>@if ($value->pre_or_sch == 1)
-                                    <span class="badge badge-danger" style="background-color: purple;">Primary</span>
+                                    <span class="badge badge-danger" style="background-color: purple;">Nursary</span>
                                    @elseif ($value->pre_or_sch == 2)
-                                    <span class="badge badge-danger" style="background-color: green;">Secondary</span>
+                                    <span class="badge badge-danger" style="background-color: green;">School</span>
                                    @endif
                                 </td>
                                 <td>@if ($value->status == 1)

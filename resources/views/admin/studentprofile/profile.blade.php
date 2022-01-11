@@ -650,42 +650,63 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="mt-0 header-title">Awards Table</h4>
+                        <h4 class="mt-0 header-title">Academic Awards Table</h4>
 
 
                         <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                             <tr>
-                                <th>Student ID</th>
-                                <th>Awards</th>
+                                <th style="width: 90%;">Awards</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
+                                @foreach ($acc_award as $acc)
+                                <tr>
+                                    <td>{{$acc->title}}</td>
+                                    <td>
+                                        <a href="{{url('admin/students/awards/view')}}/{{$acc->id}}" type="button" class="btn btn-dropbox">
+                                            <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="mt-0 header-title">Non Academic Awards Table</h4>
+
+
+                        <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
                             <tr>
-                                <td>STU/211004/0001</td>
-                                <td>relay 100m 2nd place - 2021-01-25</td>
-                                <td>
-                                    <a href="{{url('admin/students/awards/view')}}" type="button" class="btn btn-dropbox">
-                                        <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
-                                    </a>
-
-                                </td>
+                                <th style="width: 90%;">Awards</th>
+                                <th>Action</th>
                             </tr>
-                            <tr>
-                                <td>STU/211004/0001</td>
-                                <td>Grade 1, Class 1st - 2021-04-30 1st sem</td>
-                                <td>
-                                    <a href="{{url('admin/students/awards/view')}}" type="button" class="btn btn-dropbox">
-                                        <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
-                                    </a>
+                            </thead>
+                            <tbody>
+                                @foreach ($non_acc_award as $no_acc)
+                                <tr>
+                                    <td>{{$no_acc->title}}</td>
+                                    <td>
+                                        <a href="{{url('/admin/nonacc/students/awards/view')}}/{{$no_acc->id}}" type="button" class="btn btn-dropbox">
+                                            <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
+                                        </a>
 
-                                </td>
-
-
-                            </tr>
-
-
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
 
@@ -705,24 +726,22 @@
                         <table id="datatable2" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                             <tr>
-                                <th>Student ID</th>
-                                <th>Subject</th>
+                                <th style="width: 90%;">Subject</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>STU/211004/0001</td>
-                                <td>Strugle with a boy - 2021-01-27</td>
-                                <td>
-                                    <a href="{{url('admin/students/complaints/view')}}" type="button" class="btn btn-dropbox">
-                                        <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
-                                    </a>
+                                @foreach ($complain as $com)
+                                <tr>
+                                    <td>{{$com->title}}</td>
+                                    <td>
+                                        <a href="{{url('admin/students/complaints/view')}}/{{$com->title}}" type="button" class="btn btn-dropbox">
+                                            <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
+                                        </a>
 
-                                </td>
-                            </tr>
-
-
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
 

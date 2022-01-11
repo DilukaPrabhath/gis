@@ -8,9 +8,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">Complaints</h4>
+                        <h4 class="mt-0 header-title">Academic Award</h4>
 
-                        <form action="{{url('/admin/complaints/store')}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
+                        <form action="{{url('/admin/awards/store')}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
                             @csrf
                         <div class="row" style="margin-bottom: 15px;">
 
@@ -50,9 +50,9 @@
 
                                 <input type="hidden" id="ins" name="ins">
                                 <div class="form-group row">
-                                    <label for="example-text-input" class="col-sm-3 col-form-label text-right">Complaints</label>
+                                    <label for="example-text-input" class="col-sm-3 col-form-label text-right">Award</label>
                                     <div class="col-sm-9">
-                                        <textarea class="form-control" rows="2" id="complaints" name="complaints"></textarea>
+                                        <textarea class="form-control" rows="2" id="award" name="award"></textarea>
                                     </div>
                                 </div>
 
@@ -97,7 +97,7 @@
                         maxlength: 20,
                         remote:'/validate_profile',
                     },
-                    complaints: {
+                    award: {
                         required: true,
                         maxlength: 100,
                     },
@@ -112,9 +112,9 @@
                         maxlength: "Student ID cannot be more than 20 characters",
                         remote : "Student ID Not Exsist."
                     },
-                    complaints:{
-                        required: "Complaints is required",
-                        maxlength: "Complaints cannot be more than 100 characters",
+                    award:{
+                        required: "Award is required",
+                        maxlength: "Award cannot be more than 100 characters",
                     },
                     discription:{
                         required: "Discription is required",
@@ -135,7 +135,7 @@
     $('#stu_id').autocomplete({
 
         source: function(request, response) {
-          $.getJSON("{{ url('/admin/complaints/students/search') }}",
+          $.getJSON("{{ url('/admin/students/awards/search') }}",
            {stu_id:$("#stu_id").val()},
               response);
         },
@@ -149,12 +149,18 @@
         },
         select:function(event,ui){
             console.log(ui);
+            // var father_name = ui.item.father_name;
+            // var father_mobile = ui.item.father_mobile;
+            // var father_email = ui.item.father_email;
+            // var father_work_address = ui.item.father_work_address;
+            // var parent_ocupation = ui.item.parent_ocupation;
 
             document.getElementById('lbl_nm').innerHTML = ui.item.student_name;
             document.getElementById('lbl_ins').innerHTML = ui.item.ins;
             document.getElementById('lbl_grd').innerHTML = ui.item.grd;
             document.getElementById('ins').value = ui.item.ins_id;
-
+            // document.getElementById('father_address_of_work_place').value = father_work_address;
+            // document.getElementById('father_occupation').value = parent_ocupation;
          },
     });
      });

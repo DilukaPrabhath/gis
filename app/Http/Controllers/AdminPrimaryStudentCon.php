@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Grade;
+use App\Models\InstClassFee;
 use App\Models\Institute;
 use App\Models\Parentm;
 use App\Models\Siblin;
@@ -23,32 +24,45 @@ class AdminPrimaryStudentCon extends Controller
     }
     public function update(Request $request,$id){
 
+           // return $request;
+
+           $now = Carbon::now();
+           $clz_fee = InstClassFee::where('ins_id',$request->institute)->where('year', $now->year)->where('grd_id',$request->grade)->where('syl_id',$request->sy_type)->get();
+           if($clz_fee != null){
+                 $fee = $clz_fee[0]->fee;
+            //return    $fee = 00.00;
+           }else{
+             //return   $fee = $clz_fee[0]->fee;
+                  $fee = 00.00;
+           }
+
             $sc_po_co = Student::where('institute',$request->institute)->count();
             $sc_po    = $sc_po_co + 1;
-
+            $scl_code = Institute::where('id',$request->institute)->first()->code;
             $grd = 0;
             $gd  = str_pad($grd,2,"0", STR_PAD_LEFT);
-            $now = Carbon::now();
+
             $year = $now->year;
-            $isemty = Student::where('stu_status',5)->get();
+            $isemty = Student::where('stu_status',5)->where('prmy',1)->get();
             if($isemty->isEmpty()){
               // return "Empt";
-                        $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
+                    $num = $scl_code.'/'.$year.'/'.'0001';
             }else{
-                // return "Not em";
-              $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->first()->student_id;
+
+              $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->where('prmy',1)->first()->student_id;
               $string =  preg_replace("/[^0-9\.]/", '', $latnum);
-              $otputnum = substr($string, 6); //last 3 number ex 001
+              $otputnum = substr($string, 4); //last 3 number ex 001
               $otputyear = substr($string, 0, 4); // last number's first 4 digit, year 2021-05-10 -> 2021
-              $otputgr = substr($string,4,2); //last number's first 4 digit,year
+              //$otputgr = substr($string,4,2); //last number's first 4 digit,year
                 if( $year != $otputyear){
-                             $num = 'GIS'.'/'.$year.'/'.$grd.'/'.'001';
+                               $num = $scl_code.'/'.$year.'/'.'0001';
                 }else{
-                    if($otputgr != $gd){
-                                $num = 'GIS'.'/'.$year.'/'.$grd.'/'.'0001';
-                        }else{
-                                  $num = 'GIS'.'/'.$year.'/'.$grd.'/'. sprintf('%03d', $otputnum+1); //increment SID number in same grade
-                        }
+                               $num = $scl_code.'/'.$year.'/'. sprintf('%04d', $otputnum+1); //increment SID number in same grade
+                    // if($otputgr != $gd){
+                    //             $num = $scl_code.'/'.$year.'/'.'0001';
+                    //     }else{
+                    //             $num = $scl_code.'/'.$year.'/'.$grd.'/'. sprintf('%04d', $otputnum+1); //increment SID number in same grade
+                    //     }
                  }
             }
 
@@ -109,6 +123,8 @@ class AdminPrimaryStudentCon extends Controller
         //     $student->student_id  = $num;
         //    }
         $student->student_id  = $num;
+        $student->grade_now   = $request->grade;
+        $student->syllubus_type = $request->sy_type;
         $student->registration_date  = $request->register_date;
         $student->recod       = $request->recod;
         $student->is_id_issue = $request->is_id_issue;
@@ -123,7 +139,6 @@ class AdminPrimaryStudentCon extends Controller
         $student->mom_id = $motherid;
         $student->fat_id = $fatherid;
         $student->scl_po_no = $sc_po;
-        $student->grade_now = 0;
         $student->any_medi_con = $request->any_medi_con;
         $student->medi_con_det = $request->medi_con_det;
         $student->special_attention = $request->special_attention;
@@ -134,10 +149,10 @@ class AdminPrimaryStudentCon extends Controller
         $student->doc_name = $request->doc_name;
         $student->doc_address = $request->doc_address;
         $student->helthcard = $request->helthcard;
-        $student->grade_fee = 100000;
-        $student->total_need_pay = 100000;
-        $student->total_need_pay = 100000;
-        $student->total_nd_pay_cot = 100000;
+        $student->grade_fee = $fee;
+        $student->total_need_pay = $fee;
+        $student->total_nd_pay_cot = $fee;
+        $student->due_fee = $fee;
 
         if($request->hasfile('stu_img')){
 
@@ -167,7 +182,8 @@ class AdminPrimaryStudentCon extends Controller
 
         $data  = Student::find($id);
         $institute = Institute::orderBy('institute_name', 'ASC')->where('status',1)->get();
-        $grade = Grade::orderBy('grade', 'ASC')->where('status',1)->get();
+        //$grade = Grade::orderBy('grade', 'ASC')->where('status',1)->get();
+        $grade = Grade::orderBy('grade', 'ASC')->where('status',1)->where('nur_or_sch',2)->get();
         $st = $data->stu_status;
       if($st == 5 || $st == 6){
 
@@ -189,8 +205,9 @@ class AdminPrimaryStudentCon extends Controller
        public function edit($id){
 
         $data  = Student::find($id);
-        $institute = Institute::orderBy('institute_name', 'ASC')->where('status',1)->get();
-        $grade = Grade::orderBy('grade', 'ASC')->where('status',1)->get();
+        $institute = Institute::orderBy('institute_name', 'ASC')->where('status',1)->where('pre_or_sch',1)->get();
+        //$grade = Grade::orderBy('grade', 'ASC')->where('status',1)->get();
+        $grade = Grade::orderBy('grade', 'ASC')->where('status',1)->where('nur_or_sch',2)->get();
         $st = $data->stu_status;
       if($st == 5 || $st == 6){
 
@@ -269,7 +286,7 @@ class AdminPrimaryStudentCon extends Controller
     // if($s_id == null){
     //     $student->student_id  = $num;
     //    }
-
+    $student->grade_now   = $request->grade;
     $student->registration_date  = $request->register_date;
     $student->recod       = $request->recod;
     $student->is_id_issue = $request->is_id_issue;

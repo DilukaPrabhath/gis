@@ -8,13 +8,8 @@ use App\Models\Institute;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
-class AdminAwordsCon extends Controller
+class NonAdminAwordsCon extends Controller
 {
-
-    public function index(){
-        return view('admin.acc_aworde.index');
-       }
-
     public function create(){
         return view('admin.acc_aworde.create');
        }

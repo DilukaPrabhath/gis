@@ -107,7 +107,7 @@ class AdminInqueryCon extends Controller
        public function view($pid){
         $data  = Student::find($pid);
         $institute = Institute::orderBy('institute_name', 'ASC')->where('status',1)->get();
-        $grade = Grade::orderBy('grade', 'ASC')->where('status',1)->get();
+        $grade = Grade::orderBy('grade', 'ASC')->where('status',1)->where('nur_or_sch',1)->get();
         $st = $data->stu_status;
       if($st == 5 || $st == 6){
 
