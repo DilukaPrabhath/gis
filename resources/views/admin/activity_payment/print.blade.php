@@ -229,6 +229,10 @@ tr:hover .cut { opacity: 1; }
 					<td><span id="prefix" contenteditable>Rs.</span><span>{{$data[0]->price}}</span></td>
 				</tr>
                 <tr>
+					<th><span contenteditable>Activity</span></th>
+					<td><span id="prefix" contenteditable>{{$data[0]->act}}</span></td>
+				</tr>
+                <tr>
 					<th><span contenteditable>Payment Date</span></th>
 					<td><span>@php
                         $newDateTime = date('Y-m-d h:i A', strtotime($data[0]->created_at));

@@ -34,9 +34,14 @@
                                     @elseif ($value->user_role == 2)
                                     <td>Registrar</td>
                                     @elseif ($value->user_role == 3)
-                                    <td>Accountant</td>
+                                    <td>Deputary Registrar</td>
                                     @elseif ($value->user_role == 4)
-                                    <td>User</td>
+                                    <td>Accountant</td>
+                                    @elseif ($value->user_role == 5)
+                                    <td>Data Entry</td>
+                                    @elseif ($value->user_role == 6)
+                                    <td>Super Admin</td>
+                                    @else
                                     @endif
 
                                     <td>{{$value->school}}</td>

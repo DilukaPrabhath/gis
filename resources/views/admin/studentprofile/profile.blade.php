@@ -1,3 +1,4 @@
+<link href="{{asset('frogetor/assets/plugins/dropify/css/dropify.min.css')}}" rel="stylesheet">
 
 @extends('admin.layout.master')
 
@@ -124,9 +125,9 @@
                                                 <div class="card-body dash-info-carousel" >
                                                     <div id="carousel_review" class="carousel slide" data-ride="carousel">
                                                         <div class="carousel-inner">
-                                                            <div class="carousel-item">
+                                                            {{-- <div class="carousel-item">
                                                                 <div class="media">
-                                                                    <img src="{{url('frogetor/assets/images/flags/us_flag.jpg')}}" class="mr-2 thumb-xs rounded-circle" alt="...">
+                                                                    <img src="{{asset('/image/student')}}/{{$value->pro_image}}" alt="user" class="" width="220" height="210" style="margin-top: -35pt;">
                                                                     <div class="media-body align-self-center">
                                                                         <h6 class="m-0">USA Store</h6>
                                                                     </div>
@@ -137,8 +138,8 @@
 
 
                                                                 </div>
-                                                            </div>
-                                                            <div class="carousel-item">
+                                                            </div> --}}
+                                                            {{-- <div class="carousel-item">
                                                                 <div class="media">
                                                                     <img src="{{url('frogetor/assets/images/flags/spain_flag.jpg')}}" class="mr-2 thumb-xs rounded-circle" alt="...">
                                                                     <div class="media-body align-self-center">
@@ -150,20 +151,17 @@
                                                                     <p class="px-4 py-1 bg-soft-success d-inline-block rounded">Very Good</p>
 
                                                                 </div>
-                                                            </div>
-                                                            <div class="carousel-item active">
-                                                                <div class="media">
-                                                                    <img src="{{url('frogetor/assets/images/flags/russia_flag.jpg')}}" class="mr-2 thumb-xs rounded-circle" alt="...">
-                                                                    <div class="media-body align-self-center">
-                                                                        <h6 class="m-0">Russia Store</h6>
-                                                                    </div>
-                                                                </div>
+                                                            </div> --}}
+                                                            @foreach ($stu_ev_img as $key => $value)
+                                                            <div class="carousel-item {{$key == 0 ? 'active' : '' }}">
                                                                 <div class="text-center">
-                                                                    <p class="review-data mb-0">5.0<span>/ 5.0</span></p>
-                                                                    <p class="px-4 py-1 bg-soft-success d-inline-block rounded">Exellent</p>
+
+                                                                    <img src="{{asset('/image/student')}}/{{$value->image}}" alt="user" class="" width="220" height="210" style="margin-top: -35pt;">
 
                                                                 </div>
                                                             </div>
+                                                            @endforeach
+
                                                         </div>
                                                         <a class="carousel-control-prev" href="#carousel_review" role="button" data-slide="prev">
                                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -176,6 +174,51 @@
                                                     </div>
                                                 </div><!--end card-body-->
                                             </div>
+                                            {{-- <div class="text-center col-lg-2">
+                                                <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-xl">Add Image</button>
+                                            </div>
+
+                                            {{-- <div class="card overflow-hidden col-lg-5" >
+                                                <div class="card-body dash-info-carousel" >
+                                                    <div id="carousel_review" class="carousel slide" data-ride="carousel">
+                                                        <div class="carousel-inner">
+                                                            <div class="carousel-item">
+                                                                <div class="carousel-inner">
+
+                                                                    @foreach ($stu_img as $key => $value)
+                                                                    <div class="carousel-item {{$key == 0 ? 'active' : '' }}">
+                                                                        <div class="text-center">
+
+                                                                            <img src="{{asset('/image/student')}}/{{$value->image}}" alt="user" class="" width="220" height="210" style="margin-top: -35pt;">
+
+                                                                        </div>
+                                                                    </div>
+                                                                    @endforeach
+
+                                                                </div>
+                                                                <div class="text-center">
+                                                                    <p class="review-data mb-0">4.8<span>/ 5.0</span></p>
+                                                                    <p class="px-4 py-1 bg-soft-success d-inline-block rounded">Very Good</p>
+
+
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <a class="carousel-control-prev" href="#carousel_review" role="button" data-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="sr-only">Previous</span>
+                                                        </a>
+                                                        <a class="carousel-control-next" href="#carousel_review" role="button" data-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="sr-only">Next</span>
+                                                        </a>
+                                                    </div>
+                                                </div><!--end card-body-->
+                                            </div> --}}
+
+
                                             <div class="text-center col-lg-2">
                                                 <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".bd-example-modal-xl">Add Image</button>
                                             </div>
@@ -656,20 +699,20 @@
                         <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                             <tr>
-                                <th style="width: 90%;">Awards</th>
-                                <th>Action</th>
+                                <th style="width: 100%;">Awards</th>
+                                {{-- <th>Action</th> --}}
                             </tr>
                             </thead>
                             <tbody>
                                 @foreach ($acc_award as $acc)
                                 <tr>
                                     <td>{{$acc->title}}</td>
-                                    <td>
+                                    {{-- <td>
                                         <a href="{{url('admin/students/awards/view')}}/{{$acc->id}}" type="button" class="btn btn-dropbox">
                                             <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
                                         </a>
 
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -691,20 +734,20 @@
                         <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                             <tr>
-                                <th style="width: 90%;">Awards</th>
-                                <th>Action</th>
+                                <th style="width: 100%;">Awards</th>
+                                {{-- <th>Action</th> --}}
                             </tr>
                             </thead>
                             <tbody>
                                 @foreach ($non_acc_award as $no_acc)
                                 <tr>
                                     <td>{{$no_acc->title}}</td>
-                                    <td>
+                                    {{-- <td>
                                         <a href="{{url('/admin/nonacc/students/awards/view')}}/{{$no_acc->id}}" type="button" class="btn btn-dropbox">
                                             <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
                                         </a>
 
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -726,20 +769,20 @@
                         <table id="datatable2" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                             <tr>
-                                <th style="width: 90%;">Subject</th>
-                                <th>Action</th>
+                                <th style="width: 100%;">Subject</th>
+                                {{-- <th>Action</th> --}}
                             </tr>
                             </thead>
                             <tbody>
                                 @foreach ($complain as $com)
                                 <tr>
                                     <td>{{$com->title}}</td>
-                                    <td>
+                                    {{-- <td>
                                         <a href="{{url('admin/students/complaints/view')}}/{{$com->title}}" type="button" class="btn btn-dropbox">
                                             <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
                                         </a>
 
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -753,28 +796,35 @@
 
     <!-- sample modal content -->
     <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title mt-0" id="myModalLabel">Add Image</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <form action="">
+                    <form action="{{url('/admin/student/event/image')}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
+                        @csrf
+
                     <div class="row">
-                        <div class="col-md-6">
-                            <input type="text" class="" name="">
-                        </div>
-                        <div class="col-md-6">
-                            ssssssssss
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <input type="file" id="input-file-now" class="dropify" value="" data-height="350" name="stu_img" id="stu_img"/>
+                                </div>
+                            </div>
+                            <div>
+                                <input type="hidden" name="stu_id" value="{{$stu_data[0]->student_id}}">
+                            </div>
                         </div>
                     </div>
-                </form>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
                 </div>
+            </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
@@ -782,6 +832,30 @@
 </div><!--end card-body-->
 </div><!--end card-->
 </div><!--end col-->
+
+{{-- <div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+       <div class="modal-content">
+           <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Please input a new background</h4>
+
+           </div>
+           <form action="{{url('/admin/student/find')}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
+            @csrf
+           <div class="modal-body">
+               <input type="file" name="b_pic">
+           </div>
+           <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-primary">Upload Image</button>
+           </div>
+           </form>
+       </div>
+       <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+   </div> --}}
 
     @stop
 
@@ -916,6 +990,9 @@
     });
      });
           </script>
+
+<script src="{{asset('frogetor/assets/plugins/dropify/js/dropify.min.js')}}"></script>
+<script src="{{asset('frogetor/assets/pages/jquery.form-upload.init.js')}}"></script>
     @stop
 
 

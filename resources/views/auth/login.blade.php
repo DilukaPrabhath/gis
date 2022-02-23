@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registration Form</title>
+    <title>Login</title>
     <style type="text/css">
         /* Change the white to any color ;) */
     input:-webkit-autofill,
@@ -61,7 +61,7 @@
                                 @enderror
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group d-block" style="display: none;">
                                 <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                 <label for="remember-me" class="label-agree-term"><span><span></span></span> {{ __('Remember Me') }}</label>
                             </div>

@@ -611,7 +611,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="helthcard" class="col-sm-3 col-form-label text-right">Helth Card No</label>
+                                            <label for="helthcard" class="col-sm-3 col-form-label text-right">Health Card No</label>
                                             <div class="col-sm-9">
                                                 @if ($st == 5 || $st == 6)
                                                 <input class="form-control" type="text" value="{{$data->helthcard}}" readonly name="helthcard" id="helthcard">
@@ -1109,10 +1109,6 @@ $("#regForm3").validate({
         any_medi_con: {
             required: true,
         },
-        helthcard: {
-            maxlength: 10,
-            minlength: 10,
-        },
     },
     messages: {
         institute: {
@@ -1208,10 +1204,6 @@ $("#regForm3").validate({
         },
         any_medi_con: {
             required: "Have Any Madical Conditions ? is required",
-        },
-        helthcard:{
-            maxlength: "Doctor's Contact Number cannot be more than 10 characters",
-            minlength: "Doctor's Contact cannot be less than 10 characters"
         },
     }
 });

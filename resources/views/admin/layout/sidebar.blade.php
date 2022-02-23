@@ -52,7 +52,7 @@
                 <li><a href="{{url('/admin/payments')}}">Class Fees</a></li>
                 <li><a href="{{url('/admin/activities_payments')}}">Activities Fee</a></li>
                 <li><a href="{{url('/admin/application_pay')}}">Application Fee</a></li>
-                <li><a href="{{url('/admin/events')}}">Events</a></li>
+                <li><a href="{{url('/admin/admition')}}">Admition</a></li>
             </ul>
         </li>
 
@@ -95,8 +95,18 @@
         <li>
             <a href="javascript: void(0);"><i class="mdi mdi-shield-lock"></i><span>User Module</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
             <ul class="nav-second-level" aria-expanded="false">
-                <li><a href="{{url('/admin/userrole')}}">User Roles</a></li>
+                {{-- <li><a href="{{url('/admin/userrole')}}">User Roles</a></li> --}}
                 <li><a href="{{url('/admin/users')}}">Users</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript: void(0);"><i class="mdi mdi-file-table-outline"></i><span>Reports</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+            <ul class="nav-second-level" aria-expanded="false">
+                <li><a href="{{url('/admin/reports/application')}}">Application</a></li>
+                <li><a href="{{url('/admin/reports/income')}}">Income</a></li>
+                <li><a href="{{url('/admin/reports/school_due')}}">School Due Fee</a></li>
+                <li><a href="{{url('/admin/reports/admition')}}">Admition</a></li>
             </ul>
         </li>
 

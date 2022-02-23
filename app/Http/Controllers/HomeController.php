@@ -27,8 +27,16 @@ class HomeController extends Controller
     {
             if(Auth::user()->user_role =='1'){
                 return view('admin.index');
+            }elseif( Auth::user()->user_role =='6'){
+                return view('superadmin.index');
             }elseif( Auth::user()->user_role =='2'){
-                return view('user.index');
+                return view('registar.index');
+            }elseif( Auth::user()->user_role =='3'){
+                return view('de_registar.index');
+            }elseif( Auth::user()->user_role =='4'){
+                return view('accountant.index');
+            }elseif( Auth::user()->user_role =='5'){
+                return view('data_entry.index');
             }else{
                 return view('login');
             }

@@ -18,6 +18,11 @@
                                 <div class="form-group row">
 
                                     <div class="col-sm-12">
+                                        {{-- <select class="form-control" name="status" id="status">
+                                            <option value="1" selected>Student ID</option>
+                                            <option value="2" >Student Name</option>
+                                        </select> --}}
+
                                         <input class="form-control" type="text" placeholder="Student ID" value="" name="stu_id" id="stu_id">
                                         @error('stu_id')
                                         <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>

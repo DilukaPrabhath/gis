@@ -100,7 +100,7 @@
                                             <option value="">Select Type</option>
                                             <option value="1">Online</option>
                                             <option value="2">Over The Phone</option>
-                                            <option value="3">Physicaly</option>
+                                            <option value="3">Physically</option>
                                         </select>
                                     </div>
                                 </div>
