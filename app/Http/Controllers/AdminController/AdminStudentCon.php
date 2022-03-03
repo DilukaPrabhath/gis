@@ -36,11 +36,11 @@ class AdminStudentCon extends Controller
 
             $clz_fee = InstClassFee::where('ins_id',$request->institute)->where('year', $now->year)->where('grd_id',$request->grade)->where('syl_id',$request->sy_type)->first();
             if($clz_fee != null){
-                  $fee = $clz_fee[0]->fee;
+                $fee = $clz_fee->fee;
              //return    $fee = 00.00;
             }else{
             //   return  $fee = 00.00;
-                   $fee = 00.00;
+                $fee = 00.00;
             }
 
             $sc_po_co = Student::where('institute',$request->institute)->count();

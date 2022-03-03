@@ -31,9 +31,9 @@ class AdminPrimaryStudentCon extends Controller
         // return  $date = Carbon::createFromFormat('Y-m-d H:i:s', $request->register_date)->format('Y');
            //return $now = Carbon::createFromFormat('Y-m-d H:i:s', $request->register_date)->format('d-m-Y');
           $year = $now->year;
-           $clz_fee = InstClassFee::where('ins_id',$request->institute)->where('year', $now->year)->where('grd_id',$request->grade)->where('syl_id',$request->sy_type)->get();
+           $clz_fee = InstClassFee::where('ins_id',$request->institute)->where('year', $now->year)->where('grd_id',$request->grade)->where('syl_id',$request->sy_type)->first();
            if($clz_fee != null){
-                 $fee = $clz_fee[0]->fee;
+                 $fee = $clz_fee->fee;
             //return    $fee = 00.00;
            }else{
              //return   $fee = $clz_fee[0]->fee;
