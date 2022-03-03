@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="mt-0 header-title">Admition Reports</h4>
+                        <h4 class="mt-0 header-title">Admission Reports</h4>
 
 
                             <div class="form-group row">

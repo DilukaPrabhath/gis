@@ -52,7 +52,7 @@
                 <li><a href="{{url('/admin/payments')}}">Class Fees</a></li>
                 <li><a href="{{url('/admin/activities_payments')}}">Activities Fee</a></li>
                 <li><a href="{{url('/admin/application_pay')}}">Application Fee</a></li>
-                <li><a href="{{url('/admin/admition')}}">Admition</a></li>
+                <li><a href="{{url('/admin/admition')}}">Admission</a></li>
             </ul>
         </li>
 
@@ -106,7 +106,7 @@
                 <li><a href="{{url('/admin/reports/application')}}">Application</a></li>
                 <li><a href="{{url('/admin/reports/income')}}">Income</a></li>
                 <li><a href="{{url('/admin/reports/school_due')}}">School Due Fee</a></li>
-                <li><a href="{{url('/admin/reports/admition')}}">Admition</a></li>
+                <li><a href="{{url('/admin/reports/admition')}}">Admission</a></li>
             </ul>
         </li>
 

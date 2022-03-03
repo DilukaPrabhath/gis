@@ -52,7 +52,7 @@
                 <li><a href="{{url('/registar/payments')}}">Class Fees</a></li>
                 <li><a href="{{url('/registar/activities_payments')}}">Activities Fee</a></li>
                 <li><a href="{{url('/registar/application_pay')}}">Application Fee</a></li>
-                <li><a href="{{url('/registar/admition')}}">Admition</a></li>
+                <li><a href="{{url('/registar/admition')}}">Admission</a></li>
             </ul>
         </li>
 

@@ -61,7 +61,7 @@
                 <li><a href="{{url('/data_entry/payments')}}">Class Fees</a></li>
                 <li><a href="{{url('/data_entry/activities_payments')}}">Activities Fee</a></li>
                 <li><a href="{{url('/data_entry/application_pay')}}">Application Fee</a></li>
-                <li><a href="{{url('/data_entry/admition')}}">Admition</a></li>
+                <li><a href="{{url('/data_entry/admition')}}">Admission</a></li>
             </ul>
         </li>
 

@@ -48,7 +48,7 @@
 
 
 
-                                @if ($sch->pre_or_sch == 2)
+
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label text-right">Syllabus</label>
                                     <div class="col-sm-10">
@@ -62,26 +62,32 @@
                                         @enderror
                                     </div>
                                 </div>
-                                @endif
+
 
                                 <div class="form-group row">
                                     <label for="ticket_category" class="col-sm-2 col-form-label text-right">Grade</label>
+
                                     @if ($sch->pre_or_sch == 1)
                                     <div class="col-sm-10">
                                         <select class="form-control" name="grade" id="grade">
-                                            <option value="2" {{$fee->grade_id=='0'?'selected':''}}>Primary</option>
+                                            <option value="">Select</option>
+                                            @foreach($cls_n as $cls)
+                                            <option value="{{$cls->id}}" {{ $cls->id == $fee->grd_id ? 'selected' : '' }}>{{$cls->grade}}</option>
+
+                                            @endForeach
                                         </select>
                                         @error('grade')
                                         <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
                                         @enderror
                                     </div>
+
                                     @elseif (($sch->pre_or_sch == 2))
                                     <div class="col-sm-10">
                                         <select class="form-control" name="grade" id="grade">
                                             <option value="">Select</option>
-
                                             @foreach($cls as $cls)
                                             <option value="{{$cls->id}}" {{ $cls->id == $fee->grd_id ? 'selected' : '' }}>{{$cls->grade}}</option>
+
                                             @endForeach
                                         </select>
                                         @error('grade')
@@ -89,6 +95,7 @@
                                         @enderror
                                     </div>
                                     @endif
+
                                 </div>
                             </div>
 

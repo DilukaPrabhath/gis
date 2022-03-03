@@ -27,7 +27,8 @@ class SuAdminPrimaryStudentController extends Controller
 
            // return $request;
 
-           $now = Carbon::now();
+           $x = $request->register_date;
+        $now = new Carbon( $x );
            $clz_fee = InstClassFee::where('ins_id',$request->institute)->where('year', $now->year)->where('grd_id',$request->grade)->where('syl_id',$request->sy_type)->get();
            if($clz_fee != null){
                  $fee = $clz_fee[0]->fee;

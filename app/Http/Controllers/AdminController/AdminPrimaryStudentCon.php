@@ -25,9 +25,12 @@ class AdminPrimaryStudentCon extends Controller
     }
     public function update(Request $request,$id){
 
-           // return $request;
-
-           $now = Carbon::now();
+           $x = $request->register_date;
+            $now = new Carbon( $x );
+          //return $now = Carbon::now();
+        // return  $date = Carbon::createFromFormat('Y-m-d H:i:s', $request->register_date)->format('Y');
+           //return $now = Carbon::createFromFormat('Y-m-d H:i:s', $request->register_date)->format('d-m-Y');
+          $year = $now->year;
            $clz_fee = InstClassFee::where('ins_id',$request->institute)->where('year', $now->year)->where('grd_id',$request->grade)->where('syl_id',$request->sy_type)->get();
            if($clz_fee != null){
                  $fee = $clz_fee[0]->fee;
@@ -51,8 +54,8 @@ class AdminPrimaryStudentCon extends Controller
             }else{
 
               $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->where('prmy',1)->first()->student_id;
-            return  $string =  preg_replace("/[^0-9\.]/", '', $latnum);
-            return  $otputnum = substr($string, 4); //last 3 number ex 001
+              $string =  preg_replace("/[^0-9\.]/", '', $latnum);
+              $otputnum = substr($string, 4); //last 3 number ex 001
               $otputyear = substr($string, 0, 4); // last number's first 4 digit, year 2021-05-10 -> 2021
               //$otputgr = substr($string,4,2); //last number's first 4 digit,year
                 if( $year != $otputyear){
@@ -61,7 +64,7 @@ class AdminPrimaryStudentCon extends Controller
                 }else{
                    // return "Not Empt year";
 
-                            return   $num = $scl_code.'/'.$year.'/'. sprintf('%04d', $otputnum+1); //increment SID number in same grade
+                               $num = $scl_code.'/'.$year.'/'. sprintf('%04d', $otputnum+1); //increment SID number in same grade
                     // if($otputgr != $gd){
                     //             $num = $scl_code.'/'.$year.'/'.'0001';
                     //     }else{

@@ -52,7 +52,7 @@
                 <li><a href="{{url('/superadmin/payments')}}">Class Fees</a></li>
                 <li><a href="{{url('/superadmin/activities_payments')}}">Activities Fee</a></li>
                 <li><a href="{{url('/superadmin/application_pay')}}">Application Fee</a></li>
-                <li><a href="{{url('/superadmin/admition')}}">Admition</a></li>
+                <li><a href="{{url('/superadmin/admition')}}">Admission</a></li>
             </ul>
         </li>
 
@@ -106,7 +106,7 @@
                 <li><a href="{{url('/superadmin/reports/application')}}">Application</a></li>
                 <li><a href="{{url('/superadmin/reports/income')}}">Income</a></li>
                 <li><a href="{{url('/superadmin/reports/school_due')}}">School Due Fee</a></li>
-                <li><a href="{{url('/superadmin/reports/admition')}}">Admition</a></li>
+                <li><a href="{{url('/superadmin/reports/admition')}}">Admission</a></li>
             </ul>
         </li>
 

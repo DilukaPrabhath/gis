@@ -30,8 +30,9 @@ class AdminStudentCon extends Controller
 
        public function update(Request $request,$id){
 
-        $now = Carbon::now();
-
+        // $now = Carbon::now();
+        $x = $request->register_date;
+        $now = new Carbon( $x );
 
             $clz_fee = InstClassFee::where('ins_id',$request->institute)->where('year', $now->year)->where('grd_id',$request->grade)->where('syl_id',$request->sy_type)->first();
             if($clz_fee != null){

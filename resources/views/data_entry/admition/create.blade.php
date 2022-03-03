@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">Create Admition Payments</h4>
+                        <h4 class="mt-0 header-title">Create Admission Payments</h4>
                         <form action="{{url('data_entry/admition/store')}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
                             @csrf
 

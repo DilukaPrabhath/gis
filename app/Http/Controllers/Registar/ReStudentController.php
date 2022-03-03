@@ -30,7 +30,8 @@ class ReStudentController extends Controller
 
        public function update(Request $request,$id){
 
-        $now = Carbon::now();
+        $x = $request->register_date;
+            $now = new Carbon( $x );
 
 
             $clz_fee = InstClassFee::where('ins_id',$request->institute)->where('year', $now->year)->where('grd_id',$request->grade)->where('syl_id',$request->sy_type)->get();
@@ -60,7 +61,7 @@ class ReStudentController extends Controller
               $otputyear = substr($string, 0, 4); // last number's first 4 digit, year 2021-05-10 -> 2021
               $otputgr = substr($string,4,2); //grd 2 digit,year
                 if( $year != $otputyear){
-                    return  $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
+                      $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
                 }else{
 
                     if($otputgr != $gd){
@@ -68,7 +69,7 @@ class ReStudentController extends Controller
                         $lst_grd_st = Student::orderBy('student_id', 'desc')->where('grade_now',$request->grade)->get();
                         $stu_id = $lst_grd_st[0]->student_id;
                         if($lst_grd_st->isEmpty()){
-                            return $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
+                             $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
                         }else{
                             $sting =  preg_replace("/[^0-9\.]/", '', $stu_id);
                             $otputnum2 = substr($sting, 6); //last 3 number ex 001

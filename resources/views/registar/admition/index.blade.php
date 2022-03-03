@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="mt-0 header-title">Admition Payment Table</h4>
+                        <h4 class="mt-0 header-title">Admission Payment Table</h4>
 
 
                         <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">

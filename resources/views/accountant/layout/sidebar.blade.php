@@ -70,7 +70,7 @@
                 <li><a href="{{url('/accountant/reports/application')}}">Application</a></li>
                 <li><a href="{{url('/accountant/reports/income')}}">Income</a></li>
                 <li><a href="{{url('/accountant/reports/school_due')}}">School Due Fee</a></li>
-                <li><a href="{{url('/accountant/reports/admition')}}">Admition</a></li>
+                <li><a href="{{url('/accountant/reports/admition')}}">Admission</a></li>
             </ul>
         </li>
 

@@ -14,7 +14,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="mt-0 header-title">Admition Report</h4>
+                        <h4 class="mt-0 header-title">Admission Report</h4>
 
 
                             <div class="form-group row">

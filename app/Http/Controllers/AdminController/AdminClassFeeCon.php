@@ -102,11 +102,13 @@ class AdminClassFeeCon extends Controller
 
         $fee = InstClassFee::find($id);
         $sch = Institute::select('pre_or_sch','institute_name')->where('id',$ins_id)->first();
-        $cls = Grade::where('status',1)->get();
+        // $cls = Grade::where('status',1)->get();
+        $cls = Grade::where('status',1)->where('nur_or_sch',1)->get();
+        $cls_n = Grade::where('status',1)->where('nur_or_sch',2)->get();
         $ins_id = $ins_id;
         $cls_id = $id;
         $grd = InstClassFee::data($ins_id);
-        return view('admin.classfee.edit',compact('fee','ins_id','grd','sch','cls','cls_id'));
+        return view('admin.classfee.edit',compact('fee','ins_id','grd','sch','cls','cls_id','cls_n'));
     }
 
     public function update(Request $request,$id){
