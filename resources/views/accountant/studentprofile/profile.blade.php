@@ -42,7 +42,7 @@
                                                             @if ($stu_data[0]->syllubus_type == 1)
                                                             <p class="mb-0 fro_user-name-post" id="stu_sub_type">Local Sylabus</p>
                                                             @elseif ($stu_data[0]->syllubus_type == 2)
-                                                            <p class="mb-0 fro_user-name-post" id="stu_sub_type">Edexl Sylabus</p>
+                                                            <p class="mb-0 fro_user-name-post" id="stu_sub_type">Edexcel Sylabus</p>
                                                             @elseif ($stu_data[0]->syllubus_type == 0)
                                                             <p class="mb-0 fro_user-name-post" id="stu_sub_type">Nursary</p>
                                                             @endif

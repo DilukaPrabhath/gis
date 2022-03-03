@@ -55,7 +55,7 @@
                                         <select class="form-control" name="syllabus" id="syllabus">
                                             <option value="">Select</option>
                                             <option value="1" {{$fee->syl_id=='1'?'selected':''}}>Local</option>
-                                            <option value="2" {{$fee->syl_id=='2'?'selected':''}}>Edexl</option>
+                                            <option value="2" {{$fee->syl_id=='2'?'selected':''}}>Edexcel</option>
                                         </select>
                                         @error('syllabus')
                                         <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
