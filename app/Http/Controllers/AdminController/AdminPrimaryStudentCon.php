@@ -31,6 +31,9 @@ class AdminPrimaryStudentCon extends Controller
         // return  $date = Carbon::createFromFormat('Y-m-d H:i:s', $request->register_date)->format('Y');
            //return $now = Carbon::createFromFormat('Y-m-d H:i:s', $request->register_date)->format('d-m-Y');
           $year = $now->year;
+
+
+
            $clz_fee = InstClassFee::where('ins_id',$request->institute)->where('year', $now->year)->where('grd_id',$request->grade)->where('syl_id',$request->sy_type)->first();
            if($clz_fee != null){
                  $fee = $clz_fee->fee;
@@ -53,7 +56,7 @@ class AdminPrimaryStudentCon extends Controller
                     $num = $scl_code.'/'.$year.'/'.'0001';
             }else{
 
-              $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->where('prmy',1)->first()->student_id;
+              $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->where('prmy',1)->whereyear('registration_date', $year)->first()->student_id;
               $string =  preg_replace("/[^0-9\.]/", '', $latnum);
               $otputnum = substr($string, 4); //last 3 number ex 001
               $otputyear = substr($string, 0, 4); // last number's first 4 digit, year 2021-05-10 -> 2021

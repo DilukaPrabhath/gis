@@ -8,6 +8,7 @@ use App\Models\Institute;
 use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SuAdminApplicatPayController extends Controller
 {
@@ -64,7 +65,8 @@ class SuAdminApplicatPayController extends Controller
            $pay = new ApplicationPay();
            $pay->inq_id = $request->inq_num;
            $pay->price  = $request->price;
-           $pay->institute_id = 1;
+           $pay->institute_id = Auth::user()->ins_id;
+           $pay->user_id = Auth::user()->id;
            $pay->slip_num = $num;
            $pay->status   = 1;
            $pay->save();

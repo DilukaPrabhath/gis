@@ -55,7 +55,7 @@ class ReStudentController extends Controller
                        $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
             }else{
                 // return "Not em";
-              $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->first()->student_id;
+              $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->whereyear('registration_date', $year)->first()->student_id;
               $string =  preg_replace("/[^0-9\.]/", '', $latnum);
               $otputnum = substr($string, 6); //last 3 number ex 001
               $otputyear = substr($string, 0, 4); // last number's first 4 digit, year 2021-05-10 -> 2021
@@ -66,7 +66,7 @@ class ReStudentController extends Controller
 
                     if($otputgr != $gd){
 
-                        $lst_grd_st = Student::orderBy('student_id', 'desc')->where('grade_now',$request->grade)->get();
+                        $lst_grd_st = Student::orderBy('student_id', 'desc')->where('grade_now',$request->grade)->whereyear('registration_date', $year)->get();
                         $stu_id = $lst_grd_st[0]->student_id;
                         if($lst_grd_st->isEmpty()){
                              $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';

@@ -51,7 +51,7 @@ class AccPrimaryStudentController extends Controller
                         $num = $scl_code.'/'.$year.'/'.'0001';
                 }else{
 
-                  $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->where('prmy',1)->first()->student_id;
+                  $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->where('prmy',1)->whereyear('registration_date', $year)->first()->student_id;
                   $string =  preg_replace("/[^0-9\.]/", '', $latnum);
                   $otputnum = substr($string, 4); //last 3 number ex 001
                   $otputyear = substr($string, 0, 4); // last number's first 4 digit, year 2021-05-10 -> 2021
