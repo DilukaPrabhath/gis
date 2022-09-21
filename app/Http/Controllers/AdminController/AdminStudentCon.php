@@ -225,6 +225,12 @@ class AdminStudentCon extends Controller
         return redirect('admin/inqueries')->with($notification);
        }
 
+
+
+
+
+
+
        public function create(){
         return view('admin.student.create');
        }

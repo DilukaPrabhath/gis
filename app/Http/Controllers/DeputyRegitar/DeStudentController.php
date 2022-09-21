@@ -67,10 +67,11 @@ class DeStudentController extends Controller
                     if($otputgr != $gd){
 
                         $lst_grd_st = Student::orderBy('student_id', 'desc')->where('grade_now',$request->grade)->whereyear('registration_date', $year)->get();
-                        $stu_id = $lst_grd_st[0]->student_id;
+
                         if($lst_grd_st->isEmpty()){
                              $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
                         }else{
+                            $stu_id = $lst_grd_st[0]->student_id;
                             $sting =  preg_replace("/[^0-9\.]/", '', $stu_id);
                             $otputnum2 = substr($sting, 6); //last 3 number ex 001
                             $num = 'GIS'.'/'.$year.'/'.$gd.'/'. sprintf('%03d', $otputnum2+1);

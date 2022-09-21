@@ -168,6 +168,7 @@ class AdminPaymentCon extends Controller
                 $stud->intrest = $total_intrest + $intrest;
                 $stud->total_nd_pay_cot = $intrest + $total_nd_pay_cot;
                 $stud->due_fee = $intrest + $total_nd_pay_cot - $payment_cot - $request->amout;
+                $stud->last_payment_time = $now;
                 if( $old_due <= 0){
                     $stud->is_pending_fee = 2;
                 }else{

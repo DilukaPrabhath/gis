@@ -100,16 +100,28 @@ class Student extends Model
             }
 
 
-            public static function monthvise($request) {
-                $date = Carbon::today()->addMonth(-$request->school_date);
-                $sql= DB::table('students')
-                    ->select('students.*','grades.grade')
-                    ->leftjoin('grades','students.grade_now', '=', 'grades.id')
-                    ->whereDate('last_payment_time', '<=', $date)
-                    ->where('students.is_pending_fee','=',1)
-                    ->get();
-                    return $sql;
-                }
+            // public static function monthvise($request) {
+            //     $date = Carbon::today()->addMonth($request->school_date);
+            //     $sql= DB::table('students')
+            //         ->select('students.*','grades.grade','class_fee_payments.stu_num')
+            //         ->leftjoin('grades','students.grade_now', '=', 'grades.id')
+            //         ->whereDate('last_payment_time', '<=', $date)
+            //         ->where('students.prmy','=',2)
+            //         ->where('students.is_pending_fee','=',1)
+            //         ->get();
+            //         return $sql;
+            //     }
+
+                public static function monthvise($request) {
+                    $date = Carbon::today()->addMonth( -$request->school_date);
+                    $sql= DB::table('students')
+                        ->select('students.*','grades.grade')
+                        ->leftjoin('grades','students.grade_now', '=', 'grades.id')
+                        ->whereDate('last_payment_time', '<=', $date)
+                        ->where('students.is_pending_fee','=',1)
+                        ->get();
+                        return $sql;
+                    }
 
 
                 public static function yearwise($request) {
