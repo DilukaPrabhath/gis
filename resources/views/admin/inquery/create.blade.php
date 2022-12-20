@@ -41,13 +41,13 @@
                                     <div class="col-md-9">
                                         <div class="form-check-inline my-1">
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" id="male" checked="" name="gender" class="custom-control-input">
+                                                <input type="radio" id="male" checked="" name="gender" class="custom-control-input" value="1">
                                                 <label class="custom-control-label" for="male">Male</label>
                                             </div>
                                         </div>
                                         <div class="form-check-inline my-1">
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" id="female" name="gender" class="custom-control-input">
+                                                <input type="radio" id="female" name="gender" class="custom-control-input" value="2">
                                                 <label class="custom-control-label" for="female">Female</label>
                                             </div>
                                         </div>

@@ -237,6 +237,25 @@
                                         </div>
 
                                         <div class="form-group row">
+                                            <label for="register_date" class="col-sm-3 col-form-label text-right">Registration Date</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" type="date" value="{{$data->registration_date}}" id="register_date" name="register_date">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label text-right">Syllubus Type</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" name="sy_type" id="sy_type">
+                                                    <option value="" selected>Select Type</option>
+                                                    <option value="1" {{$data->syllubus_type=='1'?'selected':''}}>Local</option>
+                                                    <option value="2" {{$data->syllubus_type=='2'?'selected':''}}>Edexcel</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Grade</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="grade" id="grade">
@@ -248,13 +267,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label for="register_date" class="col-sm-3 col-form-label text-right">Registration Date</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" type="date" value="{{$data->registration_date}}" id="register_date" name="register_date">
 
-                                            </div>
-                                        </div>
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">GIS Pre School Attend</label>
@@ -305,16 +318,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label text-right">Syllubus Type</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control" name="sy_type" id="sy_type">
-                                                    <option value="" selected>Select Type</option>
-                                                    <option value="1" {{$data->syllubus_type=='1'?'selected':''}}>Local</option>
-                                                    <option value="2" {{$data->syllubus_type=='2'?'selected':''}}>Edexcel</option>
-                                                </select>
-                                            </div>
-                                        </div>
+
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Payment Type</label>
@@ -606,7 +610,7 @@
 
                                             <button type="submit" id="x" class="btn btn-success waves-effect waves-light" style="color: white;"><i class="mdi mdi-check-all mr-2"></i>Submit</button>
 
-
+                                            <a type="button" href="{{url('admin/school/student/grade/update')}}/{{$data->id}}" class="btn btn-danger waves-effect waves-light"><i class="mdi mdi-warning" style="margin-right: 5px;"></i>Update Grade</a>
                                             <a type="button" href="{{url('admin/school/students/table')}}" class="btn btn-primary waves-effect waves-light"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
                                         </div>
                                     </div>

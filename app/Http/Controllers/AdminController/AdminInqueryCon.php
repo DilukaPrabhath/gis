@@ -38,14 +38,14 @@ class AdminInqueryCon extends Controller
 
         $this->validate(request(), [
 
-            'student_name'  => 'required',
+            'student_name'       => 'required',
             'name_with_initial'  => 'required',
-            'dob' => 'required',
-            'religion' => 'required',
-            'nationality' => 'required',
-            'inquery_type'  => 'required',
-            'contact_number' => 'required',
-            'address'  => 'required',
+            'dob'                => 'required',
+            'religion'           => 'required',
+            'nationality'        => 'required',
+            'inquery_type'       => 'required',
+            'contact_number'     => 'required',
+            'address'            => 'required',
             ]);
 
             $now = Carbon::now();
@@ -84,14 +84,12 @@ class AdminInqueryCon extends Controller
         $stu->address  = $request->address;
         $stu->contact_number  = $request->contact_number;
         $stu->inq_type  = $request->inquery_type; //inquery = 1 /appliction = 2/ interview = 3 / registration = 4 / student = 5
-        if($request->gender == "on"){
-            $stu->gender     = 1; //male = 1 /female = 2
-            }else{
-            $stu->gender     = 2;
-        }
+        $stu->gender    = $request->gender;
         $stu->inq_status  = 1;
-        $stu->stu_status = 1;
+        $stu->stu_status  = 1;
         $stu->prmy = 2;
+
+       // return  $stu->gender;
         $stu->save();
 
         DB::commit();
@@ -157,11 +155,7 @@ class AdminInqueryCon extends Controller
         $stu->nationality = $request->nationality;
         $stu->address = $request->address;
         $stu->inq_type  = $request->inquery_type; //inquery = 1 /appliction = 2/ interview = 3 / registration = 4 / student = 5
-        if($request->gender == "on"){
-            $stu->gender     = 1; //male = 1 /female = 2
-            }else{
-            $stu->gender     = 2;
-        }
+        $stu->gender    = $request->gender;
         $stu->inq_status  = $request->inquery_status;
         // $stu->stu_status = 1;
         $stu->save();

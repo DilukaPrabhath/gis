@@ -51,46 +51,53 @@ class DeStudentController extends Controller
 
             $isemty = Student::where('stu_status',5)->get();
             if($isemty->isEmpty()){
-              // return "Empt";
-                       $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
-            }else{
-                // return "Not em";
-              $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->whereyear('registration_date', $year)->first()->student_id;
-              $string =  preg_replace("/[^0-9\.]/", '', $latnum);
-              $otputnum = substr($string, 6); //last 3 number ex 001
-              $otputyear = substr($string, 0, 4); // last number's first 4 digit, year 2021-05-10 -> 2021
-              $otputgr = substr($string,4,2); //grd 2 digit,year
-                if( $year != $otputyear){
-                      $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
-                }else{
+                // return "Empt";
+                      //    $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
+                      $num = 'GIS'.'/'.$year.'/'.'00001';
+              }else{
+                  // return "Not em";
+                //$latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->whereyear('registration_date', $year)->first()->student_id;
+                $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->where('prmy',2)->first()->student_id;
+                //return  $latnum;
+                $string =  preg_replace("/[^0-9\.]/", '', $latnum);
+                $otputnum = substr($string, 0); //last 3 number ex 001
+                //return $otputnum;
+                $otputyear = substr($string, 0, 4); // last number's first 4 digit, year 2021-05-10 -> 2021
+                $otputgr = substr($string,4,2); //grd 2 digit,year
+                  if( $year != $otputyear){
+                      //   $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
+                      $num = 'GIS'.'/'.$year.'/'.'00001';
+                  }else{
 
-                    if($otputgr != $gd){
+                      if($otputgr != $gd){
 
-                        $lst_grd_st = Student::orderBy('student_id', 'desc')->where('grade_now',$request->grade)->whereyear('registration_date', $year)->get();
+                          $lst_grd_st = Student::orderBy('student_id', 'desc')->where('grade_now',$request->grade)->whereyear('registration_date', $year)->get();
 
-                        if($lst_grd_st->isEmpty()){
-                             $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
-                        }else{
-                            $stu_id = $lst_grd_st[0]->student_id;
-                            $sting =  preg_replace("/[^0-9\.]/", '', $stu_id);
-                            $otputnum2 = substr($sting, 6); //last 3 number ex 001
-                            $num = 'GIS'.'/'.$year.'/'.$gd.'/'. sprintf('%03d', $otputnum2+1);
-                        }
+                          if($lst_grd_st->isEmpty()){
+                               $num = 'GIS'.'/'.$year.'/'.'00001';
+                          }else{
+                              $stu_id = $lst_grd_st[0]->student_id;
+                              $sting =  preg_replace("/[^0-9\.]/", '', $stu_id);
+                              $otputnum2 = substr($sting, 4); //last 3 number ex 001
+                              //$num = 'GIS'.'/'.$year.'/'.$gd.'/'. sprintf('%03d', $otputnum2+1);
+                              $num = 'GIS'.'/'.$year.'/'. sprintf('%05d', $otputnum2+1);
+                          }
 
-                        //    if($lst_grd_st->isEmpty()){
-                    //     // return "Empt";
-                    //          return    $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
-                    //   }else{
-                    //    return $string_lst =  preg_replace("/[^0-9\.]/", '', $lst_grd_st);
-                    //   }
-                    // return    $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
-                    //     }else{
-                    //         return  "Equal";
-                    // return    $num = 'GIS'.'/'.$year.'/'.$gd.'/'. sprintf('%03d', $otputnum+1); //increment SID number in same grade
-                    //     }
-                 }
-            }
-        }
+                          //    if($lst_grd_st->isEmpty()){
+                      //     // return "Empt";
+                      //          return    $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
+                      //   }else{
+                      //    return $string_lst =  preg_replace("/[^0-9\.]/", '', $lst_grd_st);
+                      //   }
+                      // return    $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
+                      //     }else{
+                      //         return  "Equal";
+                      // return    $num = 'GIS'.'/'.$year.'/'.$gd.'/'. sprintf('%03d', $otputnum+1); //increment SID number in same grade
+                      //     }
+                   }
+              }
+             // return $num;
+          }
 
         $fa_av = Parentm::select('parent_nic')->where('parent_nic',$request->father_nic)->where('fa_or_mom',1)->get();
 

@@ -17,40 +17,29 @@ div.sel_id {
 
 
             <div class="col-12">
-
+                <form action="{{url('/admin/payments/store')}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
+                    @csrf
                     <div class="card">
-                    <form action="{{url('/select_pay_student')}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
-                            @csrf
                     <div class="card-body">
                         <h4 class="mt-0 header-title">Class Fee Payment</h4>
-
                         <div class="row" style="margin-bottom: 15px;">
 
                             <div class="input-group col-6">
-                                @isset($ins_val)
-                                <input type="text" class="form-control col-6" id="stu_id" name="stu_id" value="{{$ins_val}}" placeholder="Student ID" aria-label="">
-                                @else
-                                <input type="text" class="form-control col-6" id="stu_id" name="stu_id" placeholder="Student ID" aria-label="">
-                                @endisset
-
+                                <input type="text" class="form-control" id="stu_id" name="stu_id" placeholder="Student ID" aria-label="">
                                 <span class="input-group-append">
-                                    <button class="btn btn-primary" id="go" name="go" style="height: 30pt;" type="submit">Go</button>
+                                    <button class="btn btn-primary" id="go" name="go" style="height: 30pt;" type="button">Go</button>
                                 </span>
                             </div>
                             @error('stu_id')
                             <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
                           @enderror
-                            </form>
+
                         </div>
 
-                        <form action="{{url('/admin/payments/store')}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
-                            @csrf
                         <div class="row">
 
                             <div class="col-lg-6">
-                                @isset($ins_val)
-                                <input type="hidden" class="form-control col-6" id="stu_id_1" name="stu_id_1" value="{{$ins_val}}" placeholder="Student ID" aria-label="">
-                                @endisset
+
                                 <div class="form-group row">
                                     <label for="amout" class="col-md-3 col-form-label text-right">Amount</label>
                                     <div class="col-md-9">
@@ -133,36 +122,25 @@ div.sel_id {
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-sm-3 col-form-label text-right">Full Name</label>
                                     <div class="col-sm-9">
-                                        <label for="" id="fnme" style="padding-top: 6px;">@isset($data) {{$data->student_full_name}} @endisset</label>
+                                        <label for="" id="fnme" style="padding-top: 6px;"></label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-sm-3 col-form-label text-right">Grade</label>
                                     <div class="col-sm-9">
-                                        <label for="" id="grad" style="padding-top: 6px;">@isset($data) {{$data->grade_now}} @endisset</label>
+                                        <label for="" id="grad" style="padding-top: 6px;"></label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-sm-3 col-form-label text-right">Payment Type</label>
                                     <div class="col-sm-9">
-                                        @isset($data)
-
-                                        @if ($data->pamt_typ == 1)
-                                            <label for="">Anualy</label>
-                                        @elseif ($data->pamt_typ == 2)
-                                            <label for="">Quater</label>
-                                        @elseif ($data->pamt_typ == 3)
-                                            <label for="">Monthly</label>
-                                        @else
-                                        @endif
-                                        @endisset
-
+                                        <label for="" id="pay_typelb" style="padding-top: 6px;"></label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-sm-3 col-form-label text-right">Totle Class Fee</label>
                                     <div class="col-sm-9">
-                                        <label for="" id="tot_cls_fee_lb" style="padding-top: 6px;">@isset($data) {{$data->grade_fee}} @endisset</label>
+                                        <label for="" id="tot_cls_fee_lb" style="padding-top: 6px;"></label>
                                     </div>
                                 </div>
 
@@ -173,14 +151,12 @@ div.sel_id {
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-sm-3 col-form-label text-right">Balance Forword</label>
                                     <div class="col-sm-9">
-                                        <label for="" id="blnc_for_lbl" style="padding-top: 6px;">@isset($data) {{$data->due_fee}} @endisset</label>
+                                        <label for="" id="blnc_for_lbl" style="padding-top: 6px;"></label>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
-                        </form>
-                        @isset($tbl)
 
                         <div class="row">
                             <div class="col-12">
@@ -202,30 +178,12 @@ div.sel_id {
                                             </thead>
                                                 <tbody>
                                                     <tr>
-                                                        @foreach ($tbl as $value)
-                                    <tr>
-                                        <td>@php
-                                            $newDateTime = date('Y-m-d h:i A', strtotime($value->created_at));
-                                            @endphp
-                                           {{ $newDateTime }}</td>
-                                        <td>{{$value->recipt_id}}</td>
-                                        <td>{{$value->stu_num}}</td>
-                                        <td>{{$value->price}}</td>
-                                        <td>{{$value->intrest}} %</td>
-
-                                        <td>@if ($value->payment_type == 1)
-                                            <span>Cash</span>
-                                           @elseif ($value->payment_type == 2)
-                                            <span>Online</span>
-                                            @elseif ($value->payment_type == 3)
-                                            <span>Cheque</span>
-                                            @elseif ($value->payment_type ==4)
-                                            <span>Card</span>
-                                           @endif
-                                        </td>
-
-                                    </tr>
-                            @endforeach
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
                                                     </tr>
                                                 </tbody>
                                         </table>
@@ -234,13 +192,10 @@ div.sel_id {
                                 </div>
                             </div> <!-- end col -->
                         </div> <!-- end row -->
-
-                        @endisset
-
                     </div>
                 </div>
             </div> <!-- end col -->
-            {{-- </form> --}}
+            </form>
         </div> <!-- end row -->
 
 
@@ -347,17 +302,17 @@ div.sel_id {
           headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
           beforeSend: function(){},
           success: function(data){
-           if(data[0].pamt_typ  == 1){var py_ty = "Anualy"}else if(data[0].pamt_typ == 2){var py_ty  = "Quater"}else if(data[0].pamt_typ == 3){var py_ty = "Monthly"}else{var py_ty = ""}
-           if(data[0].grade_now == 1){var grd  = "Grade 01"}else if(data[0].grade_now == 2){var grd = "Grade 02"}else if(data[0].grade_now == 3){var grd = "Grade 03"}else if(data[0].grade_now == 4){var grd = "Grade 04"}else if(data[0].grade_now == 5){var grd = "Grade 05"}else if(data[0].grade_now == 6){var grd = "Grade 06"}else if(data[0].grade_now == 7){var grd = "Grade 07"}else if(data[0].grade_now == 8){var grd = "Grade 08"}else if(data[0].grade_now == 9){var grd = "Grade 09"}else if(data[0].grade_now == 10){var grd = "Grade 10"}else if(data[0].grade_now == 11){var grd = "Grade 11"}else if(data[0].grade_now == 12){var grd = "Grade 12"}else if(data[0].grade_now == 13){var grd = "Grade 13"}else{var grd = ""}
+           if(data[0].pamt_typ == 1){var py_ty = "Anualy"}else if(data[0].pamt_typ == 2){var py_ty = "Quater"}else if(data[0].pamt_typ == 3){var py_ty = "Monthly"}else{var py_ty = ""}
+           if(data[0].grade_now == 1){var grd = "Grade 01"}else if(data[0].grade_now == 2){var grd = "Grade 02"}else if(data[0].grade_now == 3){var grd = "Grade 03"}else if(data[0].grade_now == 4){var grd = "Grade 04"}else if(data[0].grade_now == 5){var grd = "Grade 05"}else if(data[0].grade_now == 6){var grd = "Grade 06"}else if(data[0].grade_now == 7){var grd = "Grade 07"}else if(data[0].grade_now == 8){var grd = "Grade 08"}else if(data[0].grade_now == 9){var grd = "Grade 09"}else if(data[0].grade_now == 10){var grd = "Grade 10"}else if(data[0].grade_now == 11){var grd = "Grade 11"}else if(data[0].grade_now == 12){var grd = "Grade 12"}else if(data[0].grade_now == 13){var grd = "Grade 13"}else{var grd = ""}
            document.getElementById('fnme').innerHTML = data[0].student_full_name;
-           document.getElementById('grad').innerHTML       = grd;
+           document.getElementById('grad').innerHTML = grd;
            document.getElementById('pay_typelb').innerHTML = py_ty;
            document.getElementById('tot_cls_fee_lb').innerHTML = data[0].grade_fee;
           // document.getElementById('tot_paid_amo_lbl').innerHTML = data[0].total_need_pay;
-          // document.getElementById('tot_paid_amo').src = "client/"+data[0].pmg;
-          // document.getElementById('tot_due_amo_lb').innerHTML = data[0].due_fee;
+        //    document.getElementById('tot_paid_amo').src = "client/"+data[0].pmg;
+        //    document.getElementById('tot_due_amo_lb').innerHTML = data[0].due_fee;
            document.getElementById('blnc_for_lbl').innerHTML  = data[0].due_fee;
-          // document.getElementById('intrest').value     = data[0].cid;
+        //    document.getElementById('intrest').value     = data[0].cid;
           },
           error:function(){ $("body").css("cursor","default"); console.log("Error");  }
       });

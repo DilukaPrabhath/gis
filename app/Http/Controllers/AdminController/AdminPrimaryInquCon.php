@@ -83,11 +83,7 @@ class AdminPrimaryInquCon extends Controller
         $stu->address  = $request->address;
         $stu->contact_number  = $request->contact_number;
         $stu->inq_type  = $request->inquery_type; //inquery = 1 /appliction = 2/ interview = 3 / registration = 4 / student = 5
-        if($request->gender == "on"){
-            $stu->gender     = 1; //male = 1 /female = 2
-            }else{
-            $stu->gender     = 2;
-        }
+        $stu->gender    = $request->gender;
         $stu->inq_status  = 1;
         $stu->stu_status = 1;
         $stu->prmy = 1;
@@ -135,11 +131,7 @@ class AdminPrimaryInquCon extends Controller
        $stu->nationality = $request->nationality;
        $stu->address = $request->address;
        $stu->inq_type  = $request->inquery_type; //inquery = 1 /appliction = 2/ interview = 3 / registration = 4 / student = 5
-       if($request->gender == "on"){
-           $stu->gender     = 1; //male = 1 /female = 2
-           }else{
-           $stu->gender     = 2;
-       }
+       $stu->gender    = $request->gender;
        $stu->inq_status  = $request->inquery_status;
        // $stu->stu_status = 1;
        $stu->save();

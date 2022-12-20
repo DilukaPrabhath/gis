@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
+use function PHPUnit\Framework\isEmpty;
+
 class AdminPaymentCon extends Controller
 {
     public function __construct()
@@ -70,19 +72,21 @@ class AdminPaymentCon extends Controller
 
 
        public function student_select(Request $request){
-            $data = Student::where('student_id',$request->stu_id)->get();
-            return $data;
+            $ins_val = $request->stu_id;
+            $data = Student::where('student_id',$request->stu_id)->first();
+            $tbl  = ClassFeePayment::orderBy('id', 'DESC')->where('stu_num',$request->stu_id)->take(5)->get();
+            return view('admin.payment.create',compact('data','tbl','ins_val'));
+            // return $data;
          }
 
 
          public function store(Request $request){
+           // return $request;
             $this->validate(request(), [
-                'stu_id'   => 'required',
                 'amout'    => 'required',
                 'prtg'     => 'required',
                 'pay_type' => 'required',
                 ]);
-
 
             $now = Carbon::now();
             $year = $now->year;
@@ -90,6 +94,7 @@ class AdminPaymentCon extends Controller
             $mo  = str_pad($mon,2,"0", STR_PAD_LEFT);
             $timcode = $year.$mo;
             $isemty = ClassFeePayment::all();
+            // return $request;
             if($isemty->isEmpty()){
                 //return "rm";
                   $num = 'Fee'.'/'.$year.$mo.'/'. '0001';
@@ -113,10 +118,11 @@ class AdminPaymentCon extends Controller
                  }
             }
 
+            //return $num;
                 $fee = new ClassFeePayment();
 
                 $fee->recipt_id = $num;
-                $fee->stu_num = $request->stu_id;
+                $fee->stu_num = $request->stu_id_1;
                 $fee->price   = $request->amout;
                 $fee->intrest    = $request->prtg;
                 $fee->sub_total = $request->total;
@@ -141,7 +147,10 @@ class AdminPaymentCon extends Controller
 
                 $fee->save();
 
-                $stud_id = Student::where('student_id',$request->stu_id)->get();
+                $stud_id = Student::where('student_id',$request->stu_id_1)->get();
+              // return count($stud_id);
+
+
                 $stid = $stud_id[0]->id;
                 $payment_cot = $stud_id[0]->payment_cot;
                 $total_nd_pay_cot = $stud_id[0]->total_nd_pay_cot;
@@ -150,14 +159,7 @@ class AdminPaymentCon extends Controller
                 $old_due = $stud_id[0]->due_fee;
                 $old_paid_amount = $stud_id[0]->paid_amount;
 
-
-            $fatherdata = Parentm::find($stud_id[0]->fat_id);
-            $fatemail = $fatherdata->parent_email;
-            $fatname = $fatherdata->parent_name;
-            $motherdata = Parentm::find($stud_id[0]->mom_id);
-            $motname = $fatherdata->parent_name;
-            $motemail = $motherdata->parent_email;
-            $insdata = Institute::find($stud_id[0]->institute);
+                $insdata = Institute::find($stud_id[0]->institute);
 
                 $total_intrest = $stud_id[0]->intrest;
 
@@ -175,6 +177,17 @@ class AdminPaymentCon extends Controller
                     $stud->is_pending_fee = 1;
                 }
                 $stud->save();
+
+                if(count($stud_id) == 0){
+
+                }else{
+                    $fatherdata = Parentm::find($stud_id[0]->fat_id);
+                    $fatemail   = $fatherdata->parent_email;
+                    $fatname    = $fatherdata->parent_name;
+                    $motherdata = Parentm::find($stud_id[0]->mom_id);
+                    $motname    = $fatherdata->parent_name;
+                    $motemail   = $motherdata->parent_email;
+
 
                 $data = [
                     'subject' => "Class Fee Payments",
@@ -223,7 +236,7 @@ class AdminPaymentCon extends Controller
                     ->from('task123test123@gmail.com','test mail')
                     ->subject($data['subject']);
                   });
-
+                }
 
                 $notification = array(
                     'message' => 'Payment Sended Successfully!',

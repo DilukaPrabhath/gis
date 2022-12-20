@@ -25,6 +25,7 @@ class AdminPrimaryStudentCon extends Controller
     }
     public function update(Request $request,$id){
 
+      //return $request;
            $x = $request->register_date;
             $now = new Carbon( $x );
           //return $now = Carbon::now();
@@ -42,7 +43,7 @@ class AdminPrimaryStudentCon extends Controller
              //return   $fee = $clz_fee[0]->fee;
                   $fee = 00.00;
            }
-
+           //return $fee;
             $sc_po_co = Student::where('institute',$request->institute)->count();
             $sc_po    = $sc_po_co + 1;
             $scl_code = Institute::where('id',$request->institute)->first()->code;
@@ -50,24 +51,28 @@ class AdminPrimaryStudentCon extends Controller
             $gd  = str_pad($grd,2,"0", STR_PAD_LEFT);
 
             $year = $now->year;
-           $isemty = Student::where('stu_status',5)->where('prmy',1)->get();
+            $isemty = Student::where('stu_status',5)->where('prmy',1)->get();
             if($isemty->isEmpty()){
                 //"Empt";
-                    $num = $scl_code.'/'.$year.'/'.'0001';
+                    $num = $scl_code.'/'.$year.'/'.'00001';
             }else{
 
-              $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->where('prmy',1)->whereyear('registration_date', $year)->first()->student_id;
+              //$latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->where('prmy',1)->whereyear('registration_date', $year)->first()->student_id;
+              $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->where('prmy',1)->first()->student_id;
               $string =  preg_replace("/[^0-9\.]/", '', $latnum);
-              $otputnum = substr($string, 4); //last 3 number ex 001
+              $otputnum  = substr($string, 4); //last 3 number ex 001
               $otputyear = substr($string, 0, 4); // last number's first 4 digit, year 2021-05-10 -> 2021
               //$otputgr = substr($string,4,2); //last number's first 4 digit,year
+
+            //return $latnum;
                 if( $year != $otputyear){
                     //return "Empt year";
-                               $num = $scl_code.'/'.$year.'/'.'0001';
+                    //$num = $scl_code.'/'.$year.'/'.'0001';
+                    $num = "GISN".'/'.$year.'/'.'00001';
                 }else{
-                   // return "Not Empt year";
-
-                               $num = $scl_code.'/'.$year.'/'. sprintf('%04d', $otputnum+1); //increment SID number in same grade
+                  // return "Not Empt year";
+                    //$num = $scl_code.'/'.$year.'/'. sprintf('%04d', $otputnum+1); //increment SID number in same grade
+                    $num = "GISN".'/'.$year.'/'. sprintf('%05d', $otputnum+1);
                     // if($otputgr != $gd){
                     //             $num = $scl_code.'/'.$year.'/'.'0001';
                     //     }else{
@@ -75,7 +80,7 @@ class AdminPrimaryStudentCon extends Controller
                     //     }
                  }
             }
-
+            //return $num;
              $fa_av = Parentm::select('parent_nic')->where('parent_nic',$request->father_nic)->where('fa_or_mom',1)->get();
 
         if($fa_av->isEmpty()){

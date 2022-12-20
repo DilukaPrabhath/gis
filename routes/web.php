@@ -118,6 +118,8 @@ Route::post('/lord_temp_edit_syblin_tbl', [App\Http\Controllers\AdminController\
 Route::get('/admin/school/students/table', [App\Http\Controllers\AdminController\AdminStudentCon::class, 'index']);
 Route::get('/admin/school/student/view/{id}', [App\Http\Controllers\AdminController\AdminStudentCon::class, 'view']);
 Route::get('/admin/school/student/edit/{id}', [App\Http\Controllers\AdminController\AdminStudentCon::class, 'edit']);
+Route::get('/admin/school/student/grade/update/{id}', [App\Http\Controllers\AdminController\AdminStudentCon::class, 'student_grade_update']);
+Route::post('/admin/grade/update/store/{id}', [App\Http\Controllers\AdminController\AdminStudentCon::class, 'grade_update']);
 Route::post('/class_payment_check', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'check_payment']);
 
 //Student Primary
@@ -137,6 +139,7 @@ Route::get('/sholarship_st_id_num', [App\Http\Controllers\AdminController\AdmSch
 Route::get('/admin/payments', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'index']);
 Route::get('/admin/payments/create', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'create']);
 Route::post('/admin/payments/store', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'store']);
+Route::post('/admin/payments/student_get_details', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'student_get_details']);
 Route::get('/admin/payments/view', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'view']);
 Route::get('/admin/payments/old/view', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'old_payment']);
 Route::get('/class_st_id_num', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'student_class_fee']);
@@ -377,6 +380,7 @@ Route::post('/superadmin/lord_temp_edit_syblin_tbl', [App\Http\Controllers\Super
 Route::get('/superadmin/school/students/table', [App\Http\Controllers\SuperAdmin\SuAdminStudentController::class, 'index']);
 Route::get('/superadmin/school/student/view/{id}', [App\Http\Controllers\SuperAdmin\SuAdminStudentController::class, 'view']);
 Route::get('/superadmin/school/student/edit/{id}', [App\Http\Controllers\SuperAdmin\SuAdminStudentController::class, 'edit']);
+Route::get('/superadmin/school/student/grade/update/{id}', [App\Http\Controllers\SuperAdmin\SuAdminStudentController::class, 'student_grade_update']);
 Route::post('/superadmin/class_payment_check', [App\Http\Controllers\SuperAdmin\SuAdminPaymentController::class, 'check_payment']);
 
 //Student Primary

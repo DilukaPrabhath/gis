@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 
+use function PHPUnit\Framework\returnSelf;
+
 class AdminStudentCon extends Controller
 {
     public function __construct()
@@ -49,19 +51,24 @@ class AdminStudentCon extends Controller
             $grd = $request->grade;
             $gd  = str_pad($grd,2,"0", STR_PAD_LEFT);
 
-            $isemty = Student::where('stu_status',5)->get();
+            $isemty = Student::where('stu_status',5)->where('prmy',2)->get();
             if($isemty->isEmpty()){
               // return "Empt";
-                       $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
+                    //    $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
+                    $num = 'GIS'.'/'.$year.'/'.'00001';
             }else{
                 // return "Not em";
-              $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->whereyear('registration_date', $year)->first()->student_id;
+              //$latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->whereyear('registration_date', $year)->first()->student_id;
+              $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->where('prmy',2)->first()->student_id;
+              //return  $latnum;
               $string =  preg_replace("/[^0-9\.]/", '', $latnum);
-              $otputnum = substr($string, 6); //last 3 number ex 001
+              $otputnum = substr($string, 0); //last 3 number ex 001
+              //return $otputnum;
               $otputyear = substr($string, 0, 4); // last number's first 4 digit, year 2021-05-10 -> 2021
               $otputgr = substr($string,4,2); //grd 2 digit,year
                 if( $year != $otputyear){
-                      $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
+                    //   $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
+                    $num = 'GIS'.'/'.$year.'/'.'00001';
                 }else{
 
                     if($otputgr != $gd){
@@ -69,12 +76,13 @@ class AdminStudentCon extends Controller
                         $lst_grd_st = Student::orderBy('student_id', 'desc')->where('grade_now',$request->grade)->whereyear('registration_date', $year)->get();
 
                         if($lst_grd_st->isEmpty()){
-                             $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
+                             $num = 'GIS'.'/'.$year.'/'.'00001';
                         }else{
                             $stu_id = $lst_grd_st[0]->student_id;
                             $sting =  preg_replace("/[^0-9\.]/", '', $stu_id);
-                            $otputnum2 = substr($sting, 6); //last 3 number ex 001
-                            $num = 'GIS'.'/'.$year.'/'.$gd.'/'. sprintf('%03d', $otputnum2+1);
+                            $otputnum2 = substr($sting, 4); //last 3 number ex 001
+                            //$num = 'GIS'.'/'.$year.'/'.$gd.'/'. sprintf('%03d', $otputnum2+1);
+                            $num = 'GIS'.'/'.$year.'/'. sprintf('%05d', $otputnum2+1);
                         }
 
                         //    if($lst_grd_st->isEmpty()){
@@ -90,6 +98,7 @@ class AdminStudentCon extends Controller
                     //     }
                  }
             }
+            //return $num;
         }
 
         $fa_av = Parentm::select('parent_nic')->where('parent_nic',$request->father_nic)->where('fa_or_mom',1)->get();
@@ -218,18 +227,12 @@ class AdminStudentCon extends Controller
       }
 
         $notification = array(
-            'message' => 'Stutend Registration Successfully!',
+            'message' => 'Student Registration Successfully!',
             'alert-type' => 'Success'
         );
 
         return redirect('admin/inqueries')->with($notification);
        }
-
-
-
-
-
-
 
        public function create(){
         return view('admin.student.create');
@@ -432,6 +435,7 @@ public function tempremove(Request $request){
 
         $fa_av = Parentm::select('parent_nic')->where('parent_nic',$request->father_nic)->where('fa_or_mom',1)->get();
 
+
         if($fa_av->isEmpty()){
             // return "Emp";
             $father = new Parentm();
@@ -449,7 +453,16 @@ public function tempremove(Request $request){
         }else{
             $fter = Parentm::where('parent_nic',$request->father_nic)->get();
             $fatherid = $fter[0]->id;
-            //return "not Emp";
+            $father = Parentm::find($fatherid);
+            $father->parent_nic = $request->father_nic;
+            $father->parent_name  = $request->father_name;
+            $father->parent_mobile = $request->father_mobile;
+            $father->parent_email  = $request->father_email;
+            $father->parent_work_address = $request->father_address_of_work_place;
+            $father->parent_ocupation = $request->father_occupation;
+            $father->fa_or_mom = 1; //father
+            $father->save();
+            //return $father;
         }
 
         $mo_av = Parentm::select('parent_nic')->where('parent_nic',$request->mother_nic)->where('fa_or_mom',2)->get();
@@ -459,13 +472,13 @@ public function tempremove(Request $request){
 
         $mom = new Parentm();
 
-        $mom->parent_nic = $request->mother_nic;
-        $mom->parent_name  = $request->mother_name;
+        $mom->parent_nic    = $request->mother_nic;
+        $mom->parent_name   = $request->mother_name;
         $mom->parent_mobile = $request->mother_mobile;
         $mom->parent_email  = $request->mother_email;
         $mom->parent_work_address = $request->mother_address_of_work_place;
-        $mom->parent_ocupation = $request->mother_occupation;
-        $mom->fa_or_mom = 2; //mother
+        $mom->parent_ocupation    = $request->mother_occupation;
+        $mom->fa_or_mom     = 2; //mother
         $mom->save();
 
         $motherid = $mom->id;
@@ -474,7 +487,17 @@ public function tempremove(Request $request){
 
         $mter = Parentm::where('parent_nic',$request->mother_nic)->get();
         $motherid = $mter[0]->id;
-        //return "not Emp";
+        $mom = Parentm::find($motherid);
+
+        $mom->parent_nic    = $request->mother_nic;
+        $mom->parent_name   = $request->mother_name;
+        $mom->parent_mobile = $request->mother_mobile;
+        $mom->parent_email  = $request->mother_email;
+        $mom->parent_work_address = $request->mother_address_of_work_place;
+        $mom->parent_ocupation    = $request->mother_occupation;
+        $mom->fa_or_mom     = 2; //mother
+        $mom->save();
+        //return $mom;
         }
 
        // return $request;
@@ -547,12 +570,63 @@ public function tempremove(Request $request){
       }
 
         $notification = array(
-            'message' => 'Stutend Update Successfully!',
+            'message' => 'Student Update Successfully!',
             'alert-type' => 'Success'
         );
 
         return redirect('admin/school/students/table')->with($notification);
        }
 
+       public function student_get_details(Request $request){
+        return $request;
+       }
+
+       public function student_grade_update($id){
+        // return $id;
+
+        $data  = Student::select('grade_now')->where('id',$id)->first();
+        $syllubus_type  = Student::select('syllubus_type')->where('id',$id)->first();
+        $institute  = Student::select('institute')->where('id',$id)->first();
+
+        $grade     = Grade::orderBy('grade', 'ASC')->where('status',1)->where('nur_or_sch',1)->get();
+        $grade_new = Grade::orderBy('grade', 'ASC')->where('status',1)->where('nur_or_sch',1)->where('id', '>', $data->grade_now)->get();
+        $year_now = Carbon::now()->format('Y');
+       // return  $institute;
+        $clz_fee_year = InstClassFee::where('ins_id',$institute->institute)->where('year', '>',$year_now)->where('grd_id', '>',$data->grade_now)->where('syl_id',$syllubus_type->syllubus_type)->get();
+         // return $clz_fee_year;
+
+        //return $grade_new;
+        return view('admin.student.grade',compact('id','grade','data','grade_new','clz_fee_year'));
+       }
+
+       public function grade_update(Request $request ,$id){
+         // return $request;
+
+         $this->validate(request(), [
+            'grade_to_year'   => 'required',
+            'grade_to_update' => 'required',
+        ]);
+
+        $clz_fee = InstClassFee::where('id',$request->grade_year)->first();
+        $due_fee  = Student::select('due_fee')->where('id',$id)->first();
+        $total_need_pay  = Student::select('total_need_pay')->where('id',$id)->first();
+        $total_nd_pay_cot  = Student::select('total_nd_pay_cot')->where('id',$id)->first();
+
+        $student = Student::find($id);
+        $student->grade_fee = $clz_fee->fee;
+        $student->due_fee   =  $due_fee->due_fee + $clz_fee->fee;
+        $student->total_need_pay =  $total_need_pay->total_need_pay + $clz_fee->fee;
+        $student->total_nd_pay_cot = $total_nd_pay_cot->total_nd_pay_cot + $clz_fee->fee;
+        $student->is_pending_fee = 1;
+        $student->grade_now = $request->grade_new;
+        $student->save();
+
+        $notification = array(
+            'message' => 'Student Update Successfully!',
+            'alert-type' => 'Success'
+        );
+
+        return redirect('admin/school/students/table')->with($notification);
+       }
 
 }

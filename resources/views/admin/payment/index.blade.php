@@ -9,17 +9,6 @@
 
                         <h4 class="mt-0 header-title">Class Payment Table</h4>
 
-{{--
-                        <div class="row">
-
-                            <div class="input-group col-6" style="margin-bottom: 5px;">
-                                <input type="text" class="form-control" placeholder="Student ID" aria-label="" value="STU/211004/0001">
-                                <span class="input-group-append">
-                                    <button class="btn btn-primary" type="button">Go</button>
-                                </span>
-                            </div>
-                        </div> --}}
-
                         <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                             <tr>
@@ -59,12 +48,6 @@
                                             <a href="{{url('student_pay_print')}}/{{$value->id}}" target="_blank" type="button" class="btn btn-dropbox">
                                                 <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
                                             </a>
-                                            {{-- <a href="{{url('admin/application_pay/print')}}/{{$value->id}}" type="button" class="btnprint">
-                                                <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>jj
-                                            </a> --}}
-                                            {{-- <a href="{{url('admin/application_pay/print')}}" target="_blank" type="button" class="btn btn-danger">
-                                                <i class="fab fas fa-pencil-alt" style="color: white; font-size:8px;"></i>
-                                            </a> --}}
                                         </td>
                                     </tr>
                             @endforeach

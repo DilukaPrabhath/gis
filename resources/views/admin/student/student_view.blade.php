@@ -58,9 +58,9 @@
                                             </tr>
                                             <tr>
                                                 <th>Gender</th>
-                                                <td>@if ($data->gender == 1)
+                                                <td>@if ($data->gender == 2)
                                                     <span class="">Male</span>
-                                                   @elseif ($data->gender == 2)
+                                                   @elseif ($data->gender == 1)
                                                     <span class="" >Female</span>
                                                    @endif</td>
                                             </tr>
@@ -250,6 +250,17 @@
                                         </div>
 
                                         <div class="form-group row">
+                                            <label for="register_date" class="col-sm-3 col-form-label text-right">Registration Date</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <input class="form-control" type="date" value="{{$data->registration_date}}" disabled id="register_date" name="register_date">
+                                                @else
+                                                <input class="form-control" type="date" value="" id="register_date" name="register_date">
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Grade</label>
                                             <div class="col-sm-9">
                                                 @if ($st == 5 || $st == 6)
@@ -270,16 +281,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label for="register_date" class="col-sm-3 col-form-label text-right">Registration Date</label>
-                                            <div class="col-sm-9">
-                                                @if ($st == 5 || $st == 6)
-                                                <input class="form-control" type="date" value="{{$data->registration_date}}" disabled id="register_date" name="register_date">
-                                                @else
-                                                <input class="form-control" type="date" value="" id="register_date" name="register_date">
-                                                @endif
-                                            </div>
-                                        </div>
+
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">GIS Pre School Attend</label>
