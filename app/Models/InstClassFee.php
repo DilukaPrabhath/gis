@@ -20,4 +20,15 @@ class InstClassFee extends Model
             ->get();
             return $sql;
         }
+
+        public static function grade_get($request) {
+            $sql= DB::table('inst_class_fees')
+                ->select('inst_class_fees.*','grades.grade')
+                ->leftjoin('grades','inst_class_fees.grd_id', '=', 'grades.id')
+                ->where('inst_class_fees.year','=',$request->register_year)
+                ->where('inst_class_fees.ins_id','=',$request->institute)
+                ->where('inst_class_fees.syl_id','=',$request->sy_type)
+                ->get();
+                return $sql;
+            }
 }

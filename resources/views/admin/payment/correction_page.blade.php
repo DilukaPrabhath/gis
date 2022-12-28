@@ -19,31 +19,16 @@ div.sel_id {
             <div class="col-12">
 
                     <div class="card">
-                    <form action="{{url('/select_pay_student')}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
-                            @csrf
+
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">Class Fee Payment</h4>
+                        <h4 class="mt-0 header-title">Class Fee Correction</h4>
 
                         <div class="row" style="margin-bottom: 15px;">
 
-                            <div class="input-group col-6">
-                                @isset($ins_val)
-                                <input type="text" class="form-control col-6" id="stu_id" name="stu_id" value="{{$ins_val}}" placeholder="Student ID" aria-label="">
-                                @else
-                                <input type="text" class="form-control col-6" id="stu_id" name="stu_id" placeholder="Student ID" aria-label="">
-                                @endisset
 
-                                <span class="input-group-append">
-                                    <button class="btn btn-primary" id="go" name="go" style="height: 30pt;" type="submit">Go</button>
-                                </span>
-                            </div>
-                            @error('stu_id')
-                            <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
-                          @enderror
-                            </form>
                         </div>
 
-                        <form action="{{url('/admin/payments/store')}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
+                        <form action="{{url('/admin/payments/correction/store')}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
                             @csrf
                         <div class="row">
 
@@ -62,62 +47,6 @@ div.sel_id {
 
                                 </div>
                                 <div class="form-group row">
-                                    <label for="prtg" class="col-sm-3 col-form-label text-right">Interest</label>
-                                    <div class="col-3">
-                                        <input type="text" class="form-control col-sm-9" id="prtg" name="prtg" value="" maxlength="2" aria-label="">
-                                        @error('prtg')
-                                        <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="example-text-input" class="col-sm-3 col-form-label text-right">Total</label>
-                                    <div class="col-sm-9">
-                                        <input type="hidden" id="total" name="total" class="form-control">
-                                        <label for="" id="total_lbl"></label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label text-right">Payment Type</label>
-                                    <div class="col-sm-9">
-                                        <select class="form-control" id="pay_type" name="pay_type">
-                                            <option value="">Select</option>
-                                            <option value="1">Cash</option>
-                                            <option value="2">Online</option>
-                                            <option value="3">Cheque</option>
-                                            <option value="4">Card</option>
-                                        </select>
-                                        @error('pay_type')
-                                        <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row" id="ref_num_div">
-                                    <label for="example-tel-input" class="col-sm-3 col-form-label text-right">Date</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="date" value="" name="dip_date" id="dip_date">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row" id="dip_date_div">
-                                    <label for="example-tel-input" class="col-sm-3 col-form-label text-right">Referance Number</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="text" value="" name="ref_num" id="ref_num">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row" id="ref_img_div">
-                                    <label for="example-search-input" class="col-sm-3 col-form-label text-right">Recipt Image</label>
-                                    <div class="col-sm-9">
-                                        <input type="file" name="ref_img" id="ref_img" class="dropify" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
                                     <label for="prtg" class="col-sm-3 col-form-label text-right">Note</label>
                                     <div class="col-md-9">
                                         <textarea class="form-control col-md-9" id="note" name="note" rows="4" cols="200"></textarea>
@@ -128,12 +57,13 @@ div.sel_id {
                                     </div>
 
                                 </div>
-
-
+                                <input type="hidden" name="student_id_numb" value="{{$data->student_id}}">
+                                <input type="hidden" name="student_instu_numb" value="{{$data->institute}}">
+                                <input type="hidden" name="recipt_id_numb" value="{{$payment->recipt_id}}">
                                 <div class="row">
                                     <div class="col-2"></div>
                                     <div class="form-group row">
-                                        <button type="submit" id="x" class="btn btn-success waves-effect waves-light" style="color: white;"><i class="mdi mdi-check-all mr-2"></i>Submit</button>
+                                        <button type="submit" id="x" class="btn btn-danger waves-effect waves-light" style="color: white;"><i class="mdi mdi-check-all mr-2"></i>Remove Payment</button>
                                         <a type="button" href="{{url('admin/payments')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
                                     </div>
                                 </div>
@@ -177,7 +107,6 @@ div.sel_id {
                                         <label for="" id="tot_cls_fee_lb" style="padding-top: 6px;">@isset($data) {{$data->grade_fee}} @endisset</label>
                                     </div>
                                 </div>
-
 
                                 <div class="form-group row" >
 

@@ -483,6 +483,32 @@
     @stop
 
     <script>
+
+        jQuery(document).ready(function($) {
+            $("#year").on('change', function() {
+                var year = $(this).val();
+                //   console.log(year);
+                if (year) {
+                   // $('#loader').show();
+                    $.ajax({
+                        url: "{{ url('/admin/school/student/get_school') }}",
+                        type: "POST",
+                        data: {
+                            year: year
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(data) {
+                            $('#make').html(data);
+                           // $("#loader").hide();
+                        },
+                    });
+                } else {
+                    console.log("Eroor!");
+                }
+            });
+        });
         // function refresh(){
 
         //     var element1 = document.getElementById("homebtnext");

@@ -33,8 +33,8 @@
                                     <div class="col-sm-10">
                                         <select class="form-control" id="grade_to_year" name="grade_to_year">
                                             <option value="">Select</option>
-                                            @foreach($clz_fee_year as $year)
-                                            <option value="{{$year->id}}" >{{$year->year}}</option>
+                                            @foreach($new_years as $new_years_gd)
+                                            <option value="{{$new_years_gd}}" >{{$new_years_gd}}</option>
                                             @endForeach
                                         </select>
                                         @error('grade_to_year')

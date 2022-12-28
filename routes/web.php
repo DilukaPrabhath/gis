@@ -91,6 +91,8 @@ Route::post('admin/inqueries/store', [App\Http\Controllers\AdminController\Admin
 Route::get('/admin/inqueries/view/{pid}', [App\Http\Controllers\AdminController\AdminInqueryCon::class, 'view']);
 Route::get('/admin/inqueries/edit/{id}', [App\Http\Controllers\AdminController\AdminInqueryCon::class, 'edit']);
 Route::post('/admin/inqueries/update/{id}', [App\Http\Controllers\AdminController\AdminInqueryCon::class, 'update']);
+Route::post('/admin/school/student_inq/get_school', [App\Http\Controllers\AdminController\AdminInqueryCon::class, 'get_available_years']);
+Route::post('/admin/school/student_inq/get_available_grade', [App\Http\Controllers\AdminController\AdminInqueryCon::class, 'get_available_grade']);
 
 //Inquries Primary
 Route::get('/admin/primary/inqueries', [App\Http\Controllers\AdminController\AdminPrimaryInquCon::class, 'index']);
@@ -121,6 +123,7 @@ Route::get('/admin/school/student/edit/{id}', [App\Http\Controllers\AdminControl
 Route::get('/admin/school/student/grade/update/{id}', [App\Http\Controllers\AdminController\AdminStudentCon::class, 'student_grade_update']);
 Route::post('/admin/grade/update/store/{id}', [App\Http\Controllers\AdminController\AdminStudentCon::class, 'grade_update']);
 Route::post('/class_payment_check', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'check_payment']);
+Route::post('/admin/school/student/get_school', [App\Http\Controllers\AdminController\AdminStudentCon::class, 'get_school']);
 
 //Student Primary
 Route::post('/admin/primary/inqueries/registration/update/{id}', [App\Http\Controllers\AdminController\AdminPrimaryStudentCon::class, 'update']);
@@ -145,6 +148,8 @@ Route::get('/admin/payments/old/view', [App\Http\Controllers\AdminController\Adm
 Route::get('/class_st_id_num', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'student_class_fee']);
 Route::post('/select_pay_student', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'student_select']);
 Route::get('/student_pay_print/{id}', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'print']);
+Route::get('/student_pay_correction_view/{id}', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'student_payment_correction']);
+Route::post('/admin/payments/correction/store', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'student_payment_correction_store']);
 
 //Academic Awards
 Route::get('/admin/awards/create', [App\Http\Controllers\AdminController\AdminAwordsCon::class, 'create']);

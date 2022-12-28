@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use App\Models\InstClassFee;
 
 class AdminInqueryCon extends Controller
 {
@@ -104,10 +105,11 @@ class AdminInqueryCon extends Controller
        }
 
        public function view($pid){
+
         $data  = Student::find($pid);
         $institute = Institute::orderBy('institute_name', 'ASC')->where('status',1)->get();
         $grade = Grade::orderBy('grade', 'ASC')->where('status',1)->where('nur_or_sch',1)->get();
-        $st = $data->stu_status;
+        $st    = $data->stu_status;
       if($st == 5 || $st == 6){
 
         $fa = Parentm::where('id',$data->fat_id)->where('fa_or_mom',1)->first();
@@ -145,7 +147,7 @@ class AdminInqueryCon extends Controller
             'address'  => 'required',
             ]);
 
-            $stu =  Student::find($id);
+        $stu =  Student::find($id);
 
         $stu->student_full_name  = $request->student_name;
         $stu->dob = $request->dob;
@@ -166,6 +168,67 @@ class AdminInqueryCon extends Controller
         );
 
         return redirect('admin/inqueries')->with($notification);
+
+       }
+
+       public function get_available_years(Request $request){
+        //return $request->institute;
+        $year_now = Carbon::now()->format('Y');
+        // return  $institute;InstClassFee
+        $clz_year = InstClassFee::where('ins_id',$request->institute)->where('year', '>=',$year_now)->get()->pluck('year');
+        // ->pluck('investment_name');
+        // $duplicateFields = ["list_id" => array(), "list_title" => array()];
+        // foreach ($clz_year as $index => $value) {
+        //   if(in_array($value['id'], $duplicateFields['year'])){
+        //     unset($array[$index]);
+        //   }else{
+        //     array_push($duplicateFields['list_id'], $value['list_id']);
+        //   }
+        // }
+        //return $clz_year->toArray();
+        //$a = array_unique($clz_year);
+        //print_r(array_unique($clz_year->toArray(), SORT_REGULAR));
+            $new_years = array_unique($clz_year->toArray(), SORT_REGULAR);
+           //return $new_years;
+            $option = '<option value="">Select Model</option>';
+             foreach ($new_years as $row) {
+                $option .= '<option value="' . $row . '">' . $row . '</option>';
+              }
+            return  response()->json($option);
+        //$array = array_unique($clz_year);
+        //$array = array_unique($clz_year['year'], SORT_REGULAR);
+        //return $clz_year;
+
+    //     $data = InstClassFee::whereIn('id', $clz_year->pluck('id'))
+    // ->groupBy(['year']) // group by query
+    // ->get()
+    // ->groupBy('year');
+    //return $data;
+
+    // $data = InstClassFee::whereInwhereIn('id', $clz_year->pluck('id'))
+    // ->groupBy(['year']) // group by query
+    // ->get()
+    // ->mapToGroups(function ($item, $key) {
+    //     return [$item['year'] => $item['year']];
+    // });
+
+    // return $data;
+       }
+
+
+       public function get_available_grade(Request $request){
+        //return $request->institute;
+        // return  $institute;InstClassFee
+        $clz_year = InstClassFee::grade_get($request);
+        //$clz_year = InstClassFee::where('ins_id',$request->institute)->where('year',$request->register_year)->where('syl_id',$request->sy_type)->get();
+
+           // $new_years = array_unique($clz_year->toArray(), SORT_REGULAR);
+
+            $option = '<option value="">Select Grade</option>';
+             foreach ($clz_year as $row) {
+                $option .= '<option value="' . $row->id . '">' . $row->grade . '</option>';
+              }
+            return  response()->json($option);
 
        }
 }

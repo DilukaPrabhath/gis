@@ -58,9 +58,9 @@
                                             </tr>
                                             <tr>
                                                 <th>Gender</th>
-                                                <td>@if ($data->gender == 1)
+                                                <td>@if ($data->gender == 2)
                                                     <span class="">Male</span>
-                                                   @elseif ($data->gender == 2)
+                                                   @elseif ($data->gender == 1)
                                                     <span class="" >Female</span>
                                                    @endif</td>
                                             </tr>
@@ -129,7 +129,7 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <a type="button" data-toggle="tab" id="homebtnext"  href="#profile-1" class="btn btn-outline-info waves-effect waves-light" onClick="refresh1(this)" role="tab"><i class="fas fa-chevron-right" style="margin-right: 5px;"></i>Next</a>
-                                            <a type="button" href="{{url('admin/inqueries')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
+                                            <a type="button" href="{{url('admin/school/students/table')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
 
                                         </div>
                                     </div>
@@ -142,91 +142,70 @@
                                 <form action="{{url('/admin/applications/update')}}/{{$data->id}}" method="POST" autocomplete="off" id="regForm2"  enctype="multipart/form-data" >
                                     @csrf
                                 <div class="row">
-                                    <div class="col-lg-6">
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label text-right">Application Payment</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control" name="app_pay_st">
-                                                    <option value="2" {{$data->application_status=='2'?'selected':''}}>No</option>
-                                                    <option value="1" {{$data->application_status=='1'?'selected':''}}>Yes</option>
-
-                                                </select>
-                                                @error('app_pay_st')
-                                                <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label text-right">Interview Type</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control" name="inter_ty">
-                                                    <option value="">Not Partisipate</option>
-                                                    <option value="1" {{$data->interview_type=='1'?'selected':''}}>Online</option>
-                                                    <option value="2" {{$data->interview_type=='2'?'selected':''}}>Over the Phone</option>
-                                                    <option value="3" {{$data->interview_type=='3'?'selected':''}}>Physicaly</option>
-                                                </select>
-                                                @error('inter_ty')
-                                                <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label text-right">Interview Status</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control" name="inter_st">
-                                                    <option value="">Not Partisipate</option>
-                                                    <option value="1" {{$data->interview_status=='1'?'selected':''}}>Pass</option>
-                                                    <option value="2" {{$data->interview_status=='2'?'selected':''}}>Fail</option>
-                                                </select>
-                                                @error('inter_st')
-                                                <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label text-right">Appeal Process</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control" name="re_int">
-                                                    <option value="2" {{$data->re_interview_apply=='2'?'selected':''}}>No</option>
-                                                    <option value="1" {{$data->re_interview_apply=='1'?'selected':''}}>Yes</option>
-                                                </select>
-                                                @error('re_int')
-                                                <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                    </div>
-
 
                                     <div class="col-lg-6">
-
-                                    <div class="form-group row">
-                                        <label for="recipt_no" class="col-sm-3 col-form-label text-right">Recipt Number</label>
-                                        <div class="col-sm-9">
-                                            <input class="form-control" type="text" value="{{$data->resipt_number}}" name="recipt_no" id="recipt_no">
-                                        </div>
+                                        <table class="table table-hover mb-0">
+                                            <tr>
+                                                <th>Application Payment</th>
+                                                <td>@if ($data->application_status == 2)
+                                                    <span >No</span>
+                                                   @elseif ($data->stu_status == 2)
+                                                    <span>Yes</span>
+                                                   @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Interview Type</th>
+                                                <td>@if ($data->interview_type == 1)
+                                                    <span >Online</span>
+                                                   @elseif ($data->interview_type == 2)
+                                                    <span>Over the Phone</span>
+                                                   @elseif ($data->interview_type == 3)
+                                                    <span>Physicaly</span>
+                                                   @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Interview Status</th>
+                                                <td>@if ($data->interview_status == 1)
+                                                    <span >Pass</span>
+                                                   @elseif ($data->interview_status == 2)
+                                                    <span>Fail</span>
+                                                   @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Appeal Process</th>
+                                                <td>@if ($data->re_interview_apply == 1)
+                                                    <span >Yes</span>
+                                                   @elseif ($data->re_interview_apply == 2)
+                                                    <span>No</span>
+                                                   @endif
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <label for="example-search-input" class="col-sm-3 col-form-label text-right">Recipt Image</label>
-                                        <div class="col-sm-9">
-                                            <input type="file" id="input-file-now" class="dropify" value="{{$data->resipt_image}}" name="rec_img" id="rec_img" data-default-file="{{url('image/ricipt')}}/{{$data->resipt_image}}"/>
-                                        </div>
+                                    <div class="col-lg-6">
+                                        <table class="table table-hover mb-0">
+                                            <tr>
+                                                <th>Recipt Number</th>
+                                                <td><span>{{$data->resipt_number}}</span></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Recipt Image</th>
+                                                <td><img src="{{url('image/ricipt')}}/{{$data->resipt_image}}" height="250" width="250" alt=""></td>
+                                            </tr>
+                                        </table>
                                     </div>
 
 
-                                    </div>
 
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <a type="button" data-toggle="tab" id="proprebtn" href="#home-1" onClick="refresh2(this)" class="btn btn-outline-info waves-effect waves-light"  role="tab"><i class="fas fa-chevron-left" style="margin-right: 5px;"></i>Previous</a>
                                             <a type="button" data-toggle="tab" id="pronextbtn" href="#settings-1" onClick="refresh3(this)" class="btn btn-outline-info waves-effect waves-light"  role="tab"><i class="fas fa-chevron-right" style="margin-right: 5px;"></i>Next</a>
-                                            <a type="button" href="{{url('admin/inqueries')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
+                                            <a type="button" href="{{url('admin/school/students/table')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
                                             @if ($st == 5 || $st == 6)
                                             @else
                                             <button type="submit" id="x" class="btn btn-success waves-effect waves-light" style="color: white;"><i class="mdi mdi-check-all mr-2"></i>Submit</button>
@@ -239,7 +218,7 @@
                             </div>
 
                             <div class="tab-pane p-3" id="settings-1" role="tabpanel">
-                                <form action="{{url('/admin/inqueries/registration/update')}}/{{$data->id}}" method="POST" autocomplete="off" id="regForm3"  enctype="multipart/form-data" >
+                                <form action="{{url('')}}/{{$data->id}}" method="POST" autocomplete="off" id="regForm3"  enctype="multipart/form-data" >
                                     @csrf
                                 <div class="row">
 
@@ -258,12 +237,12 @@
                                                     @endForeach
                                                 </select>
                                                     @else
-                                                    <select class="form-control" name="institute" id="institute">
+                                                    {{-- <select class="form-control" name="institute" id="institute">
                                                         <option value="">Select </option>
                                                         @foreach($institute as $value)
                                                         <option value="{{ $value->id }}" >{{ $value->institute_name }}</option>
                                                         @endForeach
-                                                    </select>
+                                                    </select> --}}
                                                     @endif
 
 
@@ -271,37 +250,12 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label text-right">Register Year</label>
+                                            <label for="register_date" class="col-sm-3 col-form-label text-right">Registration Date</label>
                                             <div class="col-sm-9">
                                                 @if ($st == 5 || $st == 6)
-                                                <select class="form-control" name="register_year" id="register_year" disabled>
-                                                    <option value="" selected>Select Type</option>
-
-                                                </select>
+                                                <input class="form-control" type="date" value="{{$data->registration_date}}" disabled id="register_date" name="register_date">
                                                 @else
-                                                <select class="form-control" name="register_year" id="register_year">
-                                                    <option value="" selected>Select Type</option>
-
-                                                </select>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label text-right">Syllubus Type</label>
-                                            <div class="col-sm-9">
-                                                @if ($st == 5 || $st == 6)
-                                                <select class="form-control" name="sy_type" id="sy_type" disabled>
-                                                    <option value="" selected>Select Type</option>
-                                                    <option value="1" {{$data->syllubus_type=='1'?'selected':''}}>Local</option>
-                                                    <option value="2" {{$data->syllubus_type=='2'?'selected':''}}>Edexcel</option>
-                                                </select>
-                                                @else
-                                                <select class="form-control" name="sy_type" id="sy_type">
-                                                    <option value="" selected>Select Type</option>
-                                                    <option value="1" >Local</option>
-                                                    <option value="2" >Edexcel</option>
-                                                </select>
+                                                <input class="form-control" type="date" value="" id="register_date" name="register_date">
                                                 @endif
                                             </div>
                                         </div>
@@ -327,16 +281,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label for="register_date" class="col-sm-3 col-form-label text-right">Registration Date</label>
-                                            <div class="col-sm-9">
-                                                @if ($st == 5 || $st == 6)
-                                                <input class="form-control" type="date" value="{{$data->registration_date}}" disabled id="register_date" name="register_date">
-                                                @else
-                                                <input class="form-control" type="date" value="" id="register_date" name="register_date">
-                                                @endif
-                                            </div>
-                                        </div>
+
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">GIS Pre School Attend</label>
@@ -417,7 +362,24 @@
                                             </div>
                                         </div>
 
-
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label text-right">Syllubus Type</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <select class="form-control" name="sy_type" id="sy_type" disabled>
+                                                    <option value="" selected>Select Type</option>
+                                                    <option value="1" {{$data->syllubus_type=='1'?'selected':''}}>Local</option>
+                                                    <option value="2" {{$data->syllubus_type=='2'?'selected':''}}>Edexcel</option>
+                                                </select>
+                                                @else
+                                                <select class="form-control" name="sy_type" id="sy_type">
+                                                    <option value="" selected>Select Type</option>
+                                                    <option value="1" >Local</option>
+                                                    <option value="2" >Edexcel</option>
+                                                </select>
+                                                @endif
+                                            </div>
+                                        </div>
 
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Payment Type</label>
@@ -799,7 +761,7 @@
                                             <button type="submit" id="x" class="btn btn-success waves-effect waves-light" style="color: white;"><i class="mdi mdi-check-all mr-2"></i>Submit</button>
                                             @endif
 
-                                            <a type="button" href="{{url('admin/students')}}" class="btn btn-primary waves-effect waves-light"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
+                                            <a type="button" href="{{url('admin/school/students/table')}}" class="btn btn-primary waves-effect waves-light"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
                                         </div>
                                     </div>
                                 </div>
@@ -886,85 +848,6 @@
 
     <script src="{{asset('frogetor/assets/plugins/dropify/js/dropify.min.js')}}"></script>
     <script src="{{asset('frogetor/assets/pages/jquery.form-upload.init.js')}}"></script>
-
-    {{-- <script>
-        $(document).ready(function(){
-          $("#register_date").keyup(function(){
-            var amt = $("#institute").val();
-            var ptg = $("#grade").val();
-            var register_date = $("#register_date").val();
-            console.log(amt);
-            console.log(ptg);
-            console.log(register_date);
-          });
-        });
-    </script> --}}
-    <script>
-        jQuery(document).ready(function($) {
-          //alert("suc!");
-
-              $("#institute").on('change', function() {
-                 // var sy_type   = $(this).val();
-                 var institute = $("#institute").val();
-                  //   console.log(year);
-                 // alert(institute);
-                  if (institute) {
-                     // $('#loader').show();
-                      $.ajax({
-                          url: "{{ url('/admin/school/student_inq/get_school') }}",
-                          type: "POST",
-                          data: {
-                              institute: institute,
-                              //sy_type:sy_type,
-                          },
-                          headers: {
-                              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                          },
-                          success: function(data) {
-                             //alert("suc!");
-                             console.log(data);
-                             $('#register_year').html(data);
-                             // $("#loader").hide();
-                             //register_year
-                          },
-                      });
-                  } else {
-                      console.log("Eroor!");
-                  }
-              });
-
-
-              $("#sy_type").on('change', function() {
-                 var sy_type   = $(this).val();
-                 var register_year = $("#register_year").val();
-                 var institute = $("#institute").val();
-                  //   console.log(year);
-                  //alert(sy_type);
-                  if (sy_type) {
-                     // $('#loader').show();
-                      $.ajax({
-                          url: "{{ url('/admin/school/student_inq/get_available_grade') }}",
-                          type: "POST",
-                          data: {
-                              institute: institute, sy_type:sy_type,register_year:register_year,
-                          },
-                          headers: {
-                              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                          },
-                          success: function(data) {
-                             //alert("suc!");
-                             console.log(data);
-                             $('#grade').html(data);
-                             // $("#loader").hide();
-                             //register_year
-                          },
-                      });
-                  } else {
-                      console.log("Eroor!");
-                  }
-              });
-          });
-  </script>
 
     <script>
         // function refresh(){
@@ -1071,8 +954,6 @@ $("#regForm2").validate({
 });
 
 $(document).ready(function() {
-
-
 $("#regForm3").validate({
     rules: {
         institute: {
@@ -1086,14 +967,6 @@ $("#regForm3").validate({
         },
         sy_type: {
             required: true,
-            // remote: {
-            //     url: '/class_payment_check',
-            //     type: 'post',
-            //     headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            //     data: {
-            //            'sid': $('#institute').val()
-            //             }
-            //     }
         },
         paymnt_type: {
             required: true,
@@ -1194,8 +1067,7 @@ $("#regForm3").validate({
             required: "Date is required",
         },
         sy_type: {
-            required: "Syllubus Type is required",
-           // remote: "Class Payment Not Added"
+            required: "Syllubus Type is required"
         },
         paymnt_type: {
             required: "Payment Type is required"
@@ -1532,6 +1404,34 @@ function addTabledata(){
     });
           return false;
 
+        });
+
+
+        jQuery(document).ready(function($) {
+            $("#institute").on('change', function() {
+                var institute = $(this).val();
+                //   console.log(year);
+                if (institute) {
+                   // $('#loader').show();
+                    $.ajax({
+                        url: "{{ url('/admin/school/student/get_school') }}",
+                        type: "POST",
+                        data: {
+                            institute: institute
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(data) {
+                            alert("suc!");
+                           // $('#make').html(data);
+                           // $("#loader").hide();
+                        },
+                    });
+                } else {
+                    console.log("Eroor!");
+                }
+            });
         });
 </script>
 

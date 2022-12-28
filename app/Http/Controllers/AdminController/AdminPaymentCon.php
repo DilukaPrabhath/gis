@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
+use App\Models\PaymentCorrection;
 use Illuminate\Support\Facades\Auth;
 
 use function PHPUnit\Framework\isEmpty;
@@ -130,7 +131,8 @@ class AdminPaymentCon extends Controller
                 $fee->pay_date = $request->dip_date;
                 $fee->ref_num  = $request->ref_num;
                 $fee->user_id      = Auth::user()->id;
-                $fee->institute_id = Auth::user()->ins_id;;
+                $fee->institute_id = Auth::user()->ins_id;
+                $fee->pay_note         = $request->note;
 
                 if($request->hasfile('ref_img')){
 
@@ -244,7 +246,6 @@ class AdminPaymentCon extends Controller
                 );
 
                 return redirect('admin/payments')->with($notification);
-
          }
 
          public function print($id){
@@ -255,6 +256,46 @@ class AdminPaymentCon extends Controller
 
             $ins = Institute::find($iid);
             return view('admin.payment.print',compact('data','ins','snum'));
+        }
+
+        public function student_payment_correction($id){
+            $payment = ClassFeePayment::where('id',$id)->first();
+            $data = Student::where('student_id',$payment->stu_num)->first();
+            //return $student;
+            return view('admin.payment.correction_page',compact('payment','data'));
+        }
+
+        public function student_payment_correction_store(Request $request){
+            //return $request;
+
+            $pay_correction = new PaymentCorrection();
+            $pay_correction->price = $request->amout;
+            $pay_correction->note  = $request->note;
+            $pay_correction->student_sid  = $request->student_id_numb;
+            $pay_correction->school_id  = $request->student_instu_numb;
+            $pay_correction->recipt_no  = $request->recipt_id_numb;
+            $pay_correction->user_id    = Auth::user()->id;
+            $pay_correction->save();
+
+            $delete_id    = ClassFeePayment::select('id')->where('recipt_id',$request->recipt_id_numb)->first();
+            $last_payment = ClassFeePayment::where('recipt_id',$request->recipt_id_numb)->first();
+            $stn_data     = Student::where('student_id',$request->student_id_numb)->first();
+
+            $stud = Student::find($stn_data->id);
+            $stud->paid_amount      = $stn_data->paid_amount - $last_payment->price;
+            $stud->payment_cot      = $stn_data->payment_cot - $last_payment->price;
+            $stud->total_nd_pay_cot = $stn_data->total_nd_pay_cot - $last_payment->price;
+            $stud->due_fee          = $stn_data->total_need_pay + $last_payment->price;
+            $stud->save();
+
+            ClassFeePayment::where('id', $delete_id->id)->delete();
+
+            $notification = array(
+                'message' => 'Payment Correction Done Successfully!',
+                'alert-type' => 'Success'
+            );
+
+            return redirect('admin/payments')->with($notification);
         }
 
 

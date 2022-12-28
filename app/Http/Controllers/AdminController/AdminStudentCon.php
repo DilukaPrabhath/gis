@@ -240,9 +240,9 @@ class AdminStudentCon extends Controller
 
        public function view($id){
 
-        $data  = Student::find($id);
+        $data      = Student::find($id);
         $institute = Institute::orderBy('institute_name', 'ASC')->where('status',1)->get();
-        $grade = Grade::orderBy('grade', 'ASC')->where('status',1)->where('nur_or_sch',1)->get();
+        $grade     = Grade::orderBy('grade', 'ASC')->where('status',1)->where('nur_or_sch',1)->get();
         //$grade = Grade::orderBy('grade', 'ASC')->where('status',1)->get();
         $st = $data->stu_status;
       if($st == 5 || $st == 6){
@@ -590,24 +590,26 @@ public function tempremove(Request $request){
 
         $grade     = Grade::orderBy('grade', 'ASC')->where('status',1)->where('nur_or_sch',1)->get();
         $grade_new = Grade::orderBy('grade', 'ASC')->where('status',1)->where('nur_or_sch',1)->where('id', '>', $data->grade_now)->get();
+
         $year_now = Carbon::now()->format('Y');
        // return  $institute;
-        $clz_fee_year = InstClassFee::where('ins_id',$institute->institute)->where('year', '>',$year_now)->where('grd_id', '>',$data->grade_now)->where('syl_id',$syllubus_type->syllubus_type)->get();
+        $clz_fee_year = InstClassFee::where('ins_id',$institute->institute)->where('year', '>',$year_now)->where('grd_id', '>',$data->grade_now)->where('syl_id',$syllubus_type->syllubus_type)->get()->pluck('year');
          // return $clz_fee_year;
+         $new_years = array_unique($clz_fee_year->toArray(), SORT_REGULAR);
 
-        //return $grade_new;
-        return view('admin.student.grade',compact('id','grade','data','grade_new','clz_fee_year'));
+        return view('admin.student.grade',compact('id','grade','data','new_years','clz_fee_year','grade_new'));
        }
 
        public function grade_update(Request $request ,$id){
-         // return $request;
+          //return $request;
 
          $this->validate(request(), [
             'grade_to_year'   => 'required',
             'grade_to_update' => 'required',
         ]);
 
-        $clz_fee = InstClassFee::where('id',$request->grade_year)->first();
+        $clz_fee = InstClassFee::where('year',$request->grade_to_year)->where('grd_id',$request->grade_to_update)->first();
+       //return  $clz_fee;
         $due_fee  = Student::select('due_fee')->where('id',$id)->first();
         $total_need_pay  = Student::select('total_need_pay')->where('id',$id)->first();
         $total_nd_pay_cot  = Student::select('total_nd_pay_cot')->where('id',$id)->first();
@@ -618,7 +620,7 @@ public function tempremove(Request $request){
         $student->total_need_pay =  $total_need_pay->total_need_pay + $clz_fee->fee;
         $student->total_nd_pay_cot = $total_nd_pay_cot->total_nd_pay_cot + $clz_fee->fee;
         $student->is_pending_fee = 1;
-        $student->grade_now = $request->grade_new;
+        $student->grade_now = $request->grade_to_update;
         $student->save();
 
         $notification = array(
@@ -627,6 +629,13 @@ public function tempremove(Request $request){
         );
 
         return redirect('admin/school/students/table')->with($notification);
+       }
+
+       public function get_school(Request $request){
+        return $request;
+        $year_now = Carbon::now()->format('Y');
+        // return  $institute;
+        // $clz_fee_year = InstClassFee::where('ins_id',$institute->institute)->where('year', '>',$year_now)->where('grd_id', '>',$data->grade_now)->where('syl_id',$syllubus_type->syllubus_type)->get();
        }
 
 }

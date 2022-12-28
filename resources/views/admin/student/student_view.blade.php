@@ -17,7 +17,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">View registration Process</h4>
+                        <h4 class="mt-0 header-title">View registration yyy Process</h4>
 
 
 
@@ -225,7 +225,7 @@
                                     <div class="col-lg-6">
 
 
-
+<button id=""></button>
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">School</label>
                                             <div class="col-sm-9">
@@ -237,12 +237,12 @@
                                                     @endForeach
                                                 </select>
                                                     @else
-                                                    <select class="form-control" name="institute" id="institute">
+                                                    {{-- <select class="form-control" name="institute" id="institute">
                                                         <option value="">Select </option>
                                                         @foreach($institute as $value)
                                                         <option value="{{ $value->id }}" >{{ $value->institute_name }}</option>
                                                         @endForeach
-                                                    </select>
+                                                    </select> --}}
                                                     @endif
 
 
@@ -849,6 +849,7 @@
     <script src="{{asset('frogetor/assets/plugins/dropify/js/dropify.min.js')}}"></script>
     <script src="{{asset('frogetor/assets/pages/jquery.form-upload.init.js')}}"></script>
 
+
     <script>
         // function refresh(){
 
@@ -1200,7 +1201,7 @@ $('#father_nic').autocomplete({
 <script>
     //   autocomplete
 $(document).ready(function(){
- console.log("HI");
+ //console.log("HI");
 $('#mother_nic').autocomplete({
 
  source: function(request, response) {
@@ -1405,6 +1406,10 @@ function addTabledata(){
           return false;
 
         });
+
+
+
 </script>
+
 
 @stop
