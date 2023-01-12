@@ -89,18 +89,21 @@ class AdminActiviSetCon extends Controller
 
 
        //name
-       public function validateactivity(Request $request){
+       public function validateactivity(){
         {
 
-            $institute = Activity::where('activity', $request->activity)->first('activity');
-               if($institute){
-                 $return =  false;
-                }
-                else{
-                 $return= true;
-                }
-                echo json_encode($return);
-                exit;
+            $return= true;
+            // $institute = Activity::where('activity', $request->activity)->first('activity');
+
+            // return $institute;
+            //    if($institute){
+            //      $return =  false;
+            //     }
+            //     else{
+            //      $return= true;
+            //     }
+            //     echo json_encode($return);
+            //     exit;
            }
        }
 

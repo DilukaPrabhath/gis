@@ -200,7 +200,7 @@ tr:hover .cut { opacity: 1; }
 
 <body onload="myFunction()">
 		<header>
-			<h1>Activity Payment</h1>
+			<h1>Class Fee Payment</h1>
 
 		</header>
 		<article>

@@ -22,6 +22,7 @@
                 <li><a href="{{url('/admin/event_tickets')}}">Event Tickets</a></li>
                 <li><a href="{{url('/admin/classfee')}}">Class Fees</a></li>
                 <li><a href="{{url('/admin/banks')}}">Banks</a></li>
+                <li><a href="{{url('/admin/nursary/class_type')}}">Nursary Class Type</a></li>
             </ul>
         </li>
 

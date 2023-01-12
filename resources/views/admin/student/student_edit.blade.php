@@ -227,7 +227,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">School</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control" name="institute" id="institute">
+                                                <select class="form-control" name="institute" id="institute" disabled="true">
                                                     <option value="">Select </option>
                                                     @foreach($institute as $value)
                                                     <option value="{{ $value->id }}" {{ $value->id == $data->institute ? 'selected' : '' }}>{{ $value->institute_name }}</option>
@@ -236,7 +236,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row">
+                                        {{-- <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">School</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="institute2" id="institute2">
@@ -246,7 +246,7 @@
                                                     @endForeach
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         {{-- <div class="form-group row">
                                             <label for="register_date" class="col-sm-3 col-form-label text-right">Registration Date</label>
@@ -259,7 +259,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Syllubus Type</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control" name="sy_type" id="sy_type">
+                                                <select class="form-control" name="sy_type" id="sy_type" disabled="true">
                                                     <option value="" selected>Select Type</option>
                                                     <option value="1" {{$data->syllubus_type=='1'?'selected':''}}>Local</option>
                                                     <option value="2" {{$data->syllubus_type=='2'?'selected':''}}>Edexcel</option>
@@ -270,7 +270,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">Grade</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control" name="grade" id="grade">
+                                                <select class="form-control" name="grade" id="grade" disabled="true">
                                                     <option value="">Select Grade</option>
                                                     @foreach($grade as $value)
                                                     <option value="{{ $value->id }}" {{ $value->id == $data->grade_now ? 'selected' : '' }}>{{ $value->grade }}</option>
@@ -284,7 +284,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label text-right">GIS Pre School Attend</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control" name="gis_pr_sc_at" id="gis_pr_sc_at">
+                                                <select class="form-control" name="gis_pr_sc_at" id="gis_pr_sc_at" >
                                                     <option value="">Select</option>
                                                     <option value="1" {{$data->pre_sc_att=='1'?'selected':''}}>Yes</option>
                                                     <option value="2" {{$data->pre_sc_att=='2'?'selected':''}}>No</option>
@@ -1316,32 +1316,32 @@ $(document).ready(function() {   //same as: $(function() {
     });
 });
 
-jQuery(document).ready(function($) {
-            $("#institute").on('change', function() {
-                var institute = $(this).val();
-                //   console.log(year);
-                if (institute) {
-                   // $('#loader').show();
-                    $.ajax({
-                        url: "{{ url('/admin/school/student/get_school') }}",
-                        type: "POST",
-                        data: {
-                            institute: institute
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(data) {
-                            alert("suc!");
-                           // $('#make').html(data);
-                           // $("#loader").hide();
-                        },
-                    });
-                } else {
-                    console.log("Eroor!");
-                }
-            });
-        });
+// jQuery(document).ready(function($) {
+//             $("#institute").on('change', function() {
+//                 var institute = $(this).val();
+//                 //   console.log(year);
+//                 if (institute) {
+//                    // $('#loader').show();
+//                     $.ajax({
+//                         url: "{{ url('/admin/school/student/get_school') }}",
+//                         type: "POST",
+//                         data: {
+//                             institute: institute
+//                         },
+//                         headers: {
+//                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//                         },
+//                         success: function(data) {
+//                             alert("suc!");
+//                            // $('#make').html(data);
+//                            // $("#loader").hide();
+//                         },
+//                     });
+//                 } else {
+//                     console.log("Eroor!");
+//                 }
+//             });
+//         });
 </script>
 
 @stop

@@ -31,75 +31,50 @@ class AdminStudentCon extends Controller
        }
 
        public function update(Request $request,$id){
-
-        // $now = Carbon::now();
+        //return  $request;
+       // $grd
         $x = $request->register_date;
         $now = new Carbon( $x );
 
             $clz_fee = InstClassFee::where('ins_id',$request->institute)->where('year', $now->year)->where('grd_id',$request->grade)->where('syl_id',$request->sy_type)->first();
+           // return $clz_fee;
+
             if($clz_fee != null){
                 $fee = $clz_fee->fee;
-             //return    $fee = 00.00;
             }else{
-            //   return  $fee = 00.00;
                 $fee = 00.00;
             }
-
+            //return $fee;
             $sc_po_co = Student::where('institute',$request->institute)->count();
             $sc_po    = $sc_po_co + 1;
-            $year = $now->year;
+            $year = $request->register_year;
             $grd = $request->grade;
             $gd  = str_pad($grd,2,"0", STR_PAD_LEFT);
-
             $isemty = Student::where('stu_status',5)->where('prmy',2)->get();
             if($isemty->isEmpty()){
-              // return "Empt";
-                    //    $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
                     $num = 'GIS'.'/'.$year.'/'.'00001';
             }else{
-                // return "Not em";
-              //$latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->whereyear('registration_date', $year)->first()->student_id;
               $latnum = Student::orderBy('student_id', 'desc')->where('stu_status',5)->where('prmy',2)->first()->student_id;
-              //return  $latnum;
               $string =  preg_replace("/[^0-9\.]/", '', $latnum);
               $otputnum = substr($string, 0); //last 3 number ex 001
-              //return $otputnum;
               $otputyear = substr($string, 0, 4); // last number's first 4 digit, year 2021-05-10 -> 2021
-              $otputgr = substr($string,4,2); //grd 2 digit,year
+             // $otputgr = substr($string,4,2); //grd 2 digit,year
+
                 if( $year != $otputyear){
-                    //   $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
+
                     $num = 'GIS'.'/'.$year.'/'.'00001';
                 }else{
 
-                    if($otputgr != $gd){
+                    $sting =  preg_replace("/[^0-9\.]/", '', $latnum);
+                    $otputnum2 = substr($sting, 4); //last 3 number ex 001
+                    //$num = 'GIS'.'/'.$year.'/'.$gd.'/'. sprintf('%03d', $otputnum2+1);
+                    $num = 'GIS'.'/'.$year.'/'. sprintf('%05d', $otputnum2+1);
 
-                        $lst_grd_st = Student::orderBy('student_id', 'desc')->where('grade_now',$request->grade)->whereyear('registration_date', $year)->get();
-
-                        if($lst_grd_st->isEmpty()){
-                             $num = 'GIS'.'/'.$year.'/'.'00001';
-                        }else{
-                            $stu_id = $lst_grd_st[0]->student_id;
-                            $sting =  preg_replace("/[^0-9\.]/", '', $stu_id);
-                            $otputnum2 = substr($sting, 4); //last 3 number ex 001
-                            //$num = 'GIS'.'/'.$year.'/'.$gd.'/'. sprintf('%03d', $otputnum2+1);
-                            $num = 'GIS'.'/'.$year.'/'. sprintf('%05d', $otputnum2+1);
-                        }
-
-                        //    if($lst_grd_st->isEmpty()){
-                    //     // return "Empt";
-                    //          return    $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
-                    //   }else{
-                    //    return $string_lst =  preg_replace("/[^0-9\.]/", '', $lst_grd_st);
-                    //   }
-                    // return    $num = 'GIS'.'/'.$year.'/'.$gd.'/'.'001';
-                    //     }else{
-                    //         return  "Equal";
-                    // return    $num = 'GIS'.'/'.$year.'/'.$gd.'/'. sprintf('%03d', $otputnum+1); //increment SID number in same grade
-                    //     }
-                 }
             }
-            //return $num;
+
         }
+
+        //return "Hi";
 
         $fa_av = Parentm::select('parent_nic')->where('parent_nic',$request->father_nic)->where('fa_or_mom',1)->get();
 
@@ -114,7 +89,7 @@ class AdminStudentCon extends Controller
             $father->parent_work_address = $request->father_address_of_work_place;
             $father->parent_ocupation = $request->father_occupation;
             $father->fa_or_mom = 1; //father
-            $father->save();
+           $father->save();
 
             $fatherid = $father->id;
         }else{
@@ -137,7 +112,7 @@ class AdminStudentCon extends Controller
         $mom->parent_work_address = $request->mother_address_of_work_place;
         $mom->parent_ocupation = $request->mother_occupation;
         $mom->fa_or_mom = 2; //mother
-        $mom->save();
+       $mom->save();
 
         $motherid = $mom->id;
 
@@ -147,7 +122,7 @@ class AdminStudentCon extends Controller
         $motherid = $mter[0]->id;
         //return "not Emp";
         }
-
+       // return "Hi";
        // return $request;
        $s_id = Student::find($id)->student_id;
 
@@ -164,23 +139,21 @@ class AdminStudentCon extends Controller
         $student->recod       = $request->recod;
         $student->is_id_issue = $request->is_id_issue;
         $student->is_id_fee_paid = $request->is_id_paid;
-        $student->syllubus_type = $request->sy_type;
-        $student->pamt_typ    = $request->paymnt_type;
-        $student->emergency_contact_nic = $request->nic;
-        $student->emergency_contact_name = $request->name;
+        $student->syllubus_type  = $request->sy_type;
+        $student->pamt_typ       = $request->paymnt_type;
+        $student->emergency_contact_nic    = $request->nic;
+        $student->emergency_contact_name   = $request->name;
         $student->emergency_contact_mobile = $request->mobile;
         $student->emergency_contact_relationship = $request->relationship;
         $student->stu_status  = 5;
-        $student->inq_status =4;
+        $student->inq_status  = 4;
         $student->mom_id = $motherid;
         $student->fat_id = $fatherid;
         $student->scl_po_no = $sc_po;
         $student->grade_fee = $fee;
-        $student->total_need_pay = $fee;
+        $student->total_need_pay   = $fee;
         $student->total_nd_pay_cot = $fee;
         $student->due_fee = $fee;
-
-
 
         if($request->hasfile('stu_img')){
 
@@ -194,8 +167,8 @@ class AdminStudentCon extends Controller
 
            }
 
-       $student->save();
-
+      $student->save();
+           //return $student;
        if($student->stu_img != null){
         $proimg = new ProfileImage();
 
@@ -217,8 +190,8 @@ class AdminStudentCon extends Controller
 
           $siblin = new Siblin();
 
-          $siblin->s_id   = $student->id;
-          $siblin->stu_id = $emp->str_2;
+          $siblin->s_id         = $student->id;
+          $siblin->stu_id       = $emp->str_2;
           $siblin->relationship = $emp->str_3;
           $siblin->save();
 

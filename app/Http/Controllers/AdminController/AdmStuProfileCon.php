@@ -56,8 +56,11 @@ class AdmStuProfileCon extends Controller
 
     public function profile_search(Request $request){
 
-
-        $stu_data = Student::where('student_id',$request->stu_id)->get();
+        $this->validate(request(), [
+            'student_id'    => 'required',
+            ]);
+       //return  $request;
+        $stu_data = Student::where('student_id',$request->student_id)->get();
         $data  = Student::find($stu_data[0]->id);
         $stu_img_count = ProfileImage::where('stu_id',$stu_data[0]->id)->count();
         $stu_img = ProfileImage::where('stu_id',$stu_data[0]->id)->get();
@@ -78,13 +81,14 @@ class AdmStuProfileCon extends Controller
     //image upload
 
     public function eventimage(Request $request){
-        //return $request;
+      //   return $request;
 
-        $stu_data = Student::where('student_id',$request->stu_id)->get();
+        $stu_data = Student::where('student_id',$request->stu_id)->first();
+        //return $stu_data;
         // return $stu_data[0]->id;
         $stimg = new StudentEventImage();
 
-        $stimg->stu_id = $stu_data[0]->id;
+        $stimg->stu_id = $stu_data->id;
         $stimg->event  = $request->event;
         $stimg->status = 1;
 
@@ -99,7 +103,8 @@ class AdmStuProfileCon extends Controller
            }else{
               return "Hi";
            }
-        $stimg->save();
+        //return $stimg;
+       $stimg->save();
         // //$stu_data = Student::where('student_id',$request->stu_id)->get();
 
         // $notification = array(

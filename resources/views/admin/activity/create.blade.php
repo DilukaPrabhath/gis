@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="mt-0 header-title">Create Activity</h4>
-                        <form action="{{url('admin/activity/store')}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
+                        <form action="{{url('admin/activity/store')}}" method="POST" autocomplete="off" id="regForm2023" enctype="multipart/form-data">
                             @csrf
 
                         <div class="row">
@@ -111,40 +111,42 @@
     @section('scripts')
 
     <script>
-        $(document).ready(function() {
-            $("#regForm").validate({
-                rules: {
-                    activity: {
-                        required: true,
-                        maxlength: 100,
-                        remote:'/validate-activity',
-                    },
-                    price:{
-                        number: true,
-                        required: true
-                    },
-                    status: {
-                        required: true,
-                    }
+        // $(document).ready(function() {
+        //    // alert("dddd");
+        //     $("#regForm2023").validate({
 
-                },
-                messages: {
-                    activity: {
-                        required: "Activity Name is required",
-                        maxlength: "Activity Name cannot be more than 100 characters",
-                        remote:"Activity Name already taken",
-                    },
-                    Price: {
-                        required: "Price is required"
+        //         rules: {
+        //             activity: {
+        //                 required: true,
+        //                // maxlength: 100,
+        //                 remote:'{{url('validate_activity')}}',
+        //             },
+        //             price:{
+        //                 number: true,
+        //                 required: true
+        //             },
+        //             status: {
+        //                 required: true,
+        //             }
 
-                    },
-                    status: {
-                        required: "Status is required"
-                    }
-                }
-            });
+        //         },
+        //         messages: {
+        //             activity: {
+        //                 required: "Activity Name is required",
+        //                 maxlength: "Activity Name cannot be more than 100 characters",
+        //                 remote:"Activity Name already taken",
+        //             },
+        //             Price: {
+        //                 required: "Price is required"
 
-        });
+        //             },
+        //             status: {
+        //                 required: "Status is required"
+        //             }
+        //         }
+        //     });
+
+        // });
 
 
     </script>

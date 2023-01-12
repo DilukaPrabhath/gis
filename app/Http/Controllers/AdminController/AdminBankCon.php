@@ -22,7 +22,7 @@ class AdminBankCon extends Controller
 
         $this->validate(request(), [
 
-            'bank_name'          => 'required',
+            'bank_name'      => 'required',
             'status'         => 'required',
             ]);
 

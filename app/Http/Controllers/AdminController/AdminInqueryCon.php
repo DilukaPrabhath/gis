@@ -133,7 +133,7 @@ class AdminInqueryCon extends Controller
        }
 
        public function update(Request $request,$id){
-         //return  $request;
+        //  return  $request;
         $this->validate(request(), [
 
             'student_name'  => 'required',
@@ -221,12 +221,12 @@ class AdminInqueryCon extends Controller
         // return  $institute;InstClassFee
         $clz_year = InstClassFee::grade_get($request);
         //$clz_year = InstClassFee::where('ins_id',$request->institute)->where('year',$request->register_year)->where('syl_id',$request->sy_type)->get();
-
+       // return $clz_year;
            // $new_years = array_unique($clz_year->toArray(), SORT_REGULAR);
 
             $option = '<option value="">Select Grade</option>';
              foreach ($clz_year as $row) {
-                $option .= '<option value="' . $row->id . '">' . $row->grade . '</option>';
+                $option .= '<option value="' . $row->grd_id . '">' . $row->grade . '</option>';
               }
             return  response()->json($option);
 

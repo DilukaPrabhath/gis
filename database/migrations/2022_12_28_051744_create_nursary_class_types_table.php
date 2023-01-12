@@ -18,6 +18,7 @@ class CreateNursaryClassTypesTable extends Migration
             $table->string('class_types_name')->nullable();
             $table->integer('school_id')->nullable();
             $table->integer('status')->nullable();
+            $table->timestamps();
         });
     }
 

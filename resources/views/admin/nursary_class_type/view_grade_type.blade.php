@@ -21,7 +21,7 @@ div.sel_id {
                     @csrf
                     <div class="card">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">Nursary Grade Type</h4>
+                        <h4 class="mt-0 header-title">Nursary Class Type View</h4>
                         <div class="row" style="margin-bottom: 15px;">
 
                         </div>
@@ -34,7 +34,19 @@ div.sel_id {
                                 <div class="form-group row">
                                     <label for="grade_types_name" class="col-md-3 col-form-label text-right">Grade Type Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" id="grade_types_name" name="grade_types_name" class="form-control">
+                                        <input type="text" id="grade_types_name" name="grade_types_name" value="{{}}" class="form-control">
+                                    @error('grade_types_name')
+                                        <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
+                                    @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="grade_types_name" class="col-md-3 col-form-label text-right">Status</label>
+                                    <div class="col-md-9">
+                                       @if ()
+
+                                       @endif
                                     @error('grade_types_name')
                                         <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
                                     @enderror
@@ -45,7 +57,7 @@ div.sel_id {
                                     <div class="col-2"></div>
                                     <div class="form-group row">
                                         <button type="submit" id="x" class="btn btn-success waves-effect waves-light" style="color: white;"><i class="mdi mdi-check-all mr-2"></i>Submit</button>
-                                        <a type="button" href="{{url('/admin/nursary/class_type')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
+                                        <a type="button" href="{{url('/admin/nursary/class_type/store')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
                                     </div>
                                 </div>
 
@@ -87,11 +99,14 @@ div.sel_id {
                                     @endif
                                 </td>
                                 <th>
-                                    {{-- <a href="{{url('admin/nursary/grade_type/view')}}/{{$id}}/{{$grade->id}}" type="button" class="btn btn-dropbox">
+                                    <a href="{{url('admin/nursary/class_type/view')}}/{{$grade->id}}" target="_blank" type="button" class="btn btn-dropbox">
                                         <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
-                                    </a> --}}
-                                    <a href="{{url('admin/nursary/grade_type/edit')}}/{{$id}}/{{$grade->id}}" type="button" class="btn btn-danger ">
-                                        <i class="fab fas fa-pencil-alt" style="color: white; font-size:8px;"></i>
+                                    </a>
+                                    <a href="{{url('admin/nursary/class_type/edit')}}/{{$grade->id}}" target="_blank" type="button" class="btn btn-danger ">
+                                        <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
+                                    </a>
+                                    <a href="{{url('admin/nursary/class_type/add')}}/{{$grade->id}}" target="_blank" type="button" class="btn btn-warning">
+                                        <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -114,12 +129,6 @@ div.sel_id {
     @section('scripts')
     <script src="{{asset('frogetor/assets/plugins/dropify/js/dropify.min.js')}}"></script>
     <script src="{{asset('frogetor/assets/pages/jquery.form-upload.init.js')}}"></script>
-
-
-
-
-
-
 
 
     @stop

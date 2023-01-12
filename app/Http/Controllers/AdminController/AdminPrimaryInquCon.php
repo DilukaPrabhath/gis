@@ -32,7 +32,7 @@ class AdminPrimaryInquCon extends Controller
        }
 
        public function store(Request $request){
-
+       //return $request;
         DB::beginTransaction();
 
         $this->validate(request(), [
@@ -72,6 +72,11 @@ class AdminPrimaryInquCon extends Controller
                  }
             }
 
+            if( $request->gender == 'on'){
+                $gen = 1;
+            }else{
+                $gen = 2;
+            }
         $stu = new Student();
 
         $stu->student_full_name  = $request->student_name;
@@ -83,7 +88,7 @@ class AdminPrimaryInquCon extends Controller
         $stu->address  = $request->address;
         $stu->contact_number  = $request->contact_number;
         $stu->inq_type  = $request->inquery_type; //inquery = 1 /appliction = 2/ interview = 3 / registration = 4 / student = 5
-        $stu->gender    = $request->gender;
+        $stu->gender    = $gen;
         $stu->inq_status  = 1;
         $stu->stu_status = 1;
         $stu->prmy = 1;
@@ -121,6 +126,12 @@ class AdminPrimaryInquCon extends Controller
            'address'  => 'required',
            ]);
 
+           if( $request->gender == 'on'){
+            $gen = 1;
+        }else{
+            $gen = 2;
+        }
+
            $stu =  Student::find($id);
 
        $stu->student_full_name  = $request->student_name;
@@ -131,7 +142,7 @@ class AdminPrimaryInquCon extends Controller
        $stu->nationality = $request->nationality;
        $stu->address = $request->address;
        $stu->inq_type  = $request->inquery_type; //inquery = 1 /appliction = 2/ interview = 3 / registration = 4 / student = 5
-       $stu->gender    = $request->gender;
+       $stu->gender    = $gen;
        $stu->inq_status  = $request->inquery_status;
        // $stu->stu_status = 1;
        $stu->save();

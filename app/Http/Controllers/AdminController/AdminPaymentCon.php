@@ -261,7 +261,7 @@ class AdminPaymentCon extends Controller
         public function student_payment_correction($id){
             $payment = ClassFeePayment::where('id',$id)->first();
             $data = Student::where('student_id',$payment->stu_num)->first();
-            //return $student;
+            //return $payment;
             return view('admin.payment.correction_page',compact('payment','data'));
         }
 

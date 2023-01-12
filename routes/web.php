@@ -151,6 +151,22 @@ Route::get('/student_pay_print/{id}', [App\Http\Controllers\AdminController\Admi
 Route::get('/student_pay_correction_view/{id}', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'student_payment_correction']);
 Route::post('/admin/payments/correction/store', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'student_payment_correction_store']);
 
+//Nursary Class Type
+Route::get('/admin/nursary/class_type', [App\Http\Controllers\AdminController\Nursary_ClassSetUpController::class, 'index']);
+Route::get('/admin/nursary/class_type/create', [App\Http\Controllers\AdminController\Nursary_ClassSetUpController::class, 'create']);
+Route::get('/admin/nursary/class_type/view/{id}', [App\Http\Controllers\AdminController\Nursary_ClassSetUpController::class, 'view']);
+Route::get('/admin/nursary/class_type/edit/{id}', [App\Http\Controllers\AdminController\Nursary_ClassSetUpController::class, 'edit']);
+Route::post('/admin/nursary/class_type/store', [App\Http\Controllers\AdminController\Nursary_ClassSetUpController::class, 'store']);
+Route::post('admin/nursary/class_type/update/{id}', [App\Http\Controllers\AdminController\Nursary_ClassSetUpController::class, 'update']);
+
+//Nursary Grade Type
+Route::get('/admin/nursary/class_type/add/{id}', [App\Http\Controllers\AdminController\Nursary_ClassSetUpController::class, 'grade_type_create']);
+Route::get('/admin/nursary/grade_type/create', [App\Http\Controllers\AdminController\Nursary_ClassSetUpController::class, 'create']);
+Route::get('/admin/nursary/grade_type/view/{id}/{gd_id}', [App\Http\Controllers\AdminController\Nursary_ClassSetUpController::class, 'grade_type_edit']);
+Route::get('/admin/nursary/grade_type/edit/{id}/{gd_id}', [App\Http\Controllers\AdminController\Nursary_ClassSetUpController::class, 'grade_type_edit']);
+Route::post('/admin/nursary/grade_type/store', [App\Http\Controllers\AdminController\Nursary_ClassSetUpController::class, 'grade_type_store']);
+Route::post('/admin/nursary/grade_type/update/{id}/{gd_id}', [App\Http\Controllers\AdminController\Nursary_ClassSetUpController::class, 'grade_type_update']);
+
 //Academic Awards
 Route::get('/admin/awards/create', [App\Http\Controllers\AdminController\AdminAwordsCon::class, 'create']);
 Route::post('/admin/awards/store', [App\Http\Controllers\AdminController\AdminAwordsCon::class, 'store']);
@@ -185,6 +201,7 @@ Route::post('/admin/activity/store', [App\Http\Controllers\AdminController\Admin
 Route::get('/admin/activities/edit/{id}', [App\Http\Controllers\AdminController\AdminActiviSetCon::class, 'edit']);
 Route::post('/admin/activities/update/{id}', [App\Http\Controllers\AdminController\AdminActiviSetCon::class, 'update']);
 Route::get('/validate-activity', [App\Http\Controllers\AdminController\AdminActiviSetCon::class, 'validateactivity']);
+Route::get('/validate_activity', [App\Http\Controllers\AdminController\AdminActiviSetCon::class, 'validateactivity']);
 
 //Event Create
 Route::get('/admin/events', [App\Http\Controllers\AdminController\AdminEventCon::class, 'index']);

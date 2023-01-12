@@ -11,7 +11,8 @@
                         <h4 class="mt-0 header-title">Search</h4>
 
 
-                        <form action="{{url('/admin/student/find')}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
+                        {{-- <form action="{{url('/admin/student/find')}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data"> --}}
+                            <form action="{{url('/admin/student/find')}}" method="POST" id="" enctype="multipart/form-data">
                             @csrf
                         <div class="row">
                             <div class="col-lg-12">
@@ -23,8 +24,8 @@
                                             <option value="2" >Student Name</option>
                                         </select> --}}
 
-                                        <input class="form-control" type="text" placeholder="Student ID" value="" name="stu_id" id="stu_id">
-                                        @error('stu_id')
+                                        <input class="form-control" type="text" placeholder="Student ID" value="" name="student_id" id="student_id">
+                                        @error('student_id')
                                         <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -54,31 +55,7 @@
     @stop
     @section('scripts')
 
-    <script>
 
-        $(document).ready(function() {
-
-            $("#regForm").validate({
-                rules: {
-                    stu_id: {
-                        required: true,
-                        maxlength: 20,
-                        remote:'/validate_profile',
-                    },
-                },
-                messages: {
-                    stu_id: {
-                        required: "Student ID is required",
-                        maxlength: "Student ID cannot be more than 20 characters",
-                        remote : "Student ID Not Exsist."
-                    },
-
-                }
-            });
-
-        });
-
-    </script>
 
 <script>
     //   autocomplete

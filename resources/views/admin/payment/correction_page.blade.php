@@ -104,18 +104,25 @@ div.sel_id {
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-sm-3 col-form-label text-right">Totle Class Fee</label>
                                     <div class="col-sm-9">
-                                        <label for="" id="tot_cls_fee_lb" style="padding-top: 6px;">@isset($data) {{$data->grade_fee}} @endisset</label>
+                                        <label for="" id="tot_cls_fee_lb" style="padding-top: 6px;">@isset($data)Rs. {{$data->grade_fee}} @endisset</label>
                                     </div>
                                 </div>
 
-                                <div class="form-group row" >
+                                {{-- <div class="form-group row" >
 
-                                </div>
+                                </div> --}}
 
                                 <div class="form-group row">
                                     <label for="example-text-input" class="col-sm-3 col-form-label text-right">Balance Forword</label>
                                     <div class="col-sm-9">
-                                        <label for="" id="blnc_for_lbl" style="padding-top: 6px;">@isset($data) {{$data->due_fee}} @endisset</label>
+                                        <label for="" id="blnc_for_lbl" style="padding-top: 6px;">@isset($data)Rs. {{$data->due_fee}} @endisset</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-3 col-form-label text-right">Note</label>
+                                    <div class="col-sm-9">
+                                        <label for="" id="blnc_for_lbl" style="padding-top: 6px;">@isset($data) {{$payment->pay_note}} @endisset</label>
                                     </div>
                                 </div>
 

@@ -814,7 +814,7 @@
                                 </div>
                             </div>
                             <div>
-                                <input type="hidden" name="stu_id" value="{{$stu_data[0]->student_id}}">
+                                <input type="hidden" name="student_id" value="{{$stu_data[0]->student_id}}">
                             </div>
                         </div>
                     </div>

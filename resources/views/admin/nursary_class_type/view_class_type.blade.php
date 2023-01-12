@@ -17,69 +17,68 @@ div.sel_id {
 
 
             <div class="col-12">
-                <form action="{{url('/admin/nursary/class_type/update')}}/{{$id}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
+                <form action="{{url('/admin/nursary/class_type/store')}}" method="POST" autocomplete="off" id="regForm" enctype="multipart/form-data">
                     @csrf
                     <div class="card">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">Nursary Class Type Edit</h4>
+                        <h4 class="mt-0 header-title">Nursary Class Type View</h4>
                         <div class="row" style="margin-bottom: 15px;">
 
                         </div>
 
                         <div class="row">
-
                             <div class="col-lg-6">
 
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label text-right">Institute</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" id="institute" name="school_id">
+                                        <select class="form-control" id="institute" name="institute" disabled>
                                             <option value="">Select</option>
                                             @foreach ($school as $inst)
                                             <option value="{{$inst['id']}}" {{ $inst['id'] == $data['school_id'] ? 'selected' : '' }}>{{$inst['institute_name']}}</option>
                                             @endforeach
                                         </select>
-                                        @error('school_id')
+                                        @error('institute')
                                         <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="class_types_name" class="col-md-3 col-form-label text-right">Class Type Name</label>
+                                    <label for="class_type_name" class="col-md-3 col-form-label text-right">Class Type Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" id="class_types_name" value="{{ $data['class_types_name']}}" name="class_types_name" class="form-control">
-                                    @error('class_types_name')
+
+                                        <input type="text" id="class_type_name" value="{{$data['class_types_name']}}" name="class_type_name" class="form-control" readonly>
+
+                                    @error('class_type_name')
                                         <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
                                     @enderror
                                     </div>
-
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label text-right">Status</label>
-                                    <div class="col-sm-9">
-                                        <select class="form-control" id="status" name="status">
-                                            <option value="">Select</option>
-                                            <option value="1" {{$data['status']=='1'?'selected':''}}>Active</option>
-                                            <option value="0" {{$data['status']=='0'?'selected':''}}>Deactive</option>
-                                        </select>
-                                        @error('status')
+                                    <label for="class_type_name" class="col-md-3 col-form-label text-right">Class Type Name</label>
+                                    <div class="col-md-9">
+                                        @if ($data->status == 1)
+                                        <input type="text" id="class_type_name" value="Active" name="class_type_name" class="form-control" readonly>
+                                        @else
+                                        <input type="text" id="class_type_name" value="Deactive" name="class_type_name" class="form-control" readonly>
+                                        @endif
+
+                                    @error('class_type_name')
                                         <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
-                                        @enderror
+                                    @enderror
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-2"></div>
                                     <div class="form-group row">
-                                        <button type="submit" id="x" class="btn btn-success waves-effect waves-light" style="color: white;"><i class="mdi mdi-check-all mr-2"></i>Submit</button>
                                         <a type="button" href="{{url('/admin/nursary/class_type')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
                                     </div>
                                 </div>
 
                             </div>
-
 
                         </div>
 
