@@ -339,9 +339,9 @@ $('#parent_nic').autocomplete({
  },
  select:function(event,ui){
      //console.log(ui);
-     var name = ui.item.parent_name2;
-     var email = ui.item.parent_email2;
-     var mobile = ui.item.parent_mobile2;
+     var name    = ui.item.parent_name2;
+     var email   = ui.item.parent_email2;
+     var mobile  = ui.item.parent_mobile2;
      var address = ui.item.parent_address2;
 
      document.getElementById('parent_name').value = name;

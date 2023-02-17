@@ -61,6 +61,7 @@ class AdmStuProfileCon extends Controller
             ]);
        //return  $request;
         $stu_data = Student::where('student_id',$request->student_id)->get();
+       // return  $stu_data;
         $data  = Student::find($stu_data[0]->id);
         $stu_img_count = ProfileImage::where('stu_id',$stu_data[0]->id)->count();
         $stu_img = ProfileImage::where('stu_id',$stu_data[0]->id)->get();
@@ -81,11 +82,12 @@ class AdmStuProfileCon extends Controller
     //image upload
 
     public function eventimage(Request $request){
-      //   return $request;
+     // return $request->student_id;
 
-        $stu_data = Student::where('student_id',$request->stu_id)->first();
+        $stu_data = Student::where('student_id',$request->student_id)->first();
+       // $stu_data = Student::where('student_id',$request->student_id)->get();
         //return $stu_data;
-        // return $stu_data[0]->id;
+        //return $stu_data->id;
         $stimg = new StudentEventImage();
 
         $stimg->stu_id = $stu_data->id;
@@ -100,11 +102,11 @@ class AdmStuProfileCon extends Controller
             $file->move('image/student/',$filename);
             $stimg->image = $filename;
 
-           }else{
-              return "Hi";
            }
         //return $stimg;
        $stimg->save();
+
+    //    return redirect()->back();
         // //$stu_data = Student::where('student_id',$request->stu_id)->get();
 
         // $notification = array(
@@ -112,8 +114,8 @@ class AdmStuProfileCon extends Controller
         //     'alert-type' => 'Success'
         // );
         // $request->request->add(['stu_id' => $request->stu_id]);
-        //return $request;
-        return $this->profile_search($request);
+       // return $request;
+       return $this->profile_search($request);
 
     }
 

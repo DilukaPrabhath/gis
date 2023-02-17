@@ -31,4 +31,15 @@ class InstClassFee extends Model
                 ->get();
                 return $sql;
             }
+
+        public static function nursary_grd_table($ins_id) {
+            $sql= DB::table('inst_class_fees')
+                 ->select('inst_class_fees.*','nursery_grade_tables.grade_name as n_grade_name','nursery_class_tables.nursery_class_name as n_class_name','syllabi.syllubus')
+                 ->leftjoin('nursery_grade_tables','inst_class_fees.grd_id', '=', 'nursery_grade_tables.id')
+                 ->leftjoin('nursery_class_tables','inst_class_fees.class', '=', 'nursery_class_tables.id')
+                 ->leftjoin('syllabi','inst_class_fees.syl_id', '=', 'syllabi.id')
+                 ->where('inst_class_fees.ins_id','=',$ins_id)
+                 ->get();
+                 return $sql;
+            }
 }

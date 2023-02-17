@@ -156,7 +156,7 @@
                                                             <div class="carousel-item {{$key == 0 ? 'active' : '' }}">
                                                                 <div class="text-center">
 
-                                                                    <img src="{{asset('/image/student')}}/{{$value->image}}" alt="user" class="" width="220" height="210" style="margin-top: -35pt;">
+                                                                    <img src="{{asset('image/student')}}/{{$value->image}}" alt="user" class="" width="220" height="210" style="margin-top: -35pt;">
 
                                                                 </div>
                                                             </div>

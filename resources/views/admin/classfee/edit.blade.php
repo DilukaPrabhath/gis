@@ -65,21 +65,33 @@
 
 
                                 <div class="form-group row">
-                                    <label for="ticket_category" class="col-sm-2 col-form-label text-right">Grade</label>
+                                    <label for="ticket_category" class="col-sm-2 col-form-label text-right">Class</label>
 
                                     @if ($sch->pre_or_sch == 1)
                                     <div class="col-sm-10">
-                                        <select class="form-control" name="grade" id="grade">
+                                        <select class="form-control" name="class" id="class_id">
                                             <option value="">Select</option>
-                                            @foreach($cls_n as $cls)
-                                            <option value="{{$cls->id}}" {{ $cls->id == $fee->grd_id ? 'selected' : '' }}>{{$cls->grade}}</option>
-
+                                            @foreach($class_data as $cls_data)
+                                            <option value="{{$cls_data->id}}" {{ $cls_data->id == $fee->class ? 'selected' : '' }}>{{$cls_data->nursery_class_name}}</option>
                                             @endForeach
                                         </select>
-                                        @error('grade')
+                                        @error('class')
                                         <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                    <label for="grade_n" class="col-sm-2 col-form-label text-right" style="margin-top:15pt;">Grade</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="grade_n" id="grade_n" style="margin-top:15pt;">
+                                            <option value="">Select</option>
+                                            @foreach($grade_data as $grd_data)
+                                            <option value="{{$grd_data->id}}" {{ $grd_data->id == $fee->class ? 'selected' : '' }}>{{$grd_data->grade_name}}</option>
+                                            @endForeach
+                                        </select>
+                                        @error('grade_n')
+                                        <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
 
                                     @elseif (($sch->pre_or_sch == 2))
                                     <div class="col-sm-10">
@@ -99,9 +111,6 @@
                                 </div>
                             </div>
 
-
-
-
                             <div class="col-lg-12">
                                 <div class="form-group row">
 
@@ -116,6 +125,8 @@
                             </div>
 
                         </div>
+
+                        @if ($sch->pre_or_sch == 2)
                         <div class="col-lg-12">
                             <div class="form-group row">
 
@@ -157,6 +168,44 @@
 
                             </div>
                         </div>
+                        @else
+
+                        <div class="col-lg-12">
+                            <div class="form-group row">
+
+                                <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <thead>
+                                    <tr>
+                                        <th>Grade</th>
+                                        <th>Class</th>
+                                        <th>Syllubus</th>
+                                        <th>Price</th>
+                                        <th>Year</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach ($grd as $value)
+                                        <tr>
+                                            <td>{{$value->n_grade_name}}</td>
+                                            <td>{{$value->n_class_name}}</td>
+                                            <td>{{$value->syllubus}}</td>
+                                            <td>{{$value->fee}}</td>
+                                            <td>{{$value->year}}</td>
+                                            <td>
+                                                <a href="{{url('admin/classfee/edit')}}/{{$value->ins_id}}/{{$value->id}}" type="button" class="btn btn-danger">
+                                                    <i class="fab fas fa-pencil-alt" style="color: white; font-size:8px;"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                        </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        @endif
                         </form>
                     </div>
                 </div>
@@ -229,6 +278,30 @@
 
         });
 
+         // class
+       $(document).ready(function() {
+            $("#class_id").on('change', function() {
+                var class_id = $(this).val();
+                //   console.log(year);
+                if (class_id) {
+                    $.ajax({
+                        url: "{{ url('admin/get/grades') }}",
+                        type: "POST",
+                        data: {
+                            class_id: class_id,
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(data) {
+                            $('#grade_n').html(data);
+                        },
+                    });
+                } else {
+                    console.log("Eroor!");
+                }
+           });
+     });
 
     $("#year").datepicker({
     format: "yyyy",

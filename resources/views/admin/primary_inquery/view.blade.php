@@ -274,18 +274,36 @@
                                             <label class="col-sm-3 col-form-label text-right"> Class Category</label>
                                             <div class="col-sm-9">
                                                 @if ($st == 5 || $st == 6)
-                                                <select class="form-control" name="grade" id="grade" disabled>
+                                                <select class="form-control" name="class_id_select" id="class_id_select" disabled>
                                                     <option value="">Select Class Category</option>
-                                                    @foreach($grade as $value)
-                                                    <option value="{{ $value->id }}" {{ $value->id == $data->grade_now ? 'selected' : '' }}>{{ $value->grade }}</option>
+                                                    @foreach($class as $value)
+                                                    <option value="{{ $value->id }}" {{ $value->id == $data->grade_now ? 'selected' : '' }}>{{ $value->nursery_class_name }}</option>
+                                                    @endForeach
+                                                </select>
+                                                @else
+                                                <select class="form-control" name="class_id_select" id="class_id_select">
+                                                    <option value="">Select Class Category</option>
+                                                    @foreach($class as $value)
+                                                    <option value="{{ $value->id }}" >{{ $value->nursery_class_name }}</option>
+                                                    @endForeach
+                                                </select>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label text-right"> Grade</label>
+                                            <div class="col-sm-9">
+                                                @if ($st == 5 || $st == 6)
+                                                <select class="form-control" name="grade" id="grade" disabled>
+                                                    <option value="">Select Grade</option>
+                                                    @foreach($grade_set as $value)
+                                                    <option value="{{ $value->id }}" {{ $value->id == $data->grade_now ? 'selected' : '' }}>{{ $value->grade_name }}</option>
                                                     @endForeach
                                                 </select>
                                                 @else
                                                 <select class="form-control" name="grade" id="grade">
-                                                    <option value="">Select Class Category</option>
-                                                    @foreach($grade as $value)
-                                                    <option value="{{ $value->id }}" >{{ $value->grade }}</option>
-                                                    @endForeach
+                                                    <option value="">Select Grade</option>
                                                 </select>
                                                 @endif
                                             </div>
@@ -1404,7 +1422,29 @@ function addTabledata(){
 </script>
 <script>
     //Table remove
-
+    $(document).ready(function() {
+            $("#class_id_select").on('change', function() {
+                var class_id = $(this).val();
+                //   console.log(year);
+                if (class_id) {
+                    $.ajax({
+                        url: "{{ url('admin/get/grades') }}",
+                        type: "POST",
+                        data: {
+                            class_id: class_id,
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(data) {
+                            $('#grade').html(data);
+                        },
+                    });
+                } else {
+                    console.log("Error!");
+                }
+          22});
+ });
 
   $('#rsrvtbl').on('click', '.delete', function(e) {
       //var token=$(this).attr('id');

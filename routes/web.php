@@ -36,6 +36,27 @@ Route::get('/admin/userwww', [App\Http\Controllers\SupAddUserCon::class, 'add'])
 Route::group(['middleware' => 'App\Http\Middleware\IsAdmin'], function()
 {
 
+//Nursery Classes
+Route::get('/admin/nursery_classes', [App\Http\Controllers\AdminController\NurseryClassController::class, 'index']);
+Route::get('/admin/nursery_classes/create', [App\Http\Controllers\AdminController\NurseryClassController::class, 'create']);
+Route::get('/validate-nursery_class_name', [App\Http\Controllers\AdminController\NurseryClassController::class, 'validate_class_name']);
+Route::post('/admin/nursery_classes/store', [App\Http\Controllers\AdminController\NurseryClassController::class, 'store']);
+Route::get('/admin/nursery_classes/view/{id}', [App\Http\Controllers\AdminController\NurseryClassController::class, 'view']);
+Route::get('/admin/nursery_classes/edit/{id}', [App\Http\Controllers\AdminController\NurseryClassController::class, 'edit']);
+Route::post('/admin/nursery_classes/update_class/{id}', [App\Http\Controllers\AdminController\NurseryClassController::class, 'update']);
+
+//Nursery Grade
+Route::get('/admin/nursery_grades', [App\Http\Controllers\AdminController\NurseryGradeController::class, 'index']);
+Route::get('/admin/nursery_grades/create', [App\Http\Controllers\AdminController\NurseryGradeController::class, 'create']);
+Route::get('/validate-nursery_grade_name', [App\Http\Controllers\AdminController\NurseryGradeController::class, 'validate_grade_name']);
+Route::get('/validate_update-nursery_grade_name', [App\Http\Controllers\AdminController\NurseryGradeController::class, 'validate_update_grade_name']);
+Route::post('/admin/nursery_grade/store', [App\Http\Controllers\AdminController\NurseryGradeController::class, 'store']);
+Route::get('/admin/nursery_grades/view/{id}', [App\Http\Controllers\AdminController\NurseryGradeController::class, 'view']);
+Route::get('/admin/nursery_grades/edit/{id}', [App\Http\Controllers\AdminController\NurseryGradeController::class, 'edit']);
+Route::post('/admin/nursery_grade/update/{id}', [App\Http\Controllers\AdminController\NurseryGradeController::class, 'update']);
+Route::get('admin/nursary/student/grade/update/{id}', [App\Http\Controllers\AdminController\AdminPrimaryStudentCon::class, 'edit_grade']);
+Route::post('admin/nursary/grade/update/store/{id}', [App\Http\Controllers\AdminController\AdminPrimaryStudentCon::class, 'grade_update']);
+
 //User
 Route::get('admin/users', [App\Http\Controllers\AdminController\AdmUserCon::class, 'index']);
 Route::get('admin/users/create', [App\Http\Controllers\AdminController\AdmUserCon::class, 'create']);
@@ -124,6 +145,8 @@ Route::get('/admin/school/student/grade/update/{id}', [App\Http\Controllers\Admi
 Route::post('/admin/grade/update/store/{id}', [App\Http\Controllers\AdminController\AdminStudentCon::class, 'grade_update']);
 Route::post('/class_payment_check', [App\Http\Controllers\AdminController\AdminPaymentCon::class, 'check_payment']);
 Route::post('/admin/school/student/get_school', [App\Http\Controllers\AdminController\AdminStudentCon::class, 'get_school']);
+//Route::post('/image/student/', [App\Http\Controllers\AdminController\AdminStudentCon::class, 'get_school']);
+
 
 //Student Primary
 Route::post('/admin/primary/inqueries/registration/update/{id}', [App\Http\Controllers\AdminController\AdminPrimaryStudentCon::class, 'update']);
@@ -238,6 +261,7 @@ Route::get('/admin/classfee/edit/{ins_id}/{id}', [App\Http\Controllers\AdminCont
 Route::post('/admin/classfee/store', [App\Http\Controllers\AdminController\AdminClassFeeCon::class, 'store']);
 Route::post('/admin/classfee/update/{id}', [App\Http\Controllers\AdminController\AdminClassFeeCon::class, 'update']);
 Route::get('/check_grade_validation',[App\Http\Controllers\AdminController\AdminClassFeeCon::class, 'validateclassfee']);
+Route::post('/admin/get/grades',[App\Http\Controllers\AdminController\AdminClassFeeCon::class, 'get_grades']);
 
 //Student Profile
 Route::get('/admin/student/profile', [App\Http\Controllers\AdminController\AdmStuProfileCon::class, 'index']);

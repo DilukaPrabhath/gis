@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use App\Models\NurseryClassTable;
+use App\Models\NurseryGradeTable;
 
 class AdminPrimaryInquCon extends Controller
 {
@@ -105,7 +107,6 @@ class AdminPrimaryInquCon extends Controller
 
        }
 
-
        public function edit($pid){
         $data  = Student::find($pid);
         return view('admin.primary_inquery.edit',compact('data'));
@@ -158,25 +159,25 @@ class AdminPrimaryInquCon extends Controller
 
 
       public function view($pid){
-        $data  = Student::find($pid);
+        $data      = Student::find($pid);
         $institute = Institute::orderBy('institute_name', 'ASC')->where('status',1)->where('pre_or_sch',1)->get();
-        $grade = Grade::orderBy('grade', 'ASC')->where('status',1)->where('nur_or_sch',2)->get();
-        $st = $data->stu_status;
+        $grade     = Grade::orderBy('grade', 'ASC')->where('status',1)->where('nur_or_sch',2)->get();
+        $class     = NurseryClassTable::where('status',1)->get();
+        $grade_set = NurseryGradeTable::all();
+        $st        = $data->stu_status;
       if($st == 5 || $st == 6){
-
         $fa = Parentm::where('id',$data->fat_id)->where('fa_or_mom',1)->first();
         $mo = Parentm::where('id',$data->mom_id)->where('fa_or_mom',2)->first();
       }else{
-
         $fa = 0;
         $mo = 0;
       }
 
       $sibl = Siblin::where('s_id',$pid)->get();
-        // $institute = Institute::where('status',1)->get();
         $ttn1 = Str::random(6);
         $ttn2 = Str::random(6);
-        return view('admin.primary_inquery.view',compact('data','institute','grade','ttn1','ttn2','sibl','fa','mo','st'));
+        return view('admin.primary_inquery.view',compact('data','institute','grade','ttn1','ttn2','sibl','fa','mo','st','grade_set','class'));
+
        }
 
 }

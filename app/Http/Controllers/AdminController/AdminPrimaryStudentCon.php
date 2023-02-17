@@ -11,6 +11,8 @@ use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\NurseryClassTable;
+use App\Models\NurseryGradeTable;
 
 class AdminPrimaryStudentCon extends Controller
 {
@@ -36,6 +38,7 @@ class AdminPrimaryStudentCon extends Controller
 
 
            $clz_fee = InstClassFee::where('ins_id',$request->institute)->where('year', $now->year)->where('grd_id',$request->grade)->where('syl_id',$request->sy_type)->first();
+          // return $clz_fee;
            if($clz_fee != null){
                  $fee = $clz_fee->fee;
             //return    $fee = 00.00;
@@ -241,9 +244,7 @@ class AdminPrimaryStudentCon extends Controller
 
        }
 
-
        public function update_nersary(Request $request,$id){
-
 
          $fa_av = Parentm::select('parent_nic')->where('parent_nic',$request->father_nic)->where('fa_or_mom',1)->get();
 
@@ -292,15 +293,10 @@ class AdminPrimaryStudentCon extends Controller
     //return "not Emp";
     }
 
-   // return $request;
-   //$s_id = Student::find($id)->student_id;
-
     $student = Student::find($id);
 
     $student->institute   = $request->institute;
-    // if($s_id == null){
-    //     $student->student_id  = $num;
-    //    }
+
     $student->grade_now   = $request->grade;
     $student->registration_date  = $request->register_date;
     $student->recod       = $request->recod;
@@ -341,13 +337,59 @@ class AdminPrimaryStudentCon extends Controller
 
    $student->save();
 
-
-
     $notification = array(
         'message' => 'Stutend Update Successfully!',
         'alert-type' => 'Success'
     );
 
     return redirect('admin/nursary/students/table')->with($notification);
+   }
+
+   public function edit_grade($id){
+    //return $id;
+    $class     = NurseryClassTable::where('status',1)->get();
+    $grade     = NurseryGradeTable::all();
+    $data      = Student::find($id);
+
+    $year_now = Carbon::now()->format('Y');
+       // return  $institute;
+    $clz_fee_year = InstClassFee::where('year', '>',$year_now)->get()->pluck('year');
+    //$clz_fee_year = InstClassFee::where('ins_id',$student_data->institute)->where('year', '>',$year_now)->where('grd_id', '>',$student_data->grade_now)->where('syl_id',$student_data->syllubus_type)->get()->pluck('year');
+    // return $clz_fee_year;
+    $new_years = array_unique($clz_fee_year->toArray(), SORT_REGULAR);
+    //return $new_years;
+    return view('admin.nersary_student.grade',compact('class','grade','data','id','new_years'));
+   }
+
+
+   public function grade_update(Request $request,$id){
+    //return $id;
+        $clz_fee = InstClassFee::where('year',$request->grade_to_year)->where('grd_id',$request->grade_to_update)->first();
+       //return  $clz_fee;
+       if(!$clz_fee == ""){
+        $fee = $clz_fee->fee;
+       }else{
+        $fee = "00.00";
+       }
+        $due_fee           = Student::select('due_fee')->where('id',$id)->first();
+        $total_need_pay    = Student::select('total_need_pay')->where('id',$id)->first();
+        $total_nd_pay_cot  = Student::select('total_nd_pay_cot')->where('id',$id)->first();
+
+        $student = Student::find($id);
+        $student->grade_fee        = $fee;
+        $student->due_fee          = $due_fee->due_fee + $fee;
+        $student->total_need_pay   = $total_need_pay->total_need_pay + $fee;
+        $student->total_nd_pay_cot = $total_nd_pay_cot->total_nd_pay_cot + $fee;
+        $student->is_pending_fee   = 1;
+        $student->grade_now        = $request->grade_to_update;
+        $student->class_now        = $request->class_new;
+        $student->save();
+
+        $notification = array(
+            'message' => 'Student Update Successfully!',
+            'alert-type' => 'Success'
+        );
+
+        return redirect('admin/school/students/table')->with($notification);
    }
 }
