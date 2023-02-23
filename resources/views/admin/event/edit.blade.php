@@ -15,7 +15,7 @@
                             <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group row">
-                                    <label for="event" class="col-sm-2 col-form-label text-right">Event</label>
+                                    <label for="event" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Event</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="text" value="{{$evet[0]->event}}" id="event" name="event">
                                         @error('event')
@@ -24,7 +24,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label text-right">School</label>
+                                    <label class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>School</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" id="institute" name="institute">
                                             <option value="">Select </option>
@@ -39,7 +39,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="date" class="col-sm-2 col-form-label text-right">Date</label>
+                                    <label for="date" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Date</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="date" value="{{$evet[0]->date}}" id="date" name="date">
                                         @error('date')
@@ -48,7 +48,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="time" class="col-sm-2 col-form-label text-right">Time</label>
+                                    <label for="time" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Time</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="time" value="{{$evet[0]->time}}" id="time" name="time">
                                         @error('time')
@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group row">
-                                        <label for="venue" class="col-sm-2 col-form-label text-right">Venue</label>
+                                        <label for="venue" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Venue</label>
                                         <div class="col-sm-10">
                                             <input class="form-control" type="text" value="{{$evet[0]->venue}}" id="venue" name="venue">
                                         @error('venue')
@@ -77,7 +77,7 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label text-right">Status</label>
+                                        <label class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Status</label>
                                         <div class="col-sm-10">
                                             <select class="form-control" id="status" name="status">
                                                 <option value="">Select</option>
