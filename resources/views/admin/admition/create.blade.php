@@ -16,14 +16,14 @@
                             <div class="col-lg-6">
 
                                 <div class="form-group row">
-                                    <label for="st_id_num" class="col-sm-3 col-form-label text-right">Student ID Number</label>
+                                    <label for="st_id_num" class="col-sm-3 col-form-label text-right"><span style="color: #f93b7a">*</span>Student ID Number</label>
                                     <div class="col-sm-9">
                                         <input class="form-control" type="text" value="" name="st_id_num" id="st_id_num">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="price" class="col-sm-3 col-form-label text-right">Price</label>
+                                    <label for="price" class="col-sm-3 col-form-label text-right"><span style="color: #f93b7a">*</span>Price</label>
                                     <div class="col-sm-9">
                                         <input class="form-control" type="text" value="" name="price" id="price">
                                     </div>
