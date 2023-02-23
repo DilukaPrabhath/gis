@@ -16,7 +16,7 @@
                             <div class="col-lg-6">
 
                                 <div class="form-group row">
-                                    <label for="nursery_class_id" class="col-sm-3 col-form-label text-right">Nursery Class Name</label>
+                                    <label for="nursery_class_id" class="col-sm-3 col-form-label text-right"><span style="color: #f93b7a">*</span>Nursery Class Name</label>
                                     <div class="col-sm-9">
                                     <select class="form-control" name="nursery_class_id" id="nursery_class_id">
                                         <option value="">Select Class</option>
@@ -31,7 +31,7 @@
                             </div>
 
                                 <div class="form-group row">
-                                    <label for="grade_name" class="col-sm-3 col-form-label text-right">Grade Name</label>
+                                    <label for="grade_name" class="col-sm-3 col-form-label text-right"><span style="color: #f93b7a">*</span>Grade Name</label>
                                     <div class="col-sm-9">
                                         <input class="form-control" type="text" value="" name="grade_name" id="grade_name">
                                     </div>
@@ -41,7 +41,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="nursery_grade_status" class="col-sm-3 col-form-label text-right">Nursery Grade Status</label>
+                                    <label for="nursery_grade_status" class="col-sm-3 col-form-label text-right"><span style="color: #f93b7a">*</span>Nursery Grade Status</label>
                                     <div class="col-sm-9">
                                     <select class="form-control" name="nursery_grade_status" id="nursery_grade_status">
                                         <option value="">Select Status</option>
@@ -60,7 +60,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <button type="submit" id="x" class="btn btn-success waves-effect waves-light" style="color: white;"><i class="mdi mdi-check-all mr-2"></i>Submit</button>
-                                    <a type="button" href="{{url('admin/nursery_classes')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
+                                    <a type="button" href="{{url('admin/nursery_grades')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
                                 </div>
                             </div>
                         </div>

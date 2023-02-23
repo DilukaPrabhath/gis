@@ -59,7 +59,7 @@
 
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <a type="button" href="{{url('admin/nursery_classes')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
+                                    <a type="button" href="{{url('admin/nursery_grades')}}" class="btn btn-primary waves-effect waves-light" style="margin-left: 5px;"><i class="mdi mdi-close" style="margin-right: 5px;"></i>Close</a>
                                 </div>
                             </div>
                         </div>

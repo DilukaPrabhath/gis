@@ -16,7 +16,7 @@
                             <div class="col-lg-6">
 
                                 <div class="form-group row">
-                                    <label for="nursery_class_name" class="col-sm-3 col-form-label text-right">Nursery Classes Name</label>
+                                    <label for="nursery_class_name" class="col-sm-3 col-form-label text-right"><span style="color: #f93b7a">*</span>Nursery Classes Name</label>
                                     <div class="col-sm-9">
                                         <input class="form-control" type="text" value="" name="nursery_class_name" id="nursery_class_name">
                                     </div>
@@ -26,7 +26,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="nursery_class_status" class="col-sm-3 col-form-label text-right">Nursery Classes Status</label>
+                                    <label for="nursery_class_status" class="col-sm-3 col-form-label text-right"><span style="color: #f93b7a">*</span>Nursery Classes Status</label>
                                     <div class="col-sm-9">
                                     <select class="form-control" name="nursery_class_status" id="nursery_class_status">
                                         <option value="">Select Type</option>
