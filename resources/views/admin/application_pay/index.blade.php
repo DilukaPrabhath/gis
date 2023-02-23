@@ -40,9 +40,9 @@
                                                 {{-- <a href="{{url('admin/application_pay/print')}}/{{$value->id}}" type="button" class="btnprint">
                                                     <i class="fab far fa-eye" style="color: white; font-size:8px;"></i>jj
                                                 </a> --}}
-                                                <a href="{{url('admin/application_pay/print')}}" target="_blank" type="button" class="btn btn-danger">
+                                                {{-- <a href="{{url('admin/application_pay/print')}}" target="_blank" type="button" class="btn btn-danger">
                                                     <i class="fab fas fa-pencil-alt" style="color: white; font-size:8px;"></i>
-                                                </a>
+                                                </a> --}}
                                             </td>
                                         </tr>
                                 @endforeach

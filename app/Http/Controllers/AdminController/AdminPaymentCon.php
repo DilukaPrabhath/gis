@@ -152,7 +152,9 @@ class AdminPaymentCon extends Controller
                 $stud_id = Student::where('student_id',$request->stu_id_1)->get();
               // return count($stud_id);
 
+                if(isset($stud_id[0])){
 
+                }
                 $stid = $stud_id[0]->id;
                 $payment_cot = $stud_id[0]->payment_cot;
                 $total_nd_pay_cot = $stud_id[0]->total_nd_pay_cot;
@@ -184,60 +186,65 @@ class AdminPaymentCon extends Controller
 
                 }else{
                     $fatherdata = Parentm::find($stud_id[0]->fat_id);
-                    $fatemail   = $fatherdata->parent_email;
-                    $fatname    = $fatherdata->parent_name;
+
+                    if(isset($fatherdata)){
+                        $fatemail   = $fatherdata->parent_email;
+                        $fatname    = $fatherdata->parent_name;
+                        $data = [
+                            'subject' => "Class Fee Payments",
+                            'stuname' => $stud_id[0]->student_full_name,
+                            'pay_time'=> Carbon::parse($fee->created_at)->format('d/m/Y'),
+                            'email' => $fatemail,
+                            'parname' => $fatname,
+                            'fromemail' => 'task123test123@gmail.com',
+                            'content' => "Class Fee Payments",
+                            'number'  => $num,
+                            'price'  => $request->amout,
+                            'stu_no'  => $request->stu_id,
+                            'institute' => $insdata->institute_name,
+                            'insemail' => $insdata->email,
+                            'insadd_line_1' => $insdata->address_line_1,
+                            'insadd_line_2' => $insdata->address_line_2,
+                            'city' => $insdata->city,
+                          ];
+
+                          Mail::send('admin.emails.mail_fee', $data, function($message) use ($data) {
+                            $message->to($data['email'])
+                            ->from('task123test123@gmail.com','GIS')
+                            ->subject($data['subject']);
+                          });
+                    }
+
                     $motherdata = Parentm::find($stud_id[0]->mom_id);
-                    $motname    = $fatherdata->parent_name;
-                    $motemail   = $motherdata->parent_email;
 
+                    if(isset($motherdata)){
+                        $motname    = $motherdata->parent_name;
+                        $motemail   = $motherdata->parent_email;
+                        $data2 = [
+                            'subject' => "Class Fee Payments",
+                            'stuname' => $stud_id[0]->student_full_name,
+                            'pay_time'=> Carbon::parse($fee->created_at)->format('d/m/Y'),
+                            'email' => $motemail,
+                            'parname' => $motname,
+                            'fromemail' => 'task123test123@gmail.com',
+                            'content' => "Class Fee Payments",
+                            'number'  => $num,
+                            'price'  => $request->amout,
+                            'stu_no'  => $request->stu_id,
+                            'institute' => $insdata->institute_name,
+                            'insemail' => $insdata->email,
+                            'insadd_line_1' => $insdata->address_line_1,
+                            'insadd_line_2' => $insdata->address_line_2,
+                            'city' => $insdata->city,
+                          ];
 
-                $data = [
-                    'subject' => "Class Fee Payments",
-                    'stuname' => $stud_id[0]->student_full_name,
-                    'pay_time'=> Carbon::parse($fee->created_at)->format('d/m/Y'),
-                    'email' => $fatemail,
-                    'parname' => $fatname,
-                    'fromemail' => 'task123test123@gmail.com',
-                    'content' => "Class Fee Payments",
-                    'number'  => $num,
-                    'price'  => $request->amout,
-                    'stu_no'  => $request->stu_id,
-                    'institute' => $insdata->institute_name,
-                    'insemail' => $insdata->email,
-                    'insadd_line_1' => $insdata->address_line_1,
-                    'insadd_line_2' => $insdata->address_line_2,
-                    'city' => $insdata->city,
-                  ];
+                          Mail::send('admin.emails.mail_fee', $data2, function($message) use ($data) {
+                            $message->to($data['email'])
+                            ->from('task123test123@gmail.com','GIS')
+                            ->subject($data['subject']);
+                          });
+                    }
 
-                  $data2 = [
-                    'subject' => "Class Fee Payments",
-                    'stuname' => $stud_id[0]->student_full_name,
-                    'pay_time'=> Carbon::parse($fee->created_at)->format('d/m/Y'),
-                    'email' => $motemail,
-                    'parname' => $motname,
-                    'fromemail' => 'task123test123@gmail.com',
-                    'content' => "Class Fee Payments",
-                    'number'  => $num,
-                    'price'  => $request->amout,
-                    'stu_no'  => $request->stu_id,
-                    'institute' => $insdata->institute_name,
-                    'insemail' => $insdata->email,
-                    'insadd_line_1' => $insdata->address_line_1,
-                    'insadd_line_2' => $insdata->address_line_2,
-                    'city' => $insdata->city,
-                  ];
-
-                  Mail::send('admin.emails.mail_fee', $data, function($message) use ($data) {
-                    $message->to($data['email'])
-                    ->from('task123test123@gmail.com','test mail')
-                    ->subject($data['subject']);
-                  });
-
-                  Mail::send('admin.emails.mail_fee', $data2, function($message) use ($data) {
-                    $message->to($data['email'])
-                    ->from('task123test123@gmail.com','test mail')
-                    ->subject($data['subject']);
-                  });
                 }
 
                 $notification = array(

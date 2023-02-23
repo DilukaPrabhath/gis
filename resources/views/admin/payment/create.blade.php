@@ -52,7 +52,7 @@ div.sel_id {
                                 <input type="hidden" class="form-control col-6" id="stu_id_1" name="stu_id_1" value="{{$ins_val}}" placeholder="Student ID" aria-label="">
                                 @endisset
                                 <div class="form-group row">
-                                    <label for="amout" class="col-md-3 col-form-label text-right">Amount</label>
+                                    <label for="amout" class="col-md-3 col-form-label text-right"><span style="color: #f93b7a">*</span>Amount</label>
                                     <div class="col-md-9">
                                         <input type="text" id="amout" name="amout" class="form-control">
                                     @error('amout')
@@ -62,7 +62,7 @@ div.sel_id {
 
                                 </div>
                                 <div class="form-group row">
-                                    <label for="prtg" class="col-sm-3 col-form-label text-right">Interest</label>
+                                    <label for="prtg" class="col-sm-3 col-form-label text-right"><span style="color: #f93b7a">*</span>Interest</label>
                                     <div class="col-3">
                                         <input type="text" class="form-control col-sm-9" id="prtg" name="prtg" value="" maxlength="2" aria-label="">
                                         @error('prtg')
@@ -81,7 +81,7 @@ div.sel_id {
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label text-right">Payment Type</label>
+                                    <label class="col-sm-3 col-form-label text-right"><span style="color: #f93b7a">*</span>Payment Type</label>
                                     <div class="col-sm-9">
                                         <select class="form-control" id="pay_type" name="pay_type">
                                             <option value="">Select</option>
@@ -118,7 +118,7 @@ div.sel_id {
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="prtg" class="col-sm-3 col-form-label text-right">Note</label>
+                                    <label for="prtg" class="col-sm-3 col-form-label text-right"><span style="color: #f93b7a">*</span>Note</label>
                                     <div class="col-md-9">
                                         <textarea class="form-control col-md-9" id="note" name="note" rows="4" cols="200"></textarea>
                                         {{-- <input type="text" class="form-control col-sm-9" id="note" name="note" value="" maxlength="2" aria-label=""> --}}
