@@ -15,13 +15,13 @@
                             <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group row">
-                                    <label for="name" class="col-sm-2 col-form-label text-right">School Name</label>
+                                    <label for="name" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>School Name</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="text" value="" id="name" name="name">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label text-right">Is Nursary School ?</label>
+                                    <label class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Is Nursary School ?</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" id="pre_or_sch" name="pre_or_sch">
                                             <option value="">Select</option>
@@ -31,19 +31,19 @@
                                     </div>
                                 </div>
                                 <div class="form-group row" id="code_div">
-                                    <label for="code" class="col-sm-2 col-form-label text-right">Short Code</label>
+                                    <label for="code" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Short Code</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="text" value="" name="code" id="code">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="email" class="col-sm-2 col-form-label text-right">Email</label>
+                                    <label for="email" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Email</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="email" value="" id="email" name="email">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="phone" class="col-sm-2 col-form-label text-right">Telephone</label>
+                                    <label for="phone" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Telephone</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="tel" value="" id="phone" name="phone">
                                     </div>
@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group row">
-                                        <label for="address_line_1" class="col-sm-2 col-form-label text-right">Address Line 1</label>
+                                        <label for="address_line_1" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Address Line 1</label>
                                         <div class="col-sm-10">
                                             <input class="form-control" type="text" value="" name="address_line_1" id="address_line_1">
                                         </div>
@@ -65,13 +65,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="city" class="col-sm-2 col-form-label text-right">City</label>
+                                        <label for="city" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>City</label>
                                         <div class="col-sm-10">
                                             <input class="form-control" type="text" value="" id="city" name="city">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label text-right">Status</label>
+                                        <label class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Status</label>
                                         <div class="col-sm-10">
                                             <select class="form-control" id="status" name="status">
                                                 <option value="">Select</option>

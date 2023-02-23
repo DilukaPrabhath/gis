@@ -21,7 +21,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group row">
-                                    <label for="institute_name" class="col-sm-2 col-form-label text-right">School Name</label>
+                                    <label for="institute_name" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>School Name</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="text" value="{{$value->institute_name}}" id="institute_name" name="institute_name">
                                         @error('institute_name')
@@ -47,7 +47,7 @@
                                     </div>
                                 </div> --}}
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label text-right">Is Nursary School ?</label>
+                                    <label class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Is Nursary School ?</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" id="pre_or_sch" name="pre_or_sch">
                                             <option value="">Select</option>
@@ -60,13 +60,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group row" id="code_div">
-                                    <label for="code" class="col-sm-2 col-form-label text-right">Short Code</label>
+                                    <label for="code" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Short Code</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="text" value="{{$value->code}}" name="code" id="code">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="email" class="col-sm-2 col-form-label text-right">Email</label>
+                                    <label for="email" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Email</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="email" value="{{$value->email}}" name="ins_email" id="ins_email">
                                         @error('email')
@@ -75,7 +75,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="con_number" class="col-sm-2 col-form-label text-right">Phone</label>
+                                    <label for="con_number" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Phone</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="text" value="{{$value->contact_number}}" name="con_number" id="con_number">
                                         @error('con_number')
@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="address_line_1" class="col-sm-2 col-form-label text-right">Address Line 1</label>
+                                    <label for="address_line_1" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Address Line 1</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="text" value="{{$value->address_line_1}}" name="address_line_1" id="address_line_1">
                                     </div>
@@ -96,7 +96,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="city" class="col-sm-2 col-form-label text-right">City</label>
+                                    <label for="city" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>City</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="text" value="{{$value->city}}" name="city" id="city">
                                         @error('city')
@@ -106,10 +106,10 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label text-right">Status</label>
+                                    <label class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Status</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" name="status">
-                                            <option value="">Select</option>
+                                            <option value=""><span style="color: #f93b7a">*</span>Select</option>
                                             <option value="1" {{$value->status=='1'?'selected':''}}>Active</option>
                                             <option value="2" {{$value->status=='2'?'selected':''}}>Inactive</option>
                                         </select>
