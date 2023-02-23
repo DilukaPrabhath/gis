@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group row">
-                                    <label for="activity" class="col-sm-2 col-form-label text-right">Activity Name</label>
+                                    <label for="activity" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Activity Name</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="text" value="{{$data->activity}}" name="activity" id="activity">
                                         @error('activity')
@@ -25,7 +25,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="price" class="col-sm-2 col-form-label text-right">Activity Price</label>
+                                    <label for="price" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Activity Price</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="text" value="{{$data->price}}" name="price" id="price">
                                         @error('price')
@@ -35,7 +35,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label text-right">Status</label>
+                                    <label class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Status</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" name="status" id="status">
                                             <option value="">Select</option>

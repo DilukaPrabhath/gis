@@ -810,7 +810,7 @@
                         <div class="col-md-12">
                             <div class="form-group row">
                                 <div class="col-sm-12">
-                                    <input type="file" id="input-file-now" class="dropify" value="" data-height="350" name="stu_img" id="stu_img"/>
+                                    <input type="file" id="input-file-now" class="dropify" value="" data-allowed-file-extensions="jpg jpeg png" data-height="350" name="stu_img" id="stu_img"/>
                                 </div>
                             </div>
                             <div>
