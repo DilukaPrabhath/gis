@@ -20,7 +20,7 @@
                             <div class="col-lg-6">
 
                                 <div class="form-group row">
-                                    <label for="year" class="col-sm-2 col-form-label text-right">Selected Year</label>
+                                    <label for="year" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Selected Year</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="text" value="{{$fee->year}}" name="year" id="year">
                                         @error('year')
@@ -30,7 +30,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="fee" class="col-sm-2 col-form-label text-right">Class Fee</label>
+                                    <label for="fee" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Class Fee</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="number" value="{{$fee->fee}}" name="fee" id="fee">
                                         @error('fee')
@@ -50,7 +50,7 @@
 
 
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label text-right">Syllabus</label>
+                                    <label class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Syllabus</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" name="syllabus" id="syllabus">
                                             <option value="">Select</option>
@@ -65,7 +65,7 @@
 
 
                                 <div class="form-group row">
-                                    <label for="ticket_category" class="col-sm-2 col-form-label text-right">Class</label>
+                                    <label for="ticket_category" class="col-sm-2 col-form-label text-right"><span style="color: #f93b7a">*</span>Class</label>
 
                                     @if ($sch->pre_or_sch == 1)
                                     <div class="col-sm-10">
@@ -79,7 +79,7 @@
                                         <div class="alert" style="color: #f93b7a;padding-left: 0px;">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <label for="grade_n" class="col-sm-2 col-form-label text-right" style="margin-top:15pt;">Grade</label>
+                                    <label for="grade_n" class="col-sm-2 col-form-label text-right" style="margin-top:15pt;"><span style="color: #f93b7a">*</span>Grade</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" name="grade_n" id="grade_n" style="margin-top:15pt;">
                                             <option value="">Select</option>
